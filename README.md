@@ -348,6 +348,56 @@ There are two parts to an Alexa skill. The first part is the Voice User Interfa
 
 <details>
 <summary><strong>Full solution - Setting up VUI (expand for details)</strong></summary><p>
-  1. Go to the <a href="http://developer.amazon.com/">Amazon Developer Portal</a>. In the top-right corner of the screen, click the "Sign In" button. <br>(If you don't already have an account, you will be able to create a new one for free.)
+  1. Go to the <a href="http://developer.amazon.com/">Amazon Developer Portal</a>. In the top-right corner of the screen, click the <b>"Sign In"</b> button. <br>(If you don't already have an account, you will be able to create a new one for free.)
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_1.png?raw=true">
+  2. Once you have signed in, click the <b>Alexa button</b> at the top of the screen.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_2.png?raw=true">
+  3.  On the Alexa page, choose the <b>"Get Started"</b> button for the Alexa Skills Kit.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_3.png?raw=true">
+  4.  Select <b>"Add A New Skill."</b> This will get you to the first page of your new Alexa skill.
+
+ <summary><strong>Skill Information Tips (expand for details)</strong></summary><p> #### Skill Information Tips<br>
+  i.  <b>Skill Type</b> For this skill, we are creating a skill using the Custom Interaction Model. This is the default choice.
+ii. <b>Language</b> Choose the first language you want to support. You can add additional languages in the future, but we need to start with one. (This guide is using U.S. English to start.)
+iii.  <b>Name</b> This is the name that will be shown in the Alexa Skills Store, and the name your users will refer to.
+iv. <b>Invocation Name</b> This is the name that your users will need to say to start your skill. We have provided some common issues developers encounter in the list below, but you should also review the entire <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill">Invocation Name Requirements</a>.
+<table>
+<thead>
+<tr>
+<th>Invocation Name Requirements</th>
+<th>Examples of incorrect invocation names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The skill invocation name must not infringe upon the intellectual property rights of an entity or person.</td>
+<td>korean air; septa check</td>
+</tr>
+<tr>
+<td>Invocation names should be more than one word (unless it is a brand or intellectual property), and must not be a name or place</td>
+<td>horoscope; trivia; guide; new york</td>
+</tr>
+<tr>
+<td>Two word invocation names are not allowed when one of the words is a definite article, indefinite article, or a preposition</td>
+<td>any poet; the bookie; the fool</td>
+</tr>
+<tr>
+<td>The invocation name must not contain any of the Alexa skill launch phrases and connecting words.  Launch phrase examples include "launch," "ask," "tell," "load," and "begin."  Connecting word examples include "to," "from," "by," "if," "and," "whether."</td>
+<td>trivia game for star wars; better with bacon</td>
+</tr>
+<tr>
+<td>The invocation name must not contain the wake words "Alexa," "Amazon," "Echo," or the words "skill" or "app."</td>
+<td>hackster initial skill; word skills</td>
+</tr>
+<tr>
+<td>The invocation name must be written in each language you choose to support.  For example, the German version of your skill must have an invocation name written in German, while the English (US) version must have an invocation name written in English.</td>
+<td>kitchen stories (German skill)</td>
+</tr></tbody></table>
+ </p></details>
+  5.  Fill out the <b>Skill Information screen</b>. Make sure to review the tips we provide below the screenshot.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_4.png?raw=true">
+</p>
+</details>
+
+
 
