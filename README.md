@@ -353,11 +353,13 @@ There are two parts to an Alexa skill. The first part is the Voice User Interfa
   2. Once you have signed in, click the <b>Alexa button</b> at the top of the screen.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_2.png?raw=true">
   3.  On the Alexa page, choose the <b>"Get Started"</b> button for the Alexa Skills Kit.
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_3.png?raw=true">
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_3.png?raw=true"><br>
   4.  Select <b>"Add A New Skill."</b> This will get you to the first page of your new Alexa skill.
-
+  5.  Fill out the <b>Skill Information screen</b>. Make sure to review the tips we provide below the screenshot.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_4.png?raw=true"><br>
+  <details>
  <summary><strong>Skill Information Tips (expand for details)</strong></summary><p> #### Skill Information Tips<br>
-  i.  <b>Skill Type</b> For this skill, we are creating a skill using the Custom Interaction Model. This is the default choice.
+i.  <b>Skill Type</b> For this skill, we are creating a skill using the Custom Interaction Model. This is the default choice.
 ii. <b>Language</b> Choose the first language you want to support. You can add additional languages in the future, but we need to start with one. (This guide is using U.S. English to start.)
 iii.  <b>Name</b> This is the name that will be shown in the Alexa Skills Store, and the name your users will refer to.
 iv. <b>Invocation Name</b> This is the name that your users will need to say to start your skill. We have provided some common issues developers encounter in the list below, but you should also review the entire <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill">Invocation Name Requirements</a>.
@@ -394,10 +396,37 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 <td>kitchen stories (German skill)</td>
 </tr></tbody></table>
  </p></details>
-  5.  Fill out the <b>Skill Information screen</b>. Make sure to review the tips we provide below the screenshot.
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_4.png?raw=true">
-</p>
+ </p>
 </details>
-
-
+6.  Click the Next button to move to the <b>Interaction Model</b>.
+7. Click on the <b>Launch Skill Builder (Beta)</b> button . This will launch the new Skill Builder Dashboard.
+<IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_5.png?raw=true"><br>
+8.  Click on the "<b>Code Editor"</b> item under Dashboard on the top left side of the skill builder.
+9.  In the textfield provided, replace any existing code with the code provided in the <a href="https://github.com/voicehacks/setup-local-recommendations/blob/master/speech-assets/InteractionModel.json">Interaction Model</a>, then click "Apply Changes" or "Save Model".
+10.  Click on the <b>"Dashboard"</b> button.
+11.  Add some more sample utterances for your newly generated intents. These are the things a user would say to make a specific intent happen. Here are a few examples:
+  - Show me my metrics / List my metrics
+  - What is my {metric}
+<IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_6.png?raw=true"><br>
+12.  Click <b>"Build Model"</b> and <b>"Save"</b>
+<IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_7.png?raw=true"><br>
+13. If your interaction model builds successfully, click on <b>Configuration button</b> to move on to Configuration. In our next step of this guide, we will be creating our Lambda function in the AWS developer console, but keep this browser tab open, because we will be returning here on <a href="https://github.com/voicehacks/setup-local-recommendations/blob/master/step-by-step/3-connect-vui-to-code.md">Page #3: Connect VUI to Code</a>. 
+<IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_8.png?raw=true"><br>
+<br>If you get an error from your interaction model, check through this list:
+   - Did you copy & paste the provided code into the appropriate boxes?
+   - Did you accidentally add any characters to the Interaction Model or Sample Utterances?
+## Configure Alexa Backend
+<details>
+<summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
+  1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.
+<IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_9.png?raw=true"><br>
+  2. Open the Lambda function, called <b>“Serverless_Analytics_Skill”</b> deployed with the Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. If you don't see Alexa Skills Kit in the list, jump back to step #3 on this page.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_10.png?raw=true"><br>
+  Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
+  3. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_11.png?raw=true"><br>
+</details>
+## Connecting Your Voice User Interface to Your Lambda Function
+<summary><strong>Full solution - Connecting VUI to Lambda (expand for details)</strong></summary><p><details>
+  On page #1 of this guide, we created a voice user interface for the intents and utterances we expect from our users. On page #2, we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.
 
