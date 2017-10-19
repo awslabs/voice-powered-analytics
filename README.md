@@ -342,12 +342,12 @@ s3_output_location = s3://aws-vpa-athena-query-results/poller/
 
 ## Alexa Skill Building Track
 
-###Setting up Your Voice User Interface
+### Setting up Your Voice User Interface
 
 There are two parts to an Alexa skill. The first part is the Voice User Interface (VUI). This is where we define how we will handle a user's voice input, and which code should be executed when specific commands are uttered. The second part is the actual code logic for our skill, and we will handle that in the next step of this step-by-step guide.
 
 <details>
 <summary><strong>Full solution - Setting up VUI (expand for details)</strong></summary><p>
-  1. Go to the <a href="http://developer.amazon.com/">Amazon Developer Portal</a>. In the top-right corner of the screen, click the "Sign In" button. (If you don't already have an account, you will be able to create a new one for free.)
+  1. Go to the <a href="http://developer.amazon.com/">Amazon Developer Portal</a>. In the top-right corner of the screen, click the "Sign In" button. <br>(If you don't already have an account, you will be able to create a new one for free.)
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_1.png?raw=true">
 
