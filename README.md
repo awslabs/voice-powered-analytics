@@ -418,7 +418,6 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 </details>
 
 ### Configure Alexa Backend
-<br>
 Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
 <details>
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
@@ -432,8 +431,7 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 </p></details>
 
 ### Connecting Your Voice User Interface to Your Lambda Function
-<br>
-On Step 1 of this track, we created a voice user interface for the intents and utterances we expect from our users. On Step 2, we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.<br>
+On Step 1 "Setting up Your Voice User Interface" of this track, we created a voice user interface for the intents and utterances we expect from our users. On "Step 2 Configure Alexa Backend", we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.<br>
 <details>
 <summary><strong>Full solution - Connecting VUI to Lambda (expand for details)</strong></summary><p>
   
@@ -451,8 +449,7 @@ On Step 1 of this track, we created a voice user interface for the intents and
 </p>
 
 ### Testing Your Alexa Skill
-<br> 
-So far, we have created a Voice User Interface and a Lambda function, and connected the two together. Your skill is now ready to test.
+You've now created a Voice User Interface and a Lambda function, and connected the two together. Your skill is now ready to test.
 <details>
 <summary><strong>Full Solution - Testing Your Alexa Skill</strong></summary><p>
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
