@@ -417,7 +417,9 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
    - Did you accidentally add any characters to the Interaction Model or Sample Utterances?
 </details>
 
-## Configure Alexa Backend
+### Configure Alexa Backend
+<br>
+Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
 <details>
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.
@@ -429,9 +431,12 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_11.png?raw=true"><br>
 </p></details>
 
-## Connecting Your Voice User Interface to Your Lambda Function
-<summary><strong>Full solution - Connecting VUI to Lambda (expand for details)</strong></summary><p><details>
-  On Step 1 of this track, we created a voice user interface for the intents and utterances we expect from our users. On Step 2, we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.
+### Connecting Your Voice User Interface to Your Lambda Function
+<br>
+On Step 1 of this track, we created a voice user interface for the intents and utterances we expect from our users. On Step 2, we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.<br>
+<details>
+<summary><strong>Full solution - Connecting VUI to Lambda (expand for details)</strong></summary><p>
+  
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the "Configuration" tab on the left side.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_12.png?raw=true"><br>
@@ -445,7 +450,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 </details>
 </p>
 
-## Testing Your Alexa Skill
+### Testing Your Alexa Skill
 <br> 
 So far, we have created a Voice User Interface and a Lambda function, and connected the two together. Your skill is now ready to test.
 <details>
