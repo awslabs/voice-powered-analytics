@@ -358,7 +358,9 @@ There are two parts to an Alexa skill. The first part is the Voice User Interfa
   5.  Fill out the <b>Skill Information screen</b>. Make sure to review the tips we provide below the screenshot.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_4.png?raw=true"><br>
   <details>
- <summary><strong>Skill Information Tips (expand for details)</strong></summary><p> #### Skill Information Tips<br>
+ <summary><strong>Skill Information Tips (expand for details)</strong></summary><p> 
+
+#### Skill Information Tips<br>
 i.  <b>Skill Type</b> For this skill, we are creating a skill using the Custom Interaction Model. This is the default choice.
 ii. <b>Language</b> Choose the first language you want to support. You can add additional languages in the future, but we need to start with one. (This guide is using U.S. English to start.)
 iii.  <b>Name</b> This is the name that will be shown in the Alexa Skills Store, and the name your users will refer to.
@@ -414,6 +416,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
    - Did you copy & paste the provided code into the appropriate boxes?
    - Did you accidentally add any characters to the Interaction Model or Sample Utterances?
 </details>
+
 ## Configure Alexa Backend
 <details>
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
@@ -425,6 +428,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
   3. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_11.png?raw=true"><br>
 </p></details>
+
 ## Connecting Your Voice User Interface to Your Lambda Function
 <summary><strong>Full solution - Connecting VUI to Lambda (expand for details)</strong></summary><p><details>
   On Step 1 of this track, we created a voice user interface for the intents and utterances we expect from our users. On Step 2, we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.
@@ -440,7 +444,9 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 7.  Click the <b>"Next"</b> button to continue to page #4 of this guide.
 </details>
 </p>
-## Testing Your Alexa Skill 
+
+## Testing Your Alexa Skill
+<br> 
 So far, we have created a Voice User Interface and a Lambda function, and connected the two together. Your skill is now ready to test.
 <details>
 <summary><strong>Full Solution - Testing Your Alexa Skill</strong></summary><p>
@@ -449,7 +455,7 @@ So far, we have created a Voice User Interface and a Lambda function, and co
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_15.png?raw=true"><br>
 3.  Test your skill with the <b>Service Simulator</b>. To validate that your skill is working as expected, use the Service Simulator. In the <b>Enter Utterance</b> text box, type "What’s my reinvent tweets over the last hour."
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/Alexa_Lab_16.png?raw=true"><br>
-  </p></details>
+  </p>
 4.  Other testing methods to consider:
 - <a href="https://echosim.io/">Echosim.io</a> - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go.
 - <a href="https://github.com/alexa/skill-sample-nodejs-city-guide/blob/master/unit-testing.md"> Unit Testing with Alexa</a> - a modern approach to unit testing your Alexa skills with <a href="http://getpostman.com/">Postman</a> and <a href="http://aws.amazon.com/apigateway">Amazon API Gateway</a>.
@@ -464,6 +470,6 @@ So far, we have created a Voice User Interface and a Lambda function, and co
 - [Press the listen button, and type "give me an activity" in the box]
 (Continue this process for all of the utterances. To start over, click the "Reset" button.)
 - If you receive a response that reads: <i>"The remote endpoint could not be called, or the response it returned was invalid,"</i> this is an indication that something is broken. AWS Lambda offers an additional testing tool to help you troubleshoot your skill.
-</p></p></details>
+</p></p></details></details>
 
 
