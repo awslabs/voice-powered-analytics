@@ -7,7 +7,8 @@ All workshop attendes will need an AWS account with access to the following prod
 ### Pre-workshop Checklist
 Please make sure you have the following availabile prior to the workshop.
 
-- [] AWS Account with root access
+
+- [ ] AWS Account with root access
 - [] Ability to create new IAM policies and roles
 - [] Full access to Athena – Clusterless Query Engine
 - [] Full access to Quicksight – Interactive BI Visualizations
