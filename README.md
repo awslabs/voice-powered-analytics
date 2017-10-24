@@ -453,7 +453,9 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <summary>Hint</summary><p>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true">
   </p></details>
-<br>Optionally, you can deploy the following CloudFormation:
+  7. Bonus (If time): can you add a skill to the Lambda function which enables users to "List My Metrics"
+<details>
+<summary>Optionally, you can deploy the following CloudFormation:</summary><p>
 <table>
 <thead>
 <tr>
@@ -465,7 +467,7 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <tr>
 <td><strong>Ireland</strong> (eu-west-1)</td>
 <td> <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" style="max-width:70%;"></a></td></tr></tbody></table>
-
+</p></details>
 
 </details>
 
@@ -511,4 +513,11 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 - If you receive a response that reads: <i>"The remote endpoint could not be called, or the response it returned was invalid,"</i> this is an indication that something is broken. AWS Lambda offers an additional testing tool to help you troubleshoot your skill.
 </p></p></details></details>
 
-
+### Bonus: What Utterances and Intents Are Needed For a "List My Metrics" skill
+<details>
+<summary><strong>Hints</strong></summary><p>
+  <br>Intent: ListMetrics
+  <br>Utterance(s): 
+  <br>- ListMetrics List My Metrics
+  <br>- ListMetrics What are my metrics
+</p></details><
