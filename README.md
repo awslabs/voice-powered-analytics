@@ -25,9 +25,9 @@ Please make sure you have the following availabile prior to the workshop.
 
 This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
 
-* **Alexa Skill Building Step**
-* **BI and Data Discovery Step**
-* **Advanced Alexa Skill Building Step**
+* **Alexa Skill Building Steps**
+* **BI and Data Discovery Steps**
+* **Advanced Alexa Skill Building Steps**
 
 We expect most attendes to be able to complete both the Alexa Skill Building and BI and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are you can focus in on the optional path, Advanced Alexa Skill Building.
 
@@ -340,7 +340,7 @@ s3_output_location = s3://aws-vpa-athena-query-results/poller/
 2. Set the Role name to **poller_full_access** and click **create role**
 
 
-## Alexa Skill Building Step
+## Alexa Skill Building Steps
 
 ### Setting up Your Voice User Interface
 
@@ -520,4 +520,4 @@ You've now created a Voice User Interface and a Lambda function, and connecte
   <br>Utterance(s): 
   <br>- ListMetrics List My Metrics
   <br>- ListMetrics What are my metrics
-</p></details><
+</p></details>
