@@ -178,23 +178,34 @@ import boto3
 import csv
 import time
 import os
+import logging
 from urllib.parse import urlparse
 
+# Setup logger
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
+
+# These ENV are expected to be defined on the lambda itself:
+# vpa_athena_database, vpa_ddb_table, vpa_metric_name, vpa_athena_query, region, vpa_s3_output_location
+
+# Responds to lambda event trigger
 def lambda_handler(event, context):
-    query = os.environ['query']
-    result = run_athena_query(query, os.environ['database'], os.environ['s3_output_location'])
-    upsert_into_DDB(os.environ['Metric_Name'], result, context)
-    return {'message': "{0} reinvent tweets so far!".format(result)}
+    vpa_athena_query = os.environ['vpa_athena_query']
+    athena_result = run_athena_query(vpa_athena_query, os.environ['vpa_athena_database'],
+                                     os.environ['vpa_s3_output_location'])
+    upsert_into_DDB(os.environ['vpa_metric_name'], athena_result, context)
+    logger.info("{0} reinvent tweets so far!".format(athena_result))
+    return {'message': "{0} reinvent tweets so far!".format(athena_result)}
 
 
-# runs athena query, open results file at specific s3 location and returns result
+# Runs athena query, open results file at specific s3 location and returns result
 def run_athena_query(query, database, s3_output_location):
     athena_client = boto3.client('athena', region_name=os.environ['region'])
     s3_client = boto3.client('s3', region_name=os.environ['region'])
     queryrunning = 0
 
-    #  kickoff the Athena query
+    # Kickoff the Athena query
     response = athena_client.start_query_execution(
         QueryString=query,
         QueryExecutionContext={
@@ -206,7 +217,7 @@ def run_athena_query(query, database, s3_output_location):
     )
 
     # Log the query execution id
-    print('Execution ID: ' + response['QueryExecutionId'])
+    logger.info('Execution ID: ' + response['QueryExecutionId'])
 
     # wait for query to finish.
     while (queryrunning == 0):
@@ -220,23 +231,27 @@ def run_athena_query(query, database, s3_output_location):
     s3url = urlparse(results_file)
     s3_bucket = s3url.netloc
     s3_key = s3url.path
-    print(s3_key)
 
     # download the result from s3
     s3_client.download_file(s3_bucket, s3_key[1:], "/tmp/results.csv")
 
-    # parse file and update the data to DynamoDB
+    # Parse file and update the data to DynamoDB
+    # This example will only have one record per petric so always grabbing 0
+    metric_value = 0
     with open("/tmp/results.csv", newline='') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            print(row[os.environ['resultCol']])
-            return row[os.environ['resultCol']]  # return result
+            metric_value = row['_col0']
+
+    os.remove("/tmp/results.csv")
+    return metric_value
 
 
+# Save result to DDB for fast access from Alexa/Lambda
 def upsert_into_DDB(nm, value, context):
     region = os.environ['region']
     dynamodb = boto3.resource('dynamodb', region_name=region)
-    table = dynamodb.Table(os.environ['DDB_Table'])
+    table = dynamodb.Table(os.environ['vpa_ddb_table'])
     try:
         response = table.put_item(
             Item={
@@ -246,8 +261,9 @@ def upsert_into_DDB(nm, value, context):
         )
         return 0
     except Exception:
-        print(str(e))
+        logger.error("ERROR: Failed to write metric to DDB")
         return 1
+
 ```
 
 1. Add the following for environment variables TODO add env, IAM Role
