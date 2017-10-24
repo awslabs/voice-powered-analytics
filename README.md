@@ -7,14 +7,14 @@ All workshop attendes will need an AWS account with access to the following prod
 ### Pre-workshop Checklist
 Please make sure you have the following availabile prior to the workshop.
 
-- [] AWS Account with root access
-- [] Ability to create new IAM policies and roles
-- [] Full access to Athena – Clusterless Query Engine
-- [] Full access to Quicksight – Interactive BI Visualizations
-- [] Full access to S3 – Limitless and durable object store
-- [] Full access to Lambda – Event-triggered functions
-- [] Full access to DynamoDB – Managed NoSQL database
-- [] Full access to Alexa – Voice-powered skills
+- [ ] AWS Account with root access
+- [ ] Ability to create new IAM policies and roles
+- [ ] Full access to Athena – Clusterless Query Engine
+- [ ] Full access to Quicksight – Interactive BI Visualizations
+- [ ] Full access to S3 – Limitless and durable object store
+- [ ] Full access to Lambda – Event-triggered functions
+- [ ] Full access to DynamoDB – Managed NoSQL database
+- [ ] Full access to Alexa – Voice-powered skills
 
 **Note** There are two steps that differ from the typical AWS workflow. 
 
