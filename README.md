@@ -423,13 +423,25 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_9.png?raw=true"><br>
-  2. Open the Lambda function, called <b>“Serverless_Analytics_Skill”</b> deployed with the Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. If you don't see Alexa Skills Kit in the list, jump back to step #3 on this page.
+  2. Open the Lambda function, starting with <b>“VoiceAlexaSkillFull-AlexaMetricSkill-1”</b> deployed with the Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. If you don't see Alexa Skills Kit in the list, jump back to step #3 on this page.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true"><br>
-  Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
-  3. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
+  3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.<br>
+  4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true"><br>
 </p>
-Optionally, you can deploy the following CloudFormation: 
+  5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.  Add a greeting and exit message for your Alexa skill by adding two environment variables(case sensitive): <b>greeting_msg</b> and <b>exit_msg</b>
+  <details>
+<summary>Example</summary><p>
+  greeting_msg <i>Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics</i> <br>
+  and
+  exit_msg <i>Thank you for trying the Voice Powered Analytics.  Have a nice day!</i>
+</p></details>
+  6.  We'll also add an environment variable called: <b>metrics_table</b> called <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric 
+<details>
+<summary>Hint</summary><p>
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true">
+  </p></details>
+Optionally, you can deploy the following CloudFormation (It is neccessary to still configure : 
 <table>
 <thead>
 <tr>
