@@ -428,7 +428,14 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
   3. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true"><br>
-</p></details>
+</p>
+Optionally, you can deploy the following CloudFormation: 
+Region | Launch Template
+------------ | -------------
+**Ireland** (eu-west-1) | [![Launch Zombie Workshop Stack into Ireland with CloudFormation](/Media/Images/CFN_Image_01.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=voice_alexa_skill_full&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml)
+
+
+</details>
 
 ### Connecting Your Voice User Interface to Your Lambda Function
 On Step 1 "Setting up Your Voice User Interface" of this Step, we created a voice user interface for the intents and utterances we expect from our users. On "Step 2 Configure Alexa Backend", we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together.<br>

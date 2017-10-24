@@ -9,7 +9,7 @@ Resources:
     Runtime: python3.6
     Role: arn:aws:iam::209015279802:role/LambdaDynamoROle
     Timeout: 60
-    CodeUri: s3://cf-templates-t9vckz1y2n2h-us-east-1/vpa_alexa_skill.zip
+    CodeUri: s3://cf-templates-kljh22251-eu-west-1/vpa_alexa_skill.zip
     Environment:
         Variables:
           greeting_msg: Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics
