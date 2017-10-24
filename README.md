@@ -430,9 +430,17 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true"><br>
 </p>
 Optionally, you can deploy the following CloudFormation: 
-Region | Launch Template
------------- | -------------
-**Ireland** (eu-west-1) | [![Launch Zombie Workshop Stack into Ireland with CloudFormation](/Media/Images/CFN_Image_01.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=voice_alexa_skill_full&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml)
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Launch Template</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ireland</strong> (eu-west-1)</td>
+<td> <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=voice_alexa_skill_full&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" style="max-width:100%;"></a></td></tr></tbody></table>
 
 
 </details>
