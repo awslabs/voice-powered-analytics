@@ -25,11 +25,12 @@ Please make sure you have the following availabile prior to the workshop.
 
 This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
 
-* **Alexa Skill Building Steps**
-* **BI and Data Discovery Steps**
-* **Advanced Alexa Skill Building Steps**
 
-We expect most attendes to be able to complete both the Alexa Skill Building and BI and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are you can focus in on the optional path, Advanced Alexa Skill Building.
+* **Athena and Data Discovery Step**
+* **Alexa Skill Building Step**
+* **Advanced Alexa Skill Building Step**
+
+We expect most attendes to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are, you can focus in on the optional path, Advanced Alexa Skill Building.
 
 We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
 
