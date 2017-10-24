@@ -10,6 +10,9 @@ Resources:
     Role: arn:aws:iam::209015279802:role/LambdaDynamoROle
     Timeout: 60
     CodeUri: s3://cf-templates-kljh22251-eu-west-1/vpa_alexa_skill.zip
+    Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
     Environment:
         Variables:
           greeting_msg: Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics

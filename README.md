@@ -453,7 +453,7 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <summary>Hint</summary><p>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true">
   </p></details>
-<br>Optionally, you can deploy the following CloudFormation (It is neccessary to still configure : 
+<br>Optionally, you can deploy the following CloudFormation:
 <table>
 <thead>
 <tr>
