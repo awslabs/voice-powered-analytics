@@ -152,8 +152,8 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 **Note:** If you would like example query strings, please review this steps Full solution.
 
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
-1. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Preto Docs](https://prestodb.io/docs/current/) web sites
-1. You can query whatever you like as this value will be used later from our Alexa skill
+2. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Preto Docs](https://prestodb.io/docs/current/) web sites
+3. You can query whatever you like as this value will be used later from our Alexa skill
 
 
 </p></details>
@@ -164,11 +164,11 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 
 #### - Create the lambda to query Athena
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
-1. Click **Create Function** 
-1. We will skip using a blueprint to get started and autor one from scratch. Click **Author one from scratch** 
-1. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
-1. Give your Lambda function a unique name. For example you can use **Athena_Poller** for the query name. For runtime select **Python 3.6**
-1. Select inline code and then use the:
+2. Click **Create Function** 
+3. We will skip using a blueprint to get started and autor one from scratch. Click **Author one from scratch** 
+4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
+5. Give your Lambda function a unique name. For example you can use **Athena_Poller** for the query name. For runtime select **Python 3.6**
+6. Select inline code and then use the:
 
 TODO: Clean up the Poller code
 
@@ -250,7 +250,7 @@ def upsert_into_DDB(nm, value, context):
 ```
 
 1. Add the following for environment variables TODO add env, IAM Role
-1. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
+2. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
 
 ```
 database = tweets
@@ -264,27 +264,27 @@ s3_output_location = s3://aws-vpa-athena-query-results/poller/
 ```
 
 1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `lambda_athena_poller`
-1. Select Adnanced Settings in order to configure the Timeout value to **1 minute**
-1. Click **Next**
-1. From the review page, select **Create Function**
+2. Select Adnanced Settings in order to configure the Timeout value to **1 minute**
+3. Click **Next**
+4. From the review page, select **Create Function**
 
 
 #### - Create a CloudWatch Event Rule to trigger Lambda
 
 1. Go to the [CloudWatch Events Rules console page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:). 
-1. Click **create rule**
-1. From the create rule page in the Event Source section. Select **Schedule** followed by **fixed rate** with a value of **5** minutes.
-1. From the Target section select **Add target**, then **lambda function**, followed by the new query we just created, **Athena_poller**.
-1. Next click on the **Configure Details**
-1. Give your rule a name, in this case **every-5-min**
-1. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
+2. Click **create rule**
+3. From the create rule page in the Event Source section. Select **Schedule** followed by **fixed rate** with a value of **5** minutes.
+4. From the Target section select **Add target**, then **lambda function**, followed by the new query we just created, **Athena_poller**.
+5. Next click on the **Configure Details**
+6. Give your rule a name, in this case **every-5-min**
+7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
 
 #### - Create an IAM Role for the Athena poller Lambda
 
 1. Go to the [IAM Roles Console Page](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) 
-1. Click on **Create Role** Button to create a new IAM Role
-1. Make sure the **AWS Service** and **Lambda** are selected for the Role Type and click **Next: Permissions**.
-1. Click on the **Create policy** button, followed by **Create your own policy**, then name the new policy **lambda_athena_poller** use the IAM Policy Document below
+2. Click on **Create Role** Button to create a new IAM Role
+3. Make sure the **AWS Service** and **Lambda** are selected for the Role Type and click **Next: Permissions**.
+4. Click on the **Create policy** button, followed by **Create your own policy**, then name the new policy **lambda_athena_poller** use the IAM Policy Document below
 
 ```JSON
 {
@@ -337,7 +337,7 @@ s3_output_location = s3://aws-vpa-athena-query-results/poller/
 ```
 
 1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
-1. Set the Role name to **poller_full_access** and click **create role**
+2. Set the Role name to **poller_full_access** and click **create role**
 
 
 ## Alexa Skill Building Step
@@ -419,6 +419,18 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 
 ### Configure Alexa Backend
 Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
+<br>Please deploy the following template into your AWS environment which contains the Lambda code for the Alexa skill. 
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Launch Template</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ireland</strong> (eu-west-1)</td>
+<td> <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template_partial.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" style="max-width:60%;"></a></td></tr></tbody></table>
 <details>
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.
@@ -439,9 +451,9 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   6.  We'll also add an environment variable called: <b>metrics_table</b> called <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric 
 <details>
 <summary>Hint</summary><p>
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true">
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true">
   </p></details>
-Optionally, you can deploy the following CloudFormation (It is neccessary to still configure : 
+<br>Optionally, you can deploy the following CloudFormation (It is neccessary to still configure : 
 <table>
 <thead>
 <tr>
