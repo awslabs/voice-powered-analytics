@@ -370,7 +370,7 @@ There are two parts to an Alexa skill. The first part is the Voice User Interfa
   2. Once you have signed in, click the <b>Alexa button</b> at the top of the screen.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_2.png?raw=true" width="80%" height="80%"><br>
   3.  On the Alexa page, choose the <b>"Get Started"</b> button for the Alexa Skills Kit.<br>
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_3.png?raw=true" width="80%" height="80%"><br>
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_3.png?raw=true" width="40%" height="40%"><br>
   4.  Select <b>"Add A New Skill."</b> This will get you to the first page of your new Alexa skill.
   5.  Fill out the <b>Skill Information screen</b>. Make sure to review the tips we provide below the screenshot.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_4.png?raw=true" width="80%" height="80%"><br>
@@ -495,7 +495,7 @@ On Step 1 "Setting up Your Voice User Interface" of this Step, we created a vo
   
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the "Configuration" tab on the left side.<br>
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_12.png?raw=true" width="80%" height="80%"><br>
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_12.png?raw=true" width="40%" height="40%"><br>
 3. Select the <b>"AWS Lambda ARN"</b> option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service">(Read more about Hosting Your Own Custom Skill Web Service.)</a> With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>. In addition, Amazon now offers <a href="https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits">AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills</a> IMPORTANT: Make sure you select the same region that you created your Lambda in.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_13.png?raw=true" width="80%" height="80%"><br>
 4.  Paste your <b>Lambda's ARN</b> (Amazon Resource Name) into the textbox provided. It should look similar to the screenshot above.
@@ -510,7 +510,7 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 <summary><strong>Full Solution - Testing Your Alexa Skill</strong></summary><p>
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the <b>"Test"</b> tab on the left side.<br>
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_15.png?raw=true" width="80%" height="80%"><br>
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_15.png?raw=true" width="40%" height="40%"><br>
 3.  Test your skill with the <b>Service Simulator</b>. To validate that your skill is working as expected, use the Service Simulator. In the <b>Enter Utterance</b> text box, type "What’s my reinvent tweets over the last hour."<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_16.png?raw=true" width="80%" height="80%"><br>
   </p>
