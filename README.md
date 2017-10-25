@@ -126,7 +126,9 @@ TODO: Use AWS Glue to discover and build a DDL.
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 1. Goto the Athena AWS Console page. From there select the **Default** Database
 1. Click the new query button. The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
-1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. A few examples are listed below.
+1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
+<details>
+<summary><strong>A few examples are listed below.</strong></summary><p>
 
 ```SQL
 --Total number of tweets
@@ -142,7 +144,7 @@ SELECT COUNT(*) FROM tweets WHERE screen_name LIKE '%chadneal%'
 SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 ```
-
+</p></details>
 </p></details>
 
 </p></details>
@@ -153,7 +155,7 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 **Note:** If you would like example query strings, please review this steps Full solution.
 
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
-2. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Preto Docs](https://prestodb.io/docs/current/) web sites
+2. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 3. You can query whatever you like as this value will be used later from our Alexa skill
 
 
@@ -178,34 +180,25 @@ import boto3
 import csv
 import time
 import os
-import logging
 from urllib.parse import urlparse
 
-# Setup logger
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
-
-# These ENV are expected to be defined on the lambda itself:
-# vpa_athena_database, vpa_ddb_table, vpa_metric_name, vpa_athena_query, region, vpa_s3_output_location
-
-# Responds to lambda event trigger
 def lambda_handler(event, context):
-    vpa_athena_query = os.environ['vpa_athena_query']
-    athena_result = run_athena_query(vpa_athena_query, os.environ['vpa_athena_database'],
-                                     os.environ['vpa_s3_output_location'])
-    upsert_into_DDB(os.environ['vpa_metric_name'], athena_result, context)
-    logger.info("{0} reinvent tweets so far!".format(athena_result))
-    return {'message': "{0} reinvent tweets so far!".format(athena_result)}
+    query = os.environ['query']
+    indexEndRegion = context.invoked_function_arn[15:30].find(":")+15
+    region = context.invoked_function_arn[15:indexEndRegion]
+    result = run_athena_query(query, os.environ['database'], os.environ['s3_output_location'],region)
+    upsert_into_DDB(os.environ['Metric_Name'], result, context,region)
+    return {'message': "{0} reinvent tweets so far!".format(result)}
 
 
-# Runs athena query, open results file at specific s3 location and returns result
-def run_athena_query(query, database, s3_output_location):
-    athena_client = boto3.client('athena', region_name=os.environ['region'])
-    s3_client = boto3.client('s3', region_name=os.environ['region'])
+# runs athena query, open results file at specific s3 location and returns result
+def run_athena_query(query, database, s3_output_location,region):
+    athena_client = boto3.client('athena', region_name=region])
+    s3_client = boto3.client('s3', region_name=region])
     queryrunning = 0
 
-    # Kickoff the Athena query
+    #  kickoff the Athena query
     response = athena_client.start_query_execution(
         QueryString=query,
         QueryExecutionContext={
@@ -217,7 +210,7 @@ def run_athena_query(query, database, s3_output_location):
     )
 
     # Log the query execution id
-    logger.info('Execution ID: ' + response['QueryExecutionId'])
+    print('Execution ID: ' + response['QueryExecutionId'])
 
     # wait for query to finish.
     while (queryrunning == 0):
@@ -231,42 +224,38 @@ def run_athena_query(query, database, s3_output_location):
     s3url = urlparse(results_file)
     s3_bucket = s3url.netloc
     s3_key = s3url.path
+    print(s3_key)
 
     # download the result from s3
     s3_client.download_file(s3_bucket, s3_key[1:], "/tmp/results.csv")
 
-    # Parse file and update the data to DynamoDB
-    # This example will only have one record per petric so always grabbing 0
-    metric_value = 0
+    # parse file and update the data to DynamoDB
     with open("/tmp/results.csv", newline='') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            metric_value = row['_col0']
-
-    os.remove("/tmp/results.csv")
-    return metric_value
+            print(row[os.environ['resultCol']])
+            return row[os.environ['resultCol']]  # return result
 
 
-# Save result to DDB for fast access from Alexa/Lambda
-def upsert_into_DDB(nm, value, context):
-    region = os.environ['region']
+def upsert_into_DDB(nm, value, context,region):
     dynamodb = boto3.resource('dynamodb', region_name=region)
-    table = dynamodb.Table(os.environ['vpa_ddb_table'])
+    table = dynamodb.Table(os.environ['DDB_Table'])
     try:
         response = table.put_item(
             Item={
-                'metric': nm,
+                'metric': UPPER(nm),
                 'value': value
             }
         )
         return 0
     except Exception:
-        logger.error("ERROR: Failed to write metric to DDB")
+        print(str(e))
         return 1
 
 ```
 
 1. Add the following for environment variables TODO add env, IAM Role
+2. Add the role to the Lambda function: lambda_athena_poller
 2. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
 
 ```
@@ -275,15 +264,15 @@ DDB_Table = VPA_Metrics_Table
 Metric_Name = Reinvent Twitter Sentiment
 query = SELECT count(*) FROM default."tweets"
 resultCol = _col0
-region = us-east-1
 s3_output_location = s3://aws-vpa-athena-query-results/poller/
 
 ```
 
-1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `lambda_athena_poller`
+3. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `lambda_athena_poller`
 2. Select Adnanced Settings in order to configure the Timeout value to **1 minute**
 3. Click **Next**
 4. From the review page, select **Create Function**
+
 
 
 #### - Create a CloudWatch Event Rule to trigger Lambda
@@ -296,8 +285,23 @@ s3_output_location = s3://aws-vpa-athena-query-results/poller/
 6. Give your rule a name, in this case **every-5-min**
 7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
 
-#### - Create an IAM Role for the Athena poller Lambda
+#### Optional CloudFormation
+<summary>Optionally, you can deploy the following CloudFormation:</summary><p>
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Launch Template</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ireland</strong> (eu-west-1)</td>
+<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AthenaPoller&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/athena_poller_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Athena Poller into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
+</p></details>
 
+#### - Create an IAM Role for the Athena poller Lambda
+<b>AdamNote: Is this necessary or should we create this automatically</b>
 1. Go to the [IAM Roles Console Page](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) 
 2. Click on **Create Role** Button to create a new IAM Role
 3. Make sure the **AWS Service** and **Lambda** are selected for the Role Type and click **Next: Permissions**.

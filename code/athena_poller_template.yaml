@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for Athena Poller
+Resources:
+ AthenaPoller:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: athena_poller.lambda_handler
+    Runtime: python3.6
+    Role: arn:aws:iam::209015279802:role/lambda_athena_poller
+    Timeout: 90
+    MemorySize: 384
+    CodeUri: s3://cf-templates-kljh22251-eu-west-1/athena_poller.zip
+    Events:
+        Timer:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
+    Environment:
+        Variables:
+          database: tweets
+          Metric_Name: Reinvent Twitter Sentiment
+          query: SELECT count(*) FROM default."tweets"
+          resultCol: _col0
+          s3_output_location: s3://aws-vpa-athena-query-results/poller/
