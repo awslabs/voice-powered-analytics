@@ -7,7 +7,12 @@ All workshop attendes will need an AWS account with access to the following prod
 ### Pre-workshop Checklist
 Please make sure you have the following availabile prior to the workshop.
 
-- [ ] AWS Account with root access
+- [ ] Amazon Developer account
+- [ ] AWS Account with root access or full access
+ 
+Or
+
+- [ ] Amazon Developer account
 - [ ] Ability to create new IAM policies and roles
 - [ ] Full access to Athena – Clusterless Query Engine
 - [ ] Full access to Quicksight – Interactive BI Visualizations
@@ -15,6 +20,8 @@ Please make sure you have the following availabile prior to the workshop.
 - [ ] Full access to Lambda – Event-triggered functions
 - [ ] Full access to DynamoDB – Managed NoSQL database
 - [ ] Full access to Alexa – Voice-powered skills
+- [ ] Full access to CloudFormation
+- [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
 
 **Note** There are two steps that differ from the typical AWS workflow. 
 
@@ -25,30 +32,31 @@ Please make sure you have the following availabile prior to the workshop.
 
 This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
 
-
 * **Athena and Data Discovery Step**
 * **Alexa Skill Building Step**
 * **Advanced Alexa Skill Building Step**
 
-We expect most attendes to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are, you can focus in on the optional path, Advanced Alexa Skill Building.
+We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are, you can focus in on the optional path, Advanced Alexa Skill Building.
 
 We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
 
-1. Full solution where the attende does not have to write any code
-1. Partial solution where the attende can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
+1. Full solution where the attendee does not have to write any code
+1. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
 
-In addition to deciding bewteen using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend the time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
+In addition to deciding between using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
 
 
 ## BI and Data Discovery Step
 
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
 
-This dataset is avilable as:
+This dataset is available as:
 
-```
+```bash
 US-EAST-1 
 s3://aws-vpa-tweets/
+EU-WEST-1
+s3://aws-vpa-tweets-euw1/
 ```
 
 ### Step 1 - Create an Athena table
@@ -187,7 +195,7 @@ logger.setLevel(logging.INFO)
 
 
 # These ENV are expected to be defined on the lambda itself:
-# vpa_athena_database, vpa_ddb_table, vpa_metric_name, vpa_athena_query, region, vpa_s3_output_location
+# vpa_athena_database, vpa_ddb_table, vpa_metric_name, vpa_athena_query, vpa_region, vpa_s3_output_location
 
 # Responds to lambda event trigger
 def lambda_handler(event, context):
@@ -201,8 +209,8 @@ def lambda_handler(event, context):
 
 # Runs athena query, open results file at specific s3 location and returns result
 def run_athena_query(query, database, s3_output_location):
-    athena_client = boto3.client('athena', region_name=os.environ['region'])
-    s3_client = boto3.client('s3', region_name=os.environ['region'])
+    athena_client = boto3.client('athena', region_name=os.environ['vpa_region'])
+    s3_client = boto3.client('s3', region_name=os.environ['vpa_region'])
     queryrunning = 0
 
     # Kickoff the Athena query
@@ -249,7 +257,7 @@ def run_athena_query(query, database, s3_output_location):
 
 # Save result to DDB for fast access from Alexa/Lambda
 def upsert_into_DDB(nm, value, context):
-    region = os.environ['region']
+    region = os.environ['vpa_region']
     dynamodb = boto3.resource('dynamodb', region_name=region)
     table = dynamodb.Table(os.environ['vpa_ddb_table'])
     try:
@@ -270,13 +278,12 @@ def upsert_into_DDB(nm, value, context):
 2. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
 
 ```
-database = tweets
-DDB_Table = VPA_Metrics_Table
-Metric_Name = Reinvent Twitter Sentiment
-query = SELECT count(*) FROM default."tweets"
-resultCol = _col0
-region = us-east-1
-s3_output_location = s3://aws-vpa-athena-query-results/poller/
+vpa_athena_database = tweets
+vpa_ddb_table = VPA_Metrics_Table
+vpa_metric_name = Reinvent Twitter Sentiment
+vpa_athena_query = SELECT count(*) FROM default."tweets"
+vpa_region = eu-west-1
+s3_output_location = s3://<your_s3_bucket_name>/poller/
 
 ```
 
