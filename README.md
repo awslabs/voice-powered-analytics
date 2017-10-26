@@ -133,10 +133,11 @@ TODO: Use AWS Glue to discover and build a DDL.
 
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 1. Goto the Athena AWS Console page. From there select the **Default** Database
+1. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 1. Click the new query button. The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
 1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
 <details>
-<summary><strong>A few examples are listed below.</strong></summary><p>
+<summary><strong>A few examples of other queries are listed below.</strong></summary><p>
 
 ```SQL
 --Total number of tweets
@@ -152,19 +153,6 @@ SELECT COUNT(*) FROM tweets WHERE screen_name LIKE '%chadneal%'
 SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 ```
-</p></details>
-
-<details>
-<summary><strong>Partial solution - Athena Query (expand for details)</strong></summary><p>
-
-**Note:** If you would like example query strings, please review this steps Full solution.
-
-1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
-2. Athena is widely compatable with Presto. You can learn more about it from our [AWS Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
-3. You can query whatever you like as this value will be used later from our Alexa skill
-
-
-</p></details>
 
 ### Step 4 - Create a lambda to query Athena
 
@@ -173,12 +161,10 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 #### - Create the lambda to query Athena
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
 2. Click **Create Function** 
-3. We will skip using a blueprint to get started and autor one from scratch. Click **Author one from scratch** 
+3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
 4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
-5. Give your Lambda function a unique name. For example you can use **Athena_Poller** for the query name. For runtime select **Python 3.6**
+5. Give your Lambda function a unique name. For example you can use **vpa_lambda_athena** for the query name. For runtime select **Python 3.6**
 6. Select inline code and then use the:
-
-TODO: Clean up the Poller code
 
 ```Python
 import boto3
@@ -286,7 +272,7 @@ vpa_region = eu-west-1
 s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 
-1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `lambda_athena_poller`
+1. From the **Lambda function handler and role** ensure the Handler is set to `vpa_lambda_athena.lambda_handler` and the Existing role to `lambda_athena_poller`
 1. Select Adnanced Settings in order to configure the Timeout value to **1 minute**
 1. Click **Next**
 1. From the review page, select **Create Function**
