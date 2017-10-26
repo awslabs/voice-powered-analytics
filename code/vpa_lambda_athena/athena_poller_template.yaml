@@ -21,5 +21,4 @@ Resources:
           database: tweets
           Metric_Name: Reinvent Twitter Sentiment
           query: SELECT count(*) FROM default."tweets"
-          resultCol: _col0
           s3_output_location: s3://aws-vpa-athena-query-results/poller/
