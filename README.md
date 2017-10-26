@@ -385,7 +385,7 @@ s3_output_location = s3://<your_s3_bucket_name>/poller/
 
 There are two parts to an Alexa skill. The first part is the Voice User Interface (VUI). This is where we define how we will handle a user's voice input, and which code should be executed when specific commands are uttered. The second part is the actual programming logic for our skill.   Both will be configured in this step-by-step guide.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Arch.png?raw=true" width="80%" height="80%"><br><br>
-Alexa fits into your Voice Powered Analytics architecture as the interaction interface for retrieving metrics.  Alexa determines what metrics to retrieve through intents (which we'll describe and configure in the next steps).  The intents correspond to metrics in your DynamoDB data store, which Lambda functions retrievse and send back to Alexa to communicate back to the user:<br>
+Alexa fits into your Voice Powered Analytics architecture as the interaction interface for retrieving metrics.  Alexa determines what metrics to retrieve through intents (which we'll describe and configure in the next steps).  The intents correspond to metrics in your DynamoDB data store, which Lambda functions retrieve and send back to the Alexa-enabled device to communicate back to the user:<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Arch2.png?raw=true" width="80%" height="80%"><br><br>   
 <details>
 <summary><strong>Full solution - Setting up VUI (expand for details)</strong></summary><p>
