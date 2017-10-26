@@ -44,11 +44,11 @@ def run_athena_query(query, database, s3_output_location):
     logger.info('Execution ID: ' + response['QueryExecutionId'])
 
     # wait for query to finish.
-    while (queryrunning == 0):
+    while queryrunning == 0:
         time.sleep(2)
         status = athena_client.get_query_execution(QueryExecutionId=response['QueryExecutionId'])
         results_file = status["QueryExecution"]["ResultConfiguration"]["OutputLocation"]
-        if (status["QueryExecution"]["Status"]["State"] != "RUNNING"):
+        if status["QueryExecution"]["Status"]["State"] != "RUNNING":
             queryrunning = 1
 
     # parse the s3 URL and find the bucket name and key name
