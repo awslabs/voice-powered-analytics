@@ -1,0 +1,67 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: ''
+Metadata:
+  AWS::CloudFormation::Interface:
+Parameters:
+Resources:
+  VPALambdaAthenaPoller:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: vpa_lambda_athena_poller
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Policies:
+      - PolicyName: vpa_lambda_athena_poller_permissions
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Sid: Stmt1506907773887
+            Effect: Allow
+            Action: 
+            - cloudwatch:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506907792079
+            Effect: Allow
+            Action: 
+            - logs:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506907804049
+            Effect: Allow
+            Action: 
+            - athena:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506907824634
+            Effect: Allow
+            Action: 
+            - xray:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506907846668
+            Effect: Allow
+            Action: 
+            - s3:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506907885059
+            Effect: Allow
+            Action: 
+            - dynamodb:*
+            Resource: 
+            - "*"
+          - Sid: Stmt1506908036515
+            Effect: Allow
+            Action: 
+            - glue:*
+            Resource: 
+            - "*"
