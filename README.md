@@ -44,6 +44,18 @@ We have provided cloud formation templates and solutions for all steps where the
 1. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
 
 In addition to deciding between using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Launch Template</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ireland</strong> (eu-west-1)</td>
+<td> 
+<center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/vpa_roles.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
 
 
 ## BI and Data Discovery Step
