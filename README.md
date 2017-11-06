@@ -195,9 +195,9 @@ TODO: Use AWS Glue to discover and build a DDL.
 ### Step 3 - Explore the data using Quicksight
 We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
 
-1. Launch the []QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
+1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
-a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.<br>  
+a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
 b. On the left menu, click *Account Settings*<br>
 c. Click the *Edit AWS permissions* button<br>
 d. Ensure the box *Amazon Athena* is checked, then click *Apply*
@@ -233,11 +233,12 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. Ensure that the **default** database is selected and you'll see our *tweets* table.  
 1. The Athena syntax is widely compatable with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
-1. Let's write a new query, there are several ways that you can do this:
+1. Let's write a new query, there are several ways that you can do this:<br>
 a. Use one of the queries that we had selected from the *Query Editor*<br>
-b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
-**TODO Show advanced query building techniques for our dataset**
+b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`<br>
+**TODO Show advanced query building techniques for our dataset**<br>
 c. Use or build off one of th examples below:
+</details>
 <details>
 <summary><strong>A few examples of other queries are listed below.</strong></summary><p>
 
@@ -260,13 +261,17 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
+Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
+
 #### - Create the lambda to query Athena
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
 2. Click **Create Function** 
 3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
 4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
 5. Give your Lambda function a unique name. For example you can use **vpa_lambda_athena** for the query name. For runtime select **Python 3.6**
-6. Select inline code and then use the:
+6. Add a role.  Under role, *Choose an existing role*, and in the box below, choose the role starting with title *vparoles-VPALambdaAthenaPoller*
+7. Click *Create function*
+8. Select inline code and then use the:
 
 ```Python
 import boto3
@@ -361,7 +366,6 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
-1. Add the following for environment variables TODO add env, IAM Role
 1. Add the role to the Lambda function: lambda_athena_poller
 1. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
 
@@ -370,12 +374,12 @@ vpa_athena_database = tweets
 vpa_ddb_table = VPA_Metrics_Table
 vpa_metric_name = Reinvent Twitter Sentiment
 vpa_athena_query = SELECT count(*) FROM default."tweets"
-vpa_region = eu-west-1
-s3_output_location = s3://<your_s3_bucket_name>/poller/
+region = eu-west-1
+vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
-
+Note: for vpa_s3_output_location, use the Athena s3 location copied in the top of this Step's instructions.  
 1. From the **Lambda function handler and role** ensure the Handler is set to `vpa_lambda_athena.lambda_handler` and the Existing role to `lambda_athena_poller`
-1. Select Adnanced Settings in order to configure the Timeout value to **1 minute**
+1. Select Advanced Settings in order to configure the Timeout value to **1 minute**
 1. Click **Next**
 1. From the review page, select **Create Function**
 
@@ -405,63 +409,6 @@ s3_output_location = s3://<your_s3_bucket_name>/poller/
 <td><strong>Ireland</strong> (eu-west-1)</td>
 <td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AthenaPoller&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/athena_poller_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Athena Poller into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
 </p></details>
-
-#### - Create an IAM Role for the Athena poller Lambda
-<b>AdamNote: Is this necessary or should we create this automatically</b>
-1. Go to the [IAM Roles Console Page](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) 
-2. Click on **Create Role** Button to create a new IAM Role
-3. Make sure the **AWS Service** and **Lambda** are selected for the Role Type and click **Next: Permissions**.
-4. Click on the **Create policy** button, followed by **Create your own policy**, then name the new policy **lambda_athena_poller** use the IAM Policy Document below
-
-```JSON
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Stmt1506907773887",
-      "Action": "cloudwatch:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506907792079",
-      "Action": "logs:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506907804049",
-      "Action": "athena:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506907824634",
-      "Action": "xray:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506907846668",
-      "Action": "s3:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506907885059",
-      "Action": "dynamodb:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1506908036515",
-      "Action": "glue:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-```
 
 1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
 2. Set the Role name to **poller_full_access** and click **create role**
