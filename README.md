@@ -194,7 +194,8 @@ TODO: Use AWS Glue to discover and build a DDL.
 
 ### Step 3 - Explore the data using Quicksight
 We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
-
+<details>
+<summary><strong>Full solution - Explore Athena data in Quicksight</strong></summary><p>
 1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
 a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
@@ -215,13 +216,13 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. On this new graph, lets add the **country** field. 
 1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
 1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
-
+</p></details>
 **Bonus: What other interesting insights can you find from this data in Quicksight**
+
 
 ### Step 4 - Create a query to find the number of reinvent tweets 
 
 
-</p></details>
 
 <details>
 <summary><strong>Full solution - Athena Query (expand for details)</strong></summary><p>
