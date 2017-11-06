@@ -256,6 +256,7 @@ SELECT COUNT(*) FROM tweets WHERE screen_name LIKE '%chadneal%'
 SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 ```
+</details>
 
 ### Step 4 - Create a lambda to query Athena
 
