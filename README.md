@@ -217,6 +217,7 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
 1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
 </p></details>
+
 **Bonus: What other interesting insights can you find from this data in Quicksight**
 
 
@@ -259,13 +260,14 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 ```
 </details>
 
-### Step 4 - Create a lambda to query Athena
+### Step 5 - Create a lambda to query Athena
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
 Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
+<details>
+<summary><strong>Full Solution - Create the lambda to query Athena</strong></summary><p>
 
-#### - Create the lambda to query Athena
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
 2. Click **Create Function** 
 3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
@@ -369,7 +371,7 @@ def upsert_into_DDB(nm, value, context):
 ```
 
 1. Add the role to the Lambda function: lambda_athena_poller
-1. Set the following Environment variables: TODO: Remove spaces in table names TODO: Create bucket for Athena results
+1. Set the following Environment variables:
 
 ```
 vpa_athena_database = tweets
@@ -384,10 +386,11 @@ Note: for vpa_s3_output_location, use the Athena s3 location copied in the top o
 1. Select Advanced Settings in order to configure the Timeout value to **1 minute**
 1. Click **Next**
 1. From the review page, select **Create Function**
+</details>
 
 
-
-#### - Create a CloudWatch Event Rule to trigger Lambda
+<details>
+<summary><strong>Full Solution - Create a CloudWatch Event Rule to trigger Lambda </strong></summary><p>
 
 1. Go to the [CloudWatch Events Rules console page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:). 
 2. Click **create rule**
@@ -396,9 +399,9 @@ Note: for vpa_s3_output_location, use the Athena s3 location copied in the top o
 5. Next click on the **Configure Details**
 6. Give your rule a name, in this case **every-5-min**
 7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
-
+</details>
 #### Optional CloudFormation
-<summary>Optionally, you can deploy the following CloudFormation:</summary><p>
+<summary>If you couldn't complete the steps above, optionally, you can deploy the following CloudFormation into your account:</summary><p>
 <table>
 <thead>
 <tr>
@@ -414,7 +417,7 @@ Note: for vpa_s3_output_location, use the Athena s3 location copied in the top o
 
 1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
 2. Set the Role name to **poller_full_access** and click **create role**
-
+3. Open the Lambda function and retrieve the S3 Athena output location to put in the environment variable
 
 ## Alexa Skill Building Steps
 
