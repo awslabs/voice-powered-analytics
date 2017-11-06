@@ -2,7 +2,9 @@
 In this workshop you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
 
 ## The primary products used in this workshop are:
-All workshop attendes will need an AWS account with access to the following products. AWS will **NOT** be providing temporary accounts for this workshop. AWS will be providing a **TODO** $25 credit to cover the expense of the workshop. 
+All workshop attendees will need an AWS account with access to the following products. 
+<br>
+*Note For re:invent attendees:  AWS will not be providing temporary accounts for this workshop. Expected costs for this workshop is < $1 (Assuming free tier eligibility), AWS will be providing $10 AWS credits to cover the expense of the workshop.* 
 
 ### Pre-workshop Checklist
 Please make sure you have the following availabile prior to the workshop.
@@ -12,7 +14,7 @@ Please make sure you have the following availabile prior to the workshop.
  
 Or
 
-- [ ] Amazon Developer account
+- [ ] [Amazon Developer](https://developer.amazon.com/) account
 - [ ] Ability to create new IAM policies and roles
 - [ ] Full access to Athena – Clusterless Query Engine
 - [ ] Full access to Quicksight – Interactive BI Visualizations
@@ -26,22 +28,22 @@ Or
 **Note** There are two steps that differ from the typical AWS workflow. 
 
 * Development of an Alexa skill requires creation of an account at [Amazon Developer](https://developer.amazon.com/alexa-skills-kit) If you have not created an account yet, please do so before the workshop.
-* Using QuickSight requires signing up for the service on a per user basis. Please conplete this step before the workshop to save on time.  
+* Using QuickSight requires [signing up](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html) for the service on a per user basis. Please conplete this step before the workshop to save on time.  
 
 ## Workshop Steps
 
 This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
 
-* **Athena and Data Discovery Step**
-* **Alexa Skill Building Step**
-* **Advanced Alexa Skill Building Step**
+* **Athena and Data Discovery Steps**
+* **Alexa Skill Building Steps**
 
-We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps and if time permits or if you are as excited about Alexa Notifications as we are, you can focus in on the optional path, Advanced Alexa Skill Building.
+We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps.
 
 We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
 
 1. Full solution where the attendee does not have to write any code
-1. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
+2. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
+3. Many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.   While there aren't hard-and-fast answers for the bonus sections, feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
 
 In addition to deciding between using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
 <table>
@@ -57,13 +59,20 @@ In addition to deciding between using the full or partial solutions. The attende
 <td> 
 <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/vpa_roles.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
 
+**TODO This needs to create additional DDB tables as well**
 
-## BI and Data Discovery Step
+## BI and Data Discovery Steps
 
+
+
+### Step 1 - Understand Raw Data Set To Query
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
-
+Let's first take a look at the data set we're going to analyze and query.  
+#### How we get the data into S3
+The data is acquired starting with a Cloudwatch Event triggering an AWS Lambda function every 1 minute.  Lambda is making calls to Twitter's APIs for data, and then ingesting the data into AWS Kinesis Firehose.   Firsthose then microbatches the results into S3 as shown in the following diagram:
+<br><IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png?raw=true" width="80%" height="80%"><br><br>
+#### Step 1 Explore the Twitter data
 This dataset is available as:
-
 ```bash
 US-EAST-1 
 s3://aws-vpa-tweets/
@@ -71,15 +80,77 @@ EU-WEST-1
 s3://aws-vpa-tweets-euw1/
 ```
 
-### Step 1 - Create an Athena table
+<details>
+<summary><strong>Partial solution - Explore the Twitter Data</strong></summary><p>
+AWS Firehose delivers the data into S3 as a GZIP file format.  There are 3 ways to get to this public dataset:
 
-There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available. You will however need to create an Athena database and table to query the data. The twitter data is stored in s3 in a JSON format which Athena has native support for. 
+1. Download a sample extract of the data at the following [File Location](https://s3.amazonaws.com/aws-vpa-tweets/tweets/2017/11/06/03/aws-vpa-tweets-1-2017-11-06-03-53-28-b055a510-f718-4207-8e48-05c3ad8c3a5d.gz)
+2. Using the [AWS CLI](https://aws.amazon.com/cli/)
+3. Using a 3rd party S3 File Explorer such as [Cloudberry Explorer](https://www.cloudberrylab.com/explorer/amazon-s3.aspx)  
+</details>
+
 
 <details>
-<summary><strong>Full solution - Athena table (expand for details)</strong></summary><p>
+<summary><strong>Full solution - Explore the Twitter Data Using AWS CLI</strong></summary><p>
+When using the AWS CLI, you can run the following commands to see the folder/prefix structure of the data.  Firehose delivers the data in micro-batches by time.  When navigating to the file itself, it is in the GZIP file format:
 
-1. In your AWS account please go to Athena query editor.
-1. You need to create a new table using this for the external table DDL:
+```bash
+$ aws s3 ls s3://aws-vpa-tweets-euw1/
+         PRE tweets/
+$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/
+         PRE 2017/
+$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/
+         PRE 10/
+         PRE 11/
+$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/
+         PRE 01/
+         PRE 02/
+         PRE 03/
+         PRE 04/
+         PRE 05/
+         PRE 06/
+$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/
+         PRE 00/
+         PRE 01/
+         PRE 02/
+         PRE 03/
+         PRE 04/
+$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/
+2017-11-05 20:09:30        270 aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
+```
+Let's download the file by copying it locally and then using our favorite editor to open it:
+``` bash
+$ aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz .
+download: s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz to ./aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
+$ vi aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz 
+```
+The data format looks something like this:
+```json
+{  
+	"id": 914642318044655600,  
+	"text": "Two months until #reInvent! Check out the session calendar & prepare for reserved seating on Oct. 19! http://amzn.to/2fxlVg7  ",  
+	"created": "2017-10-02 00:04:56",  
+	"screen_name": " AWSReinvent ",  
+	"screen_name_followers_count": 49864,  
+	"place": "none",  
+	"country": "none",  
+	"retweet_count": 7,  
+	"favorite_count": 21
+}
+```
+In the next section, we're going to use these fields to create HIVE external tables in AWS Athena and query the data directly in S3.
+</details>
+
+### Step 2 - Create an Athena table for Initial Data Discovery
+
+Now we're comfortable with the dataset, let's create a table in Athena on top of this data.  There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available. You will however need to create an Athena database and table to query the data. The twitter data is compressed in s3, but in a JSON syntax which Athena has native support for. 
+
+<details>
+<summary><strong>Full solution - Create Athena table (expand for details)</strong></summary><p>
+
+1. In your AWS account navigate to the **Athena** service
+2. In the top left menu, choose *Query Editor*.
+3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) Data Definition Language (DDL):
 
 ```SQL
 CREATE EXTERNAL TABLE tweets(
@@ -103,16 +174,19 @@ OUTPUTFORMAT
 LOCATION
   's3://aws-vpa-tweets/tweets/'
 ```
-1. Test the Athena table with a simple `SELECT` statement:
+4. Then hit the *Run Query* button
+5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
+6. If you click on the *tweets* table, you can see the fields that are in our raw S3 data.    
+7. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
 
 ```SQL
 SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
 ```
-
+The statement above shows the total amount of tweets in our data set (result value should be well over 8k).  
 </p></details>
 
 <details>
-<summary><strong>Partial solution - Athena table (expand for details)</strong></summary><p>
+<summary><strong>Partial solution - Create Athena table using Glue(expand for details)</strong></summary><p>
 
 TODO: Use AWS Glue to discover and build a DDL.
 
