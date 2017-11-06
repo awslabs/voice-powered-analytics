@@ -68,10 +68,10 @@ In addition to deciding between using the full or partial solutions. The attende
 ### Step 0 - Understand Raw Data Set To Query
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
 Let's first take a look at the data set we're going to analyze and query.  
-#### How we get the data into S3
+### How we get the data into S3
 The data is acquired starting with a Cloudwatch Event triggering an AWS Lambda function every 1 minute.  Lambda is making calls to Twitter's APIs for data, and then ingesting the data into AWS Kinesis Firehose.   Firsthose then microbatches the results into S3 as shown in the following diagram:
 <br><IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png?raw=true" width="80%" height="80%"><br><br>
-#### Step 1 - Explore the Twitter data
+### Step 1 - Explore the Twitter data
 This dataset is available as:
 ```bash
 US-EAST-1 
