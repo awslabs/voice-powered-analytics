@@ -268,6 +268,11 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
+#### Run the setup CloudFormation template
+
+We have created a CloudFormation template to create the IAM roles, IAM Policies, DynamoDB table, and s3 bucket needed for this workshop.
+The template can be found in `code/setup/vpa_setup.yaml` or https://github.com/awslabs/voice-powered-analytics/blob/master/code/setup/vpa_setup.yaml 
+
 Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
 <details>
 <summary><strong>Full Solution - Create the lambda to query Athena</strong></summary><p>
@@ -277,7 +282,7 @@ Before we create the Lambda function, we need to retrieve the bucket where Athen
 3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
 4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
 5. Give your Lambda function a unique name. For example you can use **vpa_lambda_athena** for the query name. For runtime select **Python 3.6**
-6. Add a role.  Under role, *Choose an existing role*, and in the box below, choose the role starting with title *vparoles-VPALambdaAthenaPoller*
+6. Add a role.  Under role, *Choose an existing role*, and in the box below, choose the role named *VPALambdaAthenaPoller*
 7. Click *Create function*
 8. Select inline code and then use the:
 
@@ -374,7 +379,7 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
-1. Add the role to the Lambda function: lambda_athena_poller
+1. Add the role to the Lambda function: VPALambdaAthenaPoller
 1. Set the following Environment variables:
 
 ```
@@ -385,9 +390,9 @@ vpa_athena_query = SELECT count(*) FROM default."tweets"
 region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
-Note: for vpa_s3_output_location, use the Athena s3 location copied in the top of this Step's instructions.  
-1. From the **Lambda function handler and role** ensure the Handler is set to `vpa_lambda_athena.lambda_handler` and the Existing role to `lambda_athena_poller`
-1. Select Advanced Settings in order to configure the Timeout value to **1 minute**
+Note: for vpa_s3_output_location, use the Athena s3 location from the output of the setup CloudFormation template.  
+1. From the **Lambda function handler and role** ensure the Handler is set to `vpa_lambda_athena.lambda_handler` and the Existing role to `VPALambdaAthenaPoller`
+1. Select Advanced Settings in order to configure the Timeout value to **2 minutes**
 1. Click **Next**
 1. From the review page, select **Create Function**
 </details>
