@@ -174,7 +174,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  's3://aws-vpa-tweets/tweets/'
+  's3://aws-vpa-tweets-euw1/tweets/'
 ```
 4. Then hit the *Run Query* button
 5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
