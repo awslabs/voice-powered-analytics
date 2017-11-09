@@ -391,10 +391,11 @@ region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 Note: for vpa_s3_output_location, use the Athena s3 location from the output of the setup CloudFormation template.  
-1. From the **Lambda function handler and role** ensure the Handler is set to `vpa_lambda_athena.lambda_handler` and the Existing role to `VPALambdaAthenaPoller`
+1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `VPALambdaAthenaPoller`
 1. Select Advanced Settings in order to configure the Timeout value to **2 minutes**
 1. Click **Next**
 1. From the review page, select **Create Function**
+
 </details>
 
 
