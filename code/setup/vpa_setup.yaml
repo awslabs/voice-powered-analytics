@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+  License: Apache-2.0
+Description: 'AWS CloudFormation Template to create the IAM roles and DynamoDB table needed for the workshop.'
+Parameters:
+  DDBReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '1'
+    MaxValue: '10'
+    ConstraintDescription: Must be between 1 and 10
+  DDBWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '1'
+    MaxValue: '10'
+    ConstraintDescription: Must be between 1 and 10
+Resources:
+  VPAMetricsTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: metric
+          AttributeType: S
+      KeySchema:
+        - AttributeName: metric
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref 'DDBReadCapacityUnits'
+        WriteCapacityUnits: !Ref 'DDBWriteCapacityUnits'
+      TableName: VPA_Metrics_Table
+  VPALambdaAthenaPoller:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: VPALambdaAthenaPoller
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+             - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+  VPALambdaAlexaSkill:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: VPALambdaAlexaSkill
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+             - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+  AthenaPollerPolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: AthenaPollerPolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: ['logs:*', 's3:*', 'dynamodb:*', 'athena:*', 'xray:*', 'glue:*']
+          Resource: '*'
+      Roles:
+        -
+          Ref: 'VPALambdaAthenaPoller'
+  AlexaSkillPolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: AlexaSkillPolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: ['logs:*', 'dynamodb:scan', 'xray:*']
+          Resource: '*'
+      Roles:
+        -
+          Ref: 'VPALambdaAlexaSkill'
+Outputs:
+  TableName:
+    Value: !Ref 'VPAMetricsTable'
+    Description: VPA Metrics Table Name
