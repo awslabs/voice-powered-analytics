@@ -271,7 +271,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 #### Run the setup CloudFormation template
 
 We have created a CloudFormation template to create the IAM roles, IAM Policies, DynamoDB table, and s3 bucket needed for this workshop.
-The template can be found in `code/setup/vpa_setup.yaml` or https://github.com/awslabs/voice-powered-analytics/blob/master/code/setup/vpa_setup.yaml 
+The template can be found in `code/setup/vpa_setup.yaml` or [on Github](https://github.com/awslabs/voice-powered-analytics/blob/master/code/setup/vpa_setup.yaml)
 
 Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
 <details>
