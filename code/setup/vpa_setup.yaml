@@ -17,6 +17,9 @@ Parameters:
     MinValue: '1'
     MaxValue: '10'
     ConstraintDescription: Must be between 1 and 10
+  AthenaOutputS3BucketName:
+    Description: The S3 Bucket that will hold Athena query results
+    Type: String
 Resources:
   VPAMetricsTable:
     Type: 'AWS::DynamoDB::Table'
@@ -83,7 +86,14 @@ Resources:
       Roles:
         -
           Ref: 'VPALambdaAlexaSkill'
+  AthenaOutputS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AthenaOutputS3BucketName
 Outputs:
   TableName:
     Value: !Ref 'VPAMetricsTable'
     Description: VPA Metrics Table Name
+  BucketName:
+    Value: !Ref 'AthenaOutputS3Bucket'
+    Description: Name of S3 bucket to hold website content
