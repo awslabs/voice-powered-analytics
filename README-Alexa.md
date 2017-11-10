@@ -115,7 +115,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 
 ### Step 2: Configure Alexa Backend
 Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
-<br>Please deploy the following template into your AWS environment which contains the Lambda code for the Alexa skill. 
+<br><b>Please deploy</b> the following template into your AWS environment which contains the Lambda code for the Alexa skill. 
 <table>
 <thead>
 <tr>
@@ -168,8 +168,10 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <tr>
 <td><strong>Ireland</strong> (eu-west-1)</td>
 <td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-</p></details>
-<b>TODO: 8.  Click on the "<b>Code Editor"</b> item under Dashboard on the top left side of the skill builder.</b>
+</p>
+<b>TODO: Click on the "<b>Code Editor"</b> item under Dashboard on the top left side of the skill builder.</b>
+</details>
+
 
 </details>
 
@@ -204,6 +206,11 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 - <a href="https://github.com/alexa/skill-sample-nodejs-city-guide/blob/master/unit-testing.md"> Unit Testing with Alexa</a> - a modern approach to unit testing your Alexa skills with <a href="http://getpostman.com/">Postman</a> and <a href="http://aws.amazon.com/apigateway">Amazon API Gateway</a>.
 5. If your sample skill is working properly, you can now customize your skill.
 
+####Troubleshooting
+- If you receive a response that reads: <i>"The remote endpoint could not be called, or the response it returned was invalid,"</i> this is an indication that something is broken. Copy the JSON from the Alexa skill and insert it as a test event to our Lambda function <b>VoiceAlexaSkillFull-AlexaMetricSkill-1</b>.  You can then see the specific output from the Lambda function as to why it is not executing successfully.<br>
+- Also make sure that the DynamoDB has an entry with a value for your metric.
+</p></p></details></details>
+
 <summary><strong>Service Simulator Tips</strong></summary><p>
 - After you click the <b>"Ask [Your Skill Name]"</b> button, you should see the <b>Lambda Request and Lambda Response boxes</b> get populated with JSON data like in the screenshot above.
 - Click the <b>Listen</b> button in the bottom right corner to hear Alexa read the response.
@@ -212,8 +219,8 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 - [Press the listen button, and type "recommend an attraction" in the box]
 - [Press the listen button, and type "give me an activity" in the box]
 (Continue this process for all of the utterances. To start over, click the "Reset" button.)
-- If you receive a response that reads: <i>"The remote endpoint could not be called, or the response it returned was invalid,"</i> this is an indication that something is broken. AWS Lambda offers an additional testing tool to help you troubleshoot your skill.
-</p></p></details></details>
+
+
 
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
 <details>

@@ -46,7 +46,7 @@ Or
 
 This workshop is broken up into multiple modules. You must complete each Section before proceeding to the next, however, there are AWS CloudFormation templates available that you can use to launch the necessary resources without manually creating them yourself if you'd like to skip ahead.
 
-1. [Athena and Data Discovery Section](README-Athena)
-2. [Alexa Skill Building Section](README-Alexa)
+1. [Athena and Data Discovery Section](README-Athena.md)
+2. [Alexa Skill Building Section](README-Alexa.md)
 
-After you have completed the workshop you can delete all of the resources that were created by following the [cleanup guide](README-Cleanup).
+After you have completed the workshop you can delete all of the resources that were created by following the [cleanup guide](README-Cleanup.md).
