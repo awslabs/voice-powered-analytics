@@ -5,9 +5,9 @@
 This workshop is designed for first time users of QuickSight, Athena, and Alexa. We have broken the workshop into three steps or focus topics. 
 These are:
 
-#### Using QuickSight for Data Discovery
-#### Using Athena to query data in S3 and create answers for Alexa
-#### Building an Alexa skill to access the answers from Athena
+* Using QuickSight for Data Discovery
+* Using Athena to query data in S3 and create answers for Alexa
+* Building an Alexa skill to access the answers from Athena
 
 We expect most attendees to be able to complete the full workshop in 2 hours. 
 To help keep things focused on Athena, Alexa, and QuickSight we have provided CloudFormation templates and sample code.
@@ -25,7 +25,7 @@ Please make sure you have the following available prior to the workshop.
 **Note** There are two steps that differ from the typical AWS workflow. 
 Please complete these before attending the workshop to save time. 
 * Development of an Alexa skill requires creation of an account at [Amazon Developer](https://developer.amazon.com/alexa) 
-* Using QuickSight requires [signing up](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html)
+* Using QuickSight requires [Signing up for QuickSight](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html)
 
 
 ## Modules
