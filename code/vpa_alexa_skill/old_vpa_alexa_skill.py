@@ -108,6 +108,17 @@ def on_session_started(table, session_started_request, session):
     print("on_session_started requestId=" + session_started_request['requestId']
           + ", sessionId=" + session['sessionId'])
 
+def list_metrics(table, intent, session):
+    result = table.scan()
+    speech_output = "Your metrics are:"
+    for i in result['Items']:
+        speech_output += i['metric']
+        speech_output += ", "
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = True
+    return build_response(session_attributes, build_speechlet_response(
+        intent['name'], speech_output, reprompt_text, should_end_session))
 def on_launch(table, launch_request, session):
     """ Called when the user launches the skill without specifying what they
     want
@@ -129,6 +140,8 @@ def on_intent(table, intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
+    if intent_name == "ListMetrics":
+        return list_metrics(table,intent, session)
     elif intent_name == "WhatsMyMetricIntent":
         return get_metric_from_session(table, intent, session)
     elif intent_name == "AMAZON.HelpIntent":

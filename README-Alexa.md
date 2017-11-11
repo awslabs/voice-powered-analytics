@@ -145,11 +145,11 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   exit_msg <i>Thank you for trying the Voice Powered Analytics.  Have a nice day!</i>
 </p></details>
   6.  Also <b>validate the environment variables</b>: 
-   - <b>metric_name</b> matches your slot's value(s)
    - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration
-   - <b>slot_name</b> matches what's configured for you <i>slot name</i> in the Alexa Skill's Interaction Configuration
+   - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration
    
-  7.  We'll also add an environment variable called: <b>metrics_table</b> called <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric 
+  7.  We'll also add an environment variable called: <b>metrics_table</b> called <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric
+  8.  (Optional) You can also optionally modify the <i>greeting_msg</i> and <i>exit_msg</i> if you'd like to modify Alexa's greeting and exit messages. 
 <details>
 <summary>Hint</summary><p>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true" width="80%" height="80%">
@@ -167,7 +167,7 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <tbody>
 <tr>
 <td><strong>Ireland</strong> (eu-west-1)</td>
-<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
+<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkill&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%" target="_blank"></a></center></td></tr></tbody></table>
 </p>
 <b>TODO: Click on the "<b>Code Editor"</b> item under Dashboard on the top left side of the skill builder.</b>
 </details>
@@ -186,7 +186,7 @@ In Step 1 "Setting up Your Voice User Interface", we created a voice user interf
 3. Select the <b>"AWS Lambda ARN"</b> option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service">(Read more about Hosting Your Own Custom Skill Web Service.)</a> With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>. In addition, Amazon now offers <a href="https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits">AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills</a> IMPORTANT: Make sure you select the same region that you created your Lambda in.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_13.png?raw=true" width="80%" height="80%"><br>
 4.  Paste your <b>Lambda's ARN</b> (Amazon Resource Name) into the textbox provided. It should look similar to the screenshot above.
-5.  Leave <b>"Account Linking" set to "No"</b>. For this skill, we won't be using Account Linking, but you can learn more about <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system">Linking an Alexa User with a User in Your System.</a>
+5.  Leave <b>"Account Linking" set to "No"</b>. For this skill, we won't be using Account Linking, but you can learn more about <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system" target="_blank">Linking an Alexa User with a User in Your System.</a>
 6.  Click the <b>"Next"</b> button to continue to page #4 of this guide.
 </details>
 </p>
@@ -198,12 +198,12 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the <b>"Test"</b> tab on the left side.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_15.png?raw=true" width="40%" height="40%"><br>
-3.  Test your skill with the <b>Service Simulator</b>. To validate that your skill is working as expected, use the Service Simulator. In the <b>Enter Utterance</b> text box, type "What’s my reinvent tweets over the last hour."<br>
+3. Test your skill with the <b>Service Simulator</b>. To validate that your skill is working as expected, use the Service Simulator. In the <b>Enter Utterance</b> text box, type "What’s my reinvent twitter sentiment"<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_16.png?raw=true" width="80%" height="80%"><br>
   </p>
 4.  Other testing methods to consider:
 - <a href="https://echosim.io/">Echosim.io</a> - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go.
-- <a href="https://github.com/alexa/skill-sample-nodejs-city-guide/blob/master/unit-testing.md"> Unit Testing with Alexa</a> - a modern approach to unit testing your Alexa skills with <a href="http://getpostman.com/">Postman</a> and <a href="http://aws.amazon.com/apigateway">Amazon API Gateway</a>.
+- <a href="https://github.com/alexa/skill-sample-nodejs-city-guide/blob/master/unit-testing.md"  target="_blank"> Unit Testing with Alexa</a> - a modern approach to unit testing your Alexa skills with <a href="http://getpostman.com/">Postman</a> and <a href="http://aws.amazon.com/apigateway">Amazon API Gateway</a>.
 5. If your sample skill is working properly, you can now customize your skill.
 
 ####Troubleshooting
@@ -215,9 +215,7 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 - After you click the <b>"Ask [Your Skill Name]"</b> button, you should see the <b>Lambda Request and Lambda Response boxes</b> get populated with JSON data like in the screenshot above.
 - Click the <b>Listen</b> button in the bottom right corner to hear Alexa read the response.
 - You can have an entire conversation with your skill with the Service Simulator. Try the following commands:
-- "tell me about this place"
-- [Press the listen button, and type "recommend an attraction" in the box]
-- [Press the listen button, and type "give me an activity" in the box]
+- "what is my reinvent twitter sentiment"
 (Continue this process for all of the utterances. To start over, click the "Reset" button.)
 
 
