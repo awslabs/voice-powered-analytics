@@ -90,6 +90,12 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref AthenaOutputS3BucketName
+  ScheduledRule:
+    Type: "AWS::Events::Rule"
+    Properties:
+      Description: "Every5MMinutes"
+      ScheduleExpression: "rate(5 minutes)"
+      State: "ENABLED"
 Outputs:
   TableName:
     Value: !Ref 'VPAMetricsTable'

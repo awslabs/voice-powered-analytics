@@ -2,17 +2,20 @@
 
 # Using QuickSight for Data Discovery
 
-### Step 0 - (OPTIONAL) Understand Raw Data Set To Query
+**NOTE** The QuickSight Lab is optional. Exploring the dataset is an extreamly helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familir with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
 
-This step is optional! It is intended to give you a better understanding of the data we are using for the lab. 
+### Step 1 - (OPTIONAL) Understand Raw Data Set To Query
 
-We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
+This step is optional! It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
+
+We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, this dataset includes tweets with the #reinvent hashtag or to/from @awsreinvent. In fact you if you tweet about this workshop now and use the #reinvent hashtag you will be able see that tweet later on in the workshop!
 Let's first take a look at the data set we're going to analyze and query.  
 
 ### How we get the data into S3
-The data is acquired starting with a Cloudwatch Event triggering an AWS Lambda function every 1 minute.  Lambda is making calls to Twitter's APIs for data, and then ingesting the data into AWS Kinesis Firehose.   Firsthose then microbatches the results into S3 as shown in the following diagram:
-<br><IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png?raw=true" width="80%" height="80%"><br><br>
-### Step 1 - Explore the Twitter data
+The data is acquired starting with a CloudWatch Event triggering an AWS Lambda function every 5 minutes. Lambda is making calls to Twitter's APIs for data, and then ingesting the data into [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/).   
+Firehose then micro-batches the results into S3 as shown in the following diagram:
+![Workshop dataset](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png)
+
 This dataset is available as:
 ```bash
 US-EAST-1 
