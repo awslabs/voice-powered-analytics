@@ -127,17 +127,18 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. You will see tiles for each of the QuickSight supported data sources. From this page select the **Athena** tile. 
 1. When asked for the dataset name you can choose anything you like, for our example we use **tweets-dataset** You can choose to validate that SSL will be used for data between Athena and QuickSight. Finish be selecting **Create data source**
 1. Now we need to choose the Athena table we created in **Step 1**. For our example we used the **Default** database, with a table name of **tweets**. Finish by clicking on **Select**. 
-1. You will now be asked if you want to use spice or direct query access. If in the Ireland region, choose direct query access (SPICE is not yet available in this region).  Click **Visualize** when done. 
+1. SPICE is not needed for this workshop. If asked, select **Directly query your data**. Click Visualize when done. 
 1. QuickSight will now import the data. Wait until you see **Import Complete**. Then close the summary window. 
 1. Add the **created** field from the Athena table by dragging it from the Field list to the empty AutoGraph window.
-1. From the *Visual types* in the botom left corner, select **Vertical bar chart**
+1. From the *Visual types* in the bottom left corner, select **Vertical bar chart**
 1. Add another Visual by selecting in the top left corner, the **+ Add** button  and then **Add visual**
 1. On this new graph, lets add the **country** field. 
 1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
-1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
+1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "country"**
 
 
-**Bonus: What other interesting insights can you find from this data in Quicksight**
+**Bonus: What other interesting insights can you find from this data in Quicksight?**
+
 
 
 ### Step 4 - Create a query to find the number of reinvent tweets 
