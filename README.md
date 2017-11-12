@@ -44,7 +44,9 @@ After you have completed the workshop you can disable to the CloudWatch Event to
 We have provided a CloudFormation template to create resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
 Please launch the below template so that the resources created will be ready by the time you get to those sections in the lab guides. 
 
+**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
+
 Region | Launch Template
------ | -----
+:---: | :---:
 EU-WEST-1 | [![Launch Template](/media/images/CFN_Image_01.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml)
 
