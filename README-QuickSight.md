@@ -6,11 +6,16 @@ In this lab we will use QuickSight to explore our dataset and visualize a few in
 
 **NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
 
-## Step 1 - (OPTIONAL) Understand Raw Data Set To Query
+## Step 1 - Understand The Raw Data (OPTIONAL)
 
-This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
+This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. 
+If you don't want to inspect the JSON files you can safely skip this step and continue with [Step 2](#step-2). 
+Each file in s3 has a collection of JSON objects stored within the file.
+In addition, the files have been gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/) which saves cost and improves performance.
 
-We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, this dataset includes tweets with the #reinvent hashtag or to/from @awsreinvent. In fact you if you tweet about this workshop now and use the #reinvent hashtag you will be able see that tweet later on in the workshop!
+We will be using a dataset created from Twitter data related to AWS re:Invent 2017. 
+This dataset includes tweets with the #reinvent hashtag or to/from @awsreinvent. 
+If you tweet about this workshop now and use the #reinvent hashtag you will be able see that tweet later on in the workshop!
 Let's first take a look at the data set we're going to analyze and query.  
 
 ### How we get the data into S3
