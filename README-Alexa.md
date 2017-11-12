@@ -101,7 +101,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
     - Note: Alternatively, you can create a new slot on the right side of the screen in the section titled <i>Intent Slots</i>
 13. Our slot is now created and will be added to the <i>Intent Slots</i> area on the right side of the screen.  In this section, under the slot, click the area <i>choose a slot type</i>. We’ll create a new slot type for our list of metrics.  Let's call this <b>available_metrics</b> and click the <b>+</b> button to add it.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_6_5.png?raw=true" width="80%" height="80%"><br> 
-14.  On the bottom left side of the screen, click on the <b>available_metrics</b> slot type that was just created.   Then enter the value of the metric used in the environment variable called <i>Metric</i> from the Athena_Poller lambda function as the <i>slot value</i>. Then click the <b>+</b> button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
+14.  On the bottom left side of the screen, click on the <b>available_metrics</b> slot type that was just created.   For the **slot value, enter the <i>value</i>** of the metric used from the <i>Athena_Poller</i> Lambda function's environment variable: <i>Metric</i> . Then click the <b>+</b> button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
     - Note: Don't worry about adding <b>ID (Optional)</b> or <b>Synonyms</b>.  They can be added later after you test. 
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_6_6.png?raw=true" width="80%" height="80%"><br>
 15. Now you're ready to Click <b>"Build Model"</b> and <b>"Save"</b><br>
@@ -137,19 +137,18 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true" width="80%" height="80%"><br>
 </p>
-  5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.  Add a greeting and exit message for your Alexa skill by adding two environment variables(case sensitive): <b>greeting_msg</b> and <b>exit_msg</b>
+  5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.  
+  6. <b>validate the environment variables</b>: 
+   - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration
+   - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration
+    (Optional) You can modify the greeting and exit message for your Alexa skill by changing the value of two environment variables: <b>greeting_msg</b> and <b>exit_msg</b>
   <details>
 <summary>Example</summary><p>
   greeting_msg <i>Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics</i> <br>
   and
   exit_msg <i>Thank you for trying the Voice Powered Analytics.  Have a nice day!</i>
 </p></details>
-  6.  Also <b>validate the environment variables</b>: 
-   - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration
-   - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration
-   
-  7.  We'll also add an environment variable called: <b>metrics_table</b> called <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric
-  8.  (Optional) You can also optionally modify the <i>greeting_msg</i> and <i>exit_msg</i> if you'd like to modify Alexa's greeting and exit messages. 
+    -  There's also an environment variable called: <b>metrics_table</b> with the value <i>VPA_Metrics_Table</i>.  This references the DynamoDB table that the Alexa skill will be querying for your metric
 <details>
 <summary>Hint</summary><p>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true" width="80%" height="80%">
