@@ -3,7 +3,7 @@
 # Voice Powered Analytics
 
 ### Introduction
-In this workshop, you will build an Alexa skill that queries analytics from a data lake which you define.  The goal leaving this workshop is for you to understand how to uncover KPIs from a data set, build and automate queries for measuring those KPIs, and access them via Alexa voice-enabled devices.  Startups can have voice-powered analytics available to query at any time and Enterprises can deliver these solutions so stakeholders can have easy access to the metrics that are top of mind.         
+In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  The goal after leaving this workshop, is for you to understand how to uncover Key Performance Indicators (KPIs) from a data set, build and automate queries for measuring those KPIs, and access them via Alexa voice-enabled devices.  Startups can make  available voice powered analytics to query at any time, and Enterprises can deliver these types of solutions to stakeholders so they can have easy access to the Business KPIs that are top of mind.         
 This workshop requires fundamental knowledge of AWS services, but is designed for first time users of QuickSight, Athena, and Alexa. We have broken the workshop into three sections or focus topics. 
 These are:
 
@@ -24,9 +24,9 @@ You can also contact @chadneal or @ahwestrich on twitter if you have additional 
 
 Please make sure you have the following available prior to the workshop.
 
-* [Amazon Developer](https://developer.amazon.com/alexa) (Free) **Note** This is different from a typical AWS workflow. 
+* <a href="https://developer.amazon.com/alexa" target="_blank">Amazon Developer</a> account (Free) **Note** This is different from a typical AWS workflow. 
 * AWS Account with admin or full access to all services
-* Using QuickSight requires [Signing up for QuickSight](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html)
+* Using QuickSight requires <a href="http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html" target="_blank">Signing up for QuickSight</a>
 
 ## Lab Setup
 
@@ -38,7 +38,7 @@ We have provided a CloudFormation template to create baseline resources needed b
 
 Region | Launch Template
 :---: | :---:
-EU-WEST-1 | [![Launch Template](/media/images/CFN_Image_01.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml)
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
 
 ## Modules
 
