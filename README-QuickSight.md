@@ -1,12 +1,14 @@
 ##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
 
-# Using QuickSight for Data Discovery
+# Voice Powered Analytics - QuickSight Lab (OPTIONAL)
+
+In this lab we will use QuickSight to explore our dataset and visualize a few interesting metrics of the twitter dataset. 
 
 **NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
 
 ### Step 1 - (OPTIONAL) Understand Raw Data Set To Query
 
-This step is optional! It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
+This is an optional step of the optional lab! It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
 
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, this dataset includes tweets with the #reinvent hashtag or to/from @awsreinvent. In fact you if you tweet about this workshop now and use the #reinvent hashtag you will be able see that tweet later on in the workshop!
 Let's first take a look at the data set we're going to analyze and query.  
@@ -16,22 +18,22 @@ The data is acquired starting with a CloudWatch Event triggering an AWS Lambda f
 Firehose then micro-batches the results into S3 as shown in the following diagram:
 ![Workshop dataset](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png)
 
-This dataset is available as:
-```bash
-US-EAST-1 
-s3://aws-vpa-tweets/
-EU-WEST-1
-s3://aws-vpa-tweets-euw1/
-```
+This dataset is available in the following regions
+Region | Bucket
+:---: | :---|
+US-EAST-1 | s3://aws-vpa-tweets/
+EU-WEST-1 | s3://aws-vpa-tweets-euw1/
 
-<details>
-<summary><strong>Partial solution - Explore the Twitter Data</strong></summary><p>
-AWS Firehose delivers the data into S3 as a GZIP file format.  There are 3 ways to get to this public dataset:
+
+Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
+You can use a variety of methods to download one of the files in the dataset. If you use the AWS CLI today, this is likely the easiest method to take a look at the data.
+
+An example would be 
 
 1. Download a sample extract of the data at the following [File Location](https://s3.amazonaws.com/aws-vpa-tweets/tweets/2017/11/06/03/aws-vpa-tweets-1-2017-11-06-03-53-28-b055a510-f718-4207-8e48-05c3ad8c3a5d.gz)
 2. Using the [AWS CLI](https://aws.amazon.com/cli/)
 3. Using a 3rd party S3 File Explorer such as [Cloudberry Explorer](https://www.cloudberrylab.com/explorer/amazon-s3.aspx)  
-</details>
+
 
 
 <details>

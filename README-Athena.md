@@ -1,31 +1,6 @@
 ##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
 
-# Workshop Overview
-In this workshop you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
-
-## The primary products used in this workshop are:
-All workshop attendees will need an AWS account with access to the following products. 
-<br>
-*Note For re:invent attendees:  AWS will not be providing temporary accounts for this workshop. Expected costs for this workshop is < $1 (Assuming free tier eligibility), AWS will be providing $10 AWS credits to cover the expense of the workshop.* 
-
-### Pre-workshop Checklist
-Please make sure you have the following availabile prior to the workshop.
-
-- [ ] Amazon Developer account
-- [ ] AWS Account with root access or full access
- 
-Or
-
-- [ ] [Amazon Developer](https://developer.amazon.com/) account
-- [ ] Ability to create new IAM policies and roles
-- [ ] Full access to Athena – Clusterless Query Engine
-- [ ] Full access to Quicksight – Interactive BI Visualizations
-- [ ] Full access to S3 – Limitless and durable object store
-- [ ] Full access to Lambda – Event-triggered functions
-- [ ] Full access to DynamoDB – Managed NoSQL database
-- [ ] Full access to Alexa – Voice-powered skills
-- [ ] Full access to CloudFormation
-- [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
+# Voice Powered Analytics - Athena Lab
 
 **Note** There are two steps that differ from the typical AWS workflow. 
 
@@ -61,11 +36,7 @@ In addition to deciding between using the full or partial solutions. The attende
 <td> 
 <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
 
-**TODO This needs to create additional DDB tables as well**
-
 ## BI and Data Discovery Steps
-
-
 
 ### Step 0 - Understand Raw Data Set To Query
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
@@ -188,11 +159,6 @@ The statement above shows the total amount of tweets in our data set (result val
 </p></details>
 
 <details>
-<summary><strong>Partial solution - Create Athena table using Glue(expand for details)</strong></summary><p>
-
-TODO: Use AWS Glue to discover and build a DDL.
-
-</p></details>
 
 ### Step 3 - Explore the data using Quicksight
 We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
