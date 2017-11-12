@@ -22,8 +22,8 @@ This dataset is available in the following regions
 
 Region | Bucket
 :---: | :---|
-US-EAST-1 | s3://aws-vpa-tweets/
-EU-WEST-1 | s3://aws-vpa-tweets-euw1/
+US-EAST-1 | ```s3://aws-vpa-tweets/```
+EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 
 
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
