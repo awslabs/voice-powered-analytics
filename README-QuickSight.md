@@ -138,3 +138,7 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 
 
 **Bonus: What other interesting insights can you find from this data in Quicksight?**
+
+## Step 4 - Start on the Athena lab
+
+To continue the workshop, start on the [Athena Lab](README-Athena.md)
