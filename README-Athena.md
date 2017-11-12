@@ -2,197 +2,25 @@
 
 # Voice Powered Analytics - Athena Lab
 
-**Note** There are two steps that differ from the typical AWS workflow. 
+In this lab, we will work with Athena and Lambda. 
+The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
-* Development of an Alexa skill requires creation of an account at [Amazon Developer](https://developer.amazon.com/alexa-skills-kit) If you have not created an account yet, please do so before the workshop.
-* Using QuickSight requires [signing up](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html) for the service on a per user basis. Please conplete this step before the workshop to save on time.  
+You should have launched the VPA-Setup CloudFormation template when this workshop started. 
+If you haven't yet done that, please do so now. 
 
-## Workshop Steps
-
-This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
-
-* **Athena and Data Discovery Steps**
-* **Alexa Skill Building Steps**
-
-We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps.
-
-We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
-
-1. Full solution where the attendee does not have to write any code
-2. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
-3. Many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.   While there aren't hard-and-fast answers for the bonus sections, feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
-
-In addition to deciding between using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> 
-<center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-
-## BI and Data Discovery Steps
-
-### Step 0 - Understand Raw Data Set To Query
-We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
-Let's first take a look at the data set we're going to analyze and query.  
-### How we get the data into S3
-The data is acquired starting with a Cloudwatch Event triggering an AWS Lambda function every 1 minute.  Lambda is making calls to Twitter's APIs for data, and then ingesting the data into AWS Kinesis Firehose.   Firsthose then microbatches the results into S3 as shown in the following diagram:
-<br><IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png?raw=true" width="80%" height="80%"><br><br>
-### Step 1 - Explore the Twitter data
-This dataset is available as:
-```bash
-US-EAST-1 
-s3://aws-vpa-tweets/
-EU-WEST-1
-s3://aws-vpa-tweets-euw1/
-```
+**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
 <details>
-<summary><strong>Partial solution - Explore the Twitter Data</strong></summary><p>
-AWS Firehose delivers the data into S3 as a GZIP file format.  There are 3 ways to get to this public dataset:
+<summary><strong>Full solution - Athena Query (expand for details)</strong></summary><p>
 
-1. Download a sample extract of the data at the following [File Location](https://s3.amazonaws.com/aws-vpa-tweets/tweets/2017/11/06/03/aws-vpa-tweets-1-2017-11-06-03-53-28-b055a510-f718-4207-8e48-05c3ad8c3a5d.gz)
-2. Using the [AWS CLI](https://aws.amazon.com/cli/)
-3. Using a 3rd party S3 File Explorer such as [Cloudberry Explorer](https://www.cloudberrylab.com/explorer/amazon-s3.aspx)  
+Region | Launch Template
+:---: | :---:
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
+
 </details>
 
 
-<details>
-<summary><strong>Full solution - Explore the Twitter Data Using AWS CLI</strong></summary><p>
-When using the AWS CLI, you can run the following commands to see the folder/prefix structure of the data.  Firehose delivers the data in micro-batches by time.  When navigating to the file itself, it is in the GZIP file format:
-
-```bash
-$ aws s3 ls s3://aws-vpa-tweets-euw1/
-         PRE tweets/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/
-         PRE 2017/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/
-         PRE 10/
-         PRE 11/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-         PRE 05/
-         PRE 06/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/
-         PRE 00/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/
-2017-11-05 20:09:30        270 aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
-```
-Let's download the file by copying it locally and then using our favorite editor to open it:
-``` bash
-$ aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz .
-download: s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz to ./aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
-$ vi aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz 
-```
-The data format looks something like this:
-```json
-{  
-	"id": 914642318044655600,  
-	"text": "Two months until #reInvent! Check out the session calendar & prepare for reserved seating on Oct. 19! http://amzn.to/2fxlVg7  ",  
-	"created": "2017-10-02 00:04:56",  
-	"screen_name": " AWSReinvent ",  
-	"screen_name_followers_count": 49864,  
-	"place": "none",  
-	"country": "none",  
-	"retweet_count": 7,  
-	"favorite_count": 21
-}
-```
-In the next section, we're going to use these fields to create HIVE external tables in AWS Athena and query the data directly in S3.
-</details>
-
-### Step 2 - Create an Athena table for Initial Data Discovery
-
-Now we're comfortable with the dataset, let's create a table in Athena on top of this data.  There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available. You will however need to create an Athena database and table to query the data. The twitter data is compressed in s3, but in a JSON syntax which Athena has native support for. 
-
-<details>
-<summary><strong>Full solution - Create Athena table (expand for details)</strong></summary><p>
-
-1. In your AWS account navigate to the **Athena** service
-2. In the top left menu, choose *Query Editor*.
-3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) Data Definition Language (DDL):
-
-```SQL
-CREATE EXTERNAL TABLE tweets(
-  id bigint COMMENT 'Tweet ID', 
-  text string COMMENT 'Tweet text', 
-  created timestamp COMMENT 'Tweet create timestamp', 
-  screen_name string COMMENT 'Tweet screen_name',
-  screen_name_followers_count int COMMENT 'Tweet screen_name follower count',
-  place string COMMENT 'Location full name',
-  country string COMMENT 'Location country',
-  retweet_count int COMMENT 'Retweet count', 
-  favorite_count int COMMENT 'Favorite count')
-ROW FORMAT SERDE 
-  'org.openx.data.jsonserde.JsonSerDe' 
-WITH SERDEPROPERTIES ( 
-  'paths'='id,text,created,screen_name,screen_name_followers_count,place_fullname,country,retweet_count,favorite_count') 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.mapred.TextInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
-LOCATION
-  's3://aws-vpa-tweets-euw1/tweets/'
-```
-4. Then hit the *Run Query* button
-5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
-6. If you click on the *tweets* table, you can see the fields that are in our raw S3 data.    
-7. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
-
-```SQL
-SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
-```
-The statement above shows the total amount of tweets in our data set (result value should be well over 8k).  
-</p></details>
-
-<details>
-
-### Step 3 - Explore the data using Quicksight
-We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
-<details>
-<summary><strong>Full solution - Explore Athena data in Quicksight</strong></summary><p>
-
-1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
-1. If haven't already configured, Quicksight may need special permissions to access Athena:   
-a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
-b. On the left menu, click *Account Settings*<br>
-c. Click the *Edit AWS permissions* button<br>
-d. Ensure the box *Amazon Athena* is checked, then click *Apply*
-1. In the main Quicksight portal page (ensure you're in the EU Ireland Region)
-1. In the upper right choose your  **Manage data**
-1. Now in the upper left choose **New data set**
-1. You will see tiles for each of the QuickSight supported data sources. From this page select the **Athena** tile. 
-1. When asked for the dataset name you can choose anything you like, for our example we use **tweets-dataset** You can choose to validate that SSL will be used for data between Athena and QuickSight. Finish be selecting **Create data source**
-1. Now we need to choose the Athena table we created in **Step 1**. For our example we used the **Default** database, with a table name of **tweets**. Finish by clicking on **Select**. 
-1. You will now be asked if you want to use spice or direct query access. If in the Ireland region, choose direct query access (SPICE is not yet available in this region).  Click **Visualize** when done. 
-1. QuickSight will now import the data. Wait until you see **Import Complete**. Then close the summary window. 
-1. Add the **created** field from the Athena table by dragging it from the Field list to the empty AutoGraph window.
-1. From the *Visual types* in the botom left corner, select **Vertical bar chart**
-1. Add another Visual by selecting in the top left corner, the **+ Add** button  and then **Add visual**
-1. On this new graph, lets add the **country** field. 
-1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
-1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
-
-</p></details>
-
-**Bonus: What other interesting insights can you find from this data in Quicksight**
-
-
-### Step 4 - Create a query to find the number of reinvent tweets 
-
+## Step  - Create a query to find the number of reinvent tweets 
 
 
 <details>
