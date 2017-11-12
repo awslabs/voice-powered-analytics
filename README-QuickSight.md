@@ -73,8 +73,8 @@ The data is publicly available in the bucket we provide.
 <summary><strong>Create Athena table (expand for details)</strong></summary><p>
 
 1. In your AWS account navigate to the **Athena** service
-2. In the top left menu, choose *Query Editor*.
-3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) 
+1. In the top left menu, choose *Query Editor*
+1. Use this code to create the Athena table we will use from QuickSight
 
 ```SQL
 CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
@@ -98,10 +98,10 @@ OUTPUTFORMAT
 LOCATION
   's3://aws-vpa-tweets-euw1/tweets/'
 ```
-4. Then hit the *Run Query* button
-5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
-6. If you click on the *tweets* table, you can see the fields that we saw earlier.    
-7. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
+1. Then hit the *Run Query* button
+1. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
+1. If you click on the *tweets* table, you can see the fields that we saw earlier.    
+1. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
 
 ```SQL
 SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
