@@ -34,7 +34,7 @@ EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
 You can use a variety of methods to download one of the files in the dataset. If you use the AWS CLI today, this is likely the easiest method to take a look at the data.
 
-An example would be listing one of the files with:
+List one of the files with:
 ```bash
 aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz
 ```
@@ -59,22 +59,20 @@ The data format look like this:
 }
 ```
 
-## Step 2 - Create an Athena table for Initial Data Discovery
+## Step 2 - Create an Athena table
 
-In this step, we're going to use the fields we saw in the json documents. 
-To do that, we need to create a table in Amazon Athena. This will allow us to query the data at rest in S3. 
+We need to create a table in Amazon Athena. This will allow us to query the data at rest in S3 from QuickSight. 
 The twitter data is stored as JSON documents and then compressed in s3. 
 Athena supports reading of gzip files and includes json SerDe's to make parsing the data easy.
 
 There is no need to copy the dataset to a new bucket for the workshop. 
 The data is publicly available in the bucket we provide.   
 
-<details>
-<summary><strong>Create Athena table (expand for details)</strong></summary><p>
+**Create Athena table**
 
 1. In your AWS account navigate to the **Athena** service
 1. In the top left menu, choose *Query Editor*
-1. Use this code to create the Athena table we will use from QuickSight
+1. Use this code to create the Athena table. Once added, click **Run Query**
 
 ```SQL
 CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
@@ -98,8 +96,9 @@ OUTPUTFORMAT
 LOCATION
   's3://aws-vpa-tweets-euw1/tweets/'
 ```
-1. Then hit the *Run Query* button
-1. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
+
+**Verify the table created correctly** 
+1. You'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
 1. If you click on the *tweets* table, you can see the fields that we saw earlier.    
 1. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
 
@@ -109,19 +108,18 @@ SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
 The statement above shows the total amount of tweets in our data set. 
 **Note** The result should be in the 1000's. If you got a tiny number, something is wrong. 
 Recreate your table or ask one of the lab assistants for help.
-</p></details>
 
 
 ## Step 3 - Explore the data using Quicksight
-We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
-<details>
-<summary><strong>Full solution - Explore Athena data in Quicksight</strong></summary><p>
+We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  
+While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  
+Let's explore:      
 
 1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
 a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
-b. On the left menu, click *Account Settings*<br>
-c. Click the *Edit AWS permissions* button<br>
+b. On the left menu, click *Account Settings*<
+c. Click the *Edit AWS permissions* button
 d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. In the main Quicksight portal page (ensure you're in the EU Ireland Region)
 1. In the upper right choose your  **Manage data**
@@ -138,7 +136,6 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
 1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
 
-</p></details>
 
 **Bonus: What other interesting insights can you find from this data in Quicksight**
 
