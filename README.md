@@ -30,10 +30,29 @@ Please complete these before attending the workshop to save time.
 
 ## Modules
 
-This workshop is broken up into multiple modules. You must complete each Section before proceeding to the next, however, there are AWS CloudFormation templates available that you can use to launch the necessary resources without manually creating them yourself if you'd like to skip ahead.
+This workshop is broken up into multiple modules. The QuickSight section is optional as the Athena and Alexa sections do not build on any of the artifcats create in the QuickSight section. 
+You must however complete the Athena lab before starting on the Alexa lab. 
 
-1. [Amazon QuickSight Section](README-QuickSight.md)
+1. **OPTIONAL** [Amazon QuickSight Section](README-QuickSight.md)
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexa.md)
 
 After you have completed the workshop you can delete all of the resources that were created by following the [cleanup guide](README-Cleanup.md).
+
+## Lab Setup
+
+We have provided a CloudFormation template to create resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
+Please launch the below template so that the resources created will be ready by the time you get to those sections in the lab guides. 
+
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Launch Template</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ireland</strong> (eu-west-1)</td>
+<td> 
+<center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
