@@ -46,6 +46,5 @@ Please launch the below template so that the resources created will be ready by 
 
 Region | Launch Template
 ----- | -----
-
 EU-WEST-1 | [![Launch Template](/media/images/CFN_Image_01.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml)
 
