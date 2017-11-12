@@ -19,6 +19,7 @@ Firehose then micro-batches the results into S3 as shown in the following diagra
 ![Workshop dataset](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png)
 
 This dataset is available in the following regions
+
 Region | Bucket
 :---: | :---|
 US-EAST-1 | s3://aws-vpa-tweets/
@@ -28,49 +29,17 @@ EU-WEST-1 | s3://aws-vpa-tweets-euw1/
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
 You can use a variety of methods to download one of the files in the dataset. If you use the AWS CLI today, this is likely the easiest method to take a look at the data.
 
-An example would be 
-
-1. Download a sample extract of the data at the following [File Location](https://s3.amazonaws.com/aws-vpa-tweets/tweets/2017/11/06/03/aws-vpa-tweets-1-2017-11-06-03-53-28-b055a510-f718-4207-8e48-05c3ad8c3a5d.gz)
-2. Using the [AWS CLI](https://aws.amazon.com/cli/)
-3. Using a 3rd party S3 File Explorer such as [Cloudberry Explorer](https://www.cloudberrylab.com/explorer/amazon-s3.aspx)  
-
-
-
-<details>
-<summary><strong>Full solution - Explore the Twitter Data Using AWS CLI</strong></summary><p>
-When using the AWS CLI, you can run the following commands to see the folder/prefix structure of the data.  Firehose delivers the data in micro-batches by time.  When navigating to the file itself, it is in the GZIP file format:
-
+An example would be listing one of the files with:
 ```bash
-$ aws s3 ls s3://aws-vpa-tweets-euw1/
-         PRE tweets/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/
-         PRE 2017/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/
-         PRE 10/
-         PRE 11/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-         PRE 05/
-         PRE 06/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/
-         PRE 00/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/
-2017-11-05 20:09:30        270 aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
+aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz
 ```
-Let's download the file by copying it locally and then using our favorite editor to open it:
-``` bash
-$ aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz .
-download: s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz to ./aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
-$ vi aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz 
+Download this file to your local directory:
+```bash
+aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz .
 ```
-The data format looks something like this:
+
+Since the files are compressed, you will need to unzip it. In addition the data is stored in raw text form. Make sure you rename the file to either *.json or *.text.
+The data format look like this:
 ```json
 {  
 	"id": 914642318044655600,  
@@ -84,22 +53,23 @@ The data format looks something like this:
 	"favorite_count": 21
 }
 ```
-In the next section, we're going to use these fields to create HIVE external tables in AWS Athena and query the data directly in S3.
-</details>
+
 
 ### Step 2 - Create an Athena table for Initial Data Discovery
 
-Now we're comfortable with the dataset, let's create a table in Athena on top of this data.  There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available. You will however need to create an Athena database and table to query the data. The twitter data is compressed in s3, but in a JSON syntax which Athena has native support for. 
+In this step, we're going to use the fields we saw in the json document. To do that, we need to create a HIVE external table in Amazon Athena. This will allow us to query the data at rest in S3.
+
+There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available in the bucket we provide. You will however need to create an Athena database and table to query the data. The twitter data is stored as JSON documents and then compressed in s3. Athena supports reading of gzip files and includes json SerDe's to make parsing the data easy. 
 
 <details>
-<summary><strong>Full solution - Create Athena table (expand for details)</strong></summary><p>
+<summary><strong>Create Athena table (expand for details)</strong></summary><p>
 
 1. In your AWS account navigate to the **Athena** service
 2. In the top left menu, choose *Query Editor*.
-3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) Data Definition Language (DDL):
+3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) 
 
 ```SQL
-CREATE EXTERNAL TABLE tweets(
+CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
   id bigint COMMENT 'Tweet ID', 
   text string COMMENT 'Tweet text', 
   created timestamp COMMENT 'Tweet create timestamp', 
