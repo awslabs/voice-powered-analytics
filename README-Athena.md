@@ -11,7 +11,7 @@ If you haven't yet done that, please do so now.
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
 <details>
-<summary><strong>Full solution - Athena Query (expand for details)</strong></summary><p>
+<summary><strong>Create Athena Query - In case you did not do this in the QuickSight Lab (expand for details)</strong></summary><p>
 
 Region | Launch Template
 :---: | :---:
