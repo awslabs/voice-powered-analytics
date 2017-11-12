@@ -101,7 +101,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
     - Note: Alternatively, you can create a new slot on the right side of the screen in the section titled <i>Intent Slots</i>
 13. Our slot is now created and will be added to the <i>Intent Slots</i> area on the right side of the screen.  In this section, under the slot, click the area <i>choose a slot type</i>. We’ll create a new slot type for our list of metrics.  Let's call this <b>available_metrics</b> and click the <b>+</b> button to add it.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_6_5.png?raw=true" width="80%" height="80%"><br> 
-14.  On the bottom left side of the screen, click on the <b>available_metrics</b> slot type that was just created.   For the **slot value, enter the <i>value</i>** of the metric used from the <i>Athena_Poller</i> Lambda function's environment variable: <i>Metric</i> . Then click the <b>+</b> button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
+14.  On the bottom left side of the screen, click on the <b>available_metrics</b> slot type that was just created.   For the **slot value, enter the <i>value</i>** of the metric used from the <i>Athena_Poller</i> Lambda function's environment variable: <i>Metric</i> (e.g. <i>reinvent twitter sentiment</i>. Then click the <b>+</b> button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
     - Note: Don't worry about adding <b>ID (Optional)</b> or <b>Synonyms</b>.  They can be added later after you test. 
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_6_6.png?raw=true" width="80%" height="80%"><br>
 15. Now you're ready to Click <b>"Build Model"</b> and <b>"Save"</b><br>
@@ -132,16 +132,16 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_9.png?raw=true" width="80%" height="80%"><br>
   2. Open the Lambda function, starting with <b>“VoiceAlexaSkillFull-AlexaMetricSkill-1”</b> deployed with the Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. If you don't see Alexa Skills Kit in the list, jump back to step #3 on this page.<br>
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true" width="80%" height="80%"><br>
-  3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.<br>
-  4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.<br>
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true" width="80%" height="80%">
+    3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
+    4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true" width="80%" height="80%"><br>
 </p>
-  5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.  
-  6. <b>validate the environment variables</b>: 
-   - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration
-   - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration
-    (Optional) You can modify the greeting and exit message for your Alexa skill by changing the value of two environment variables: <b>greeting_msg</b> and <b>exit_msg</b>
+    5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.<br>  
+    6. <b>validate/(or change) the environment variables</b>: <br>
+    - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration<br>
+    - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration<br>
+    - (Optional) You can modify the greeting and exit message for your Alexa skill by changing the value of two environment variables: <b>greeting_msg</b> and <b>exit_msg</b><br>
   <details>
 <summary>Example</summary><p>
   greeting_msg <i>Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics</i> <br>
@@ -152,8 +152,8 @@ Now that we've configured the voice interaction, let's set up our Lambda functio
 <details>
 <summary>Hint</summary><p>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true" width="80%" height="80%">
-  </p></details>
-  7. Bonus (If time): can you add a skill to the Lambda function which enables users to "List My Metrics"
+  </p></details><br>
+    7. Bonus (If time): can you add a skill to the Lambda function which enables users to "List My Metrics"
 <details>
 <summary>If you couldn't complete the steps for this Section above, optionally, you can deploy the following CloudFormation for the AWS configuration:</summary><p>
 <table>
