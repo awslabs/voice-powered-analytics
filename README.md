@@ -31,6 +31,7 @@ Please make sure you have the following available prior to the workshop.
 ## Lab Setup
 
 We have provided a CloudFormation template to create baseline resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
+
 **Please launch the template below so that the resources created will be ready by the time you get to those sections in the lab guides.** 
 
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**

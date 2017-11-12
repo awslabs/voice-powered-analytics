@@ -2,7 +2,7 @@
 
 # Using QuickSight for Data Discovery
 
-**NOTE** The QuickSight Lab is optional. Exploring the dataset is an extreamly helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familir with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
+**NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
 
 ### Step 1 - (OPTIONAL) Understand Raw Data Set To Query
 
