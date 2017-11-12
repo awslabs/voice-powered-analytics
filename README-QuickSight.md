@@ -6,9 +6,9 @@ In this lab we will use QuickSight to explore our dataset and visualize a few in
 
 **NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
 
-### Step 1 - (OPTIONAL) Understand Raw Data Set To Query
+## Step 1 - (OPTIONAL) Understand Raw Data Set To Query
 
-This is an optional step of the optional lab! It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
+This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. If you don't want to inspect the JSON files and trust that each file in s3 has a collection of JSON objects in the file, and that the file has been correctly gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/), you can skip this section and continue with [Step 2](#step-2)
 
 We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, this dataset includes tweets with the #reinvent hashtag or to/from @awsreinvent. In fact you if you tweet about this workshop now and use the #reinvent hashtag you will be able see that tweet later on in the workshop!
 Let's first take a look at the data set we're going to analyze and query.  
@@ -54,12 +54,15 @@ The data format look like this:
 }
 ```
 
+## Step 2 - Create an Athena table for Initial Data Discovery
 
-### Step 2 - Create an Athena table for Initial Data Discovery
+In this step, we're going to use the fields we saw in the json documents. 
+To do that, we need to create a table in Amazon Athena. This will allow us to query the data at rest in S3. 
+The twitter data is stored as JSON documents and then compressed in s3. 
+Athena supports reading of gzip files and includes json SerDe's to make parsing the data easy.
 
-In this step, we're going to use the fields we saw in the json document. To do that, we need to create a HIVE external table in Amazon Athena. This will allow us to query the data at rest in S3.
-
-There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available in the bucket we provide. You will however need to create an Athena database and table to query the data. The twitter data is stored as JSON documents and then compressed in s3. Athena supports reading of gzip files and includes json SerDe's to make parsing the data easy. 
+There is no need to copy the dataset to a new bucket for the workshop. 
+The data is publicly available in the bucket we provide.   
 
 <details>
 <summary><strong>Create Athena table (expand for details)</strong></summary><p>
@@ -92,23 +95,19 @@ LOCATION
 ```
 4. Then hit the *Run Query* button
 5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
-6. If you click on the *tweets* table, you can see the fields that are in our raw S3 data.    
+6. If you click on the *tweets* table, you can see the fields that we saw earlier.    
 7. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
 
 ```SQL
 SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
 ```
-The statement above shows the total amount of tweets in our data set (result value should be well over 8k).  
+The statement above shows the total amount of tweets in our data set. 
+**Note** The result should be in the 1000's. If you got a tiny number, something is wrong. 
+Recreate your table or ask one of the lab assistants for help.
 </p></details>
 
-<details>
-<summary><strong>Partial solution - Create Athena table using Glue(expand for details)</strong></summary><p>
 
-TODO: Use AWS Glue to discover and build a DDL.
-
-</p></details>
-
-### Step 3 - Explore the data using Quicksight
+## Step 3 - Explore the data using Quicksight
 We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
 <details>
 <summary><strong>Full solution - Explore Athena data in Quicksight</strong></summary><p>
