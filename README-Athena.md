@@ -55,7 +55,8 @@ LOCATION
 
 ## Step 1 - Create a query to find the number of reinvent tweets 
 
-1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
+We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
+
 1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
 1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
@@ -90,12 +91,9 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
-#### Run the setup CloudFormation template
-
-We have created a CloudFormation template to create the IAM roles, IAM Policies, DynamoDB table, and s3 bucket needed for this workshop.
-The template can be found in `code/setup/vpa_setup.yaml` or [on Github](https://github.com/awslabs/voice-powered-analytics/blob/master/code/setup/vpa_setup.yaml)
-
-Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
+Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.
+We can retrieve this by going to the **CloudFormation** stack we created and look at the outputs tab. 
+From the dialog, let's copy the value in the **Query result location** (beginning with 's3://') to a local text editor to save for later.
 <details>
 <summary><strong>Full Solution - Create the lambda to query Athena</strong></summary><p>
 

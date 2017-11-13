@@ -36,6 +36,8 @@ We have provided a CloudFormation template to create baseline resources needed b
 
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
+
+
 Region | Launch Template
 :---: | :---:
 EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
