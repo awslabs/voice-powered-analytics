@@ -34,10 +34,10 @@ Resources:
         ReadCapacityUnits: !Ref 'DDBReadCapacityUnits'
         WriteCapacityUnits: !Ref 'DDBWriteCapacityUnits'
       TableName: VPA_Metrics_Table
-  VPALambdaAthenaPoller:
+  VPALambdaAthenaPollerRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: VPALambdaAthenaPoller
+      RoleName: VPALambdaAthenaPollerRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -48,10 +48,10 @@ Resources:
           Action:
             - sts:AssumeRole
       Path: "/"
-  VPALambdaAlexaSkill:
+  VPALambdaAlexaSkillRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: VPALambdaAlexaSkill
+      RoleName: VPALambdaAlexaSkillRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -73,7 +73,7 @@ Resources:
           Resource: '*'
       Roles:
         -
-          Ref: 'VPALambdaAthenaPoller'
+          Ref: "VPALambdaAthenaPollerRole"
   AlexaSkillPolicies:
     Type: AWS::IAM::Policy
     Properties:
@@ -85,7 +85,7 @@ Resources:
           Resource: '*'
       Roles:
         -
-          Ref: 'VPALambdaAlexaSkill'
+          Ref: "VPALambdaAlexaSkillRole"
   AthenaOutputS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -102,4 +102,10 @@ Outputs:
     Description: VPA Metrics Table Name
   BucketName:
     Value: !Ref 'AthenaOutputS3Bucket'
-    Description: Name of S3 bucket to hold website content
+    Description: Name of S3 bucket to hold Athena query results
+  AthenaPollerRole:
+    Value: !Ref 'VPALambdaAthenaPollerRole'
+    Description: Name of the IAM Role for the Lambda polling Athena
+  AlexaSkillRole:
+    Value: !Ref 'VPALambdaAlexaSkillRole'
+    Description: Name of the IAM Role for the Lambda used by Alexa

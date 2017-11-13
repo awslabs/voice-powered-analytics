@@ -41,7 +41,7 @@ When you launch the template you will be asked for a few inputs. Use the followi
 Input Name | Value
 :---: | :---:
 Stack Name | VPA-Setup
-AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-<your initials>-<some random number>. For me this would look like **vpa-reinvent2017-can-3428**
+AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-your initials-some random number. For me this would look like **vpa-reinvent2017-can-3428** Keep in mind bucket names must not use spaces.
 DDBReadCapacityUnits | 5
 DDBWriteCapacityUnits | 5
 
