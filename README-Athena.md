@@ -9,7 +9,7 @@ The goal of the lab is to use Lambda and Athena to create a solution to query da
 
 If you did not complete the QuickSight lab, you need to catch up by creating an Anthea table. 
 While you are double checking, please make you ran the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.
-If you ran the QuickSight Lab and ran the CloudFormation template from the main readme you can move to [Step 2](#Step-2)
+If you ran the QuickSight Lab and ran the CloudFormation template from the main readme you can move to [Step 2](#Step 2)
  
 
 <details>
