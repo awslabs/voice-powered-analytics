@@ -316,3 +316,7 @@ Note, there should be > 10,000 tweets. If you get a number lower than this pleas
 ![Watch how to test the lambda](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-run.gif)
 
 </details>
+
+## Start working on the Alexa skill
+
+You are now ready to build the Alexa skill, you can get started here [Amazon Alexa Section](README-Alexa.md)
