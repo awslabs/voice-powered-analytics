@@ -11,7 +11,7 @@ If you haven't yet done that, please do so now.
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
 <details>
-<summary><strong>Create Athena Query - In case you did not do this in the QuickSight Lab (expand for details)</strong></summary><p>
+<summary><strong>If you skiped QuickSight create an Athena Table (expand for details)</strong></summary><p>
 
 If you haven't launched the CloudFormation template yet from the main README do this now.
 
