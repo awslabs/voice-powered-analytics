@@ -13,24 +13,53 @@ If you haven't yet done that, please do so now.
 <details>
 <summary><strong>Create Athena Query - In case you did not do this in the QuickSight Lab (expand for details)</strong></summary><p>
 
+If you haven't launched the CloudFormation template yet from the main README do this now.
+
 Region | Launch Template
 :---: | :---:
 EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
 
+Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so now.
+
+**Create Athena table**
+
+1. In your AWS account navigate to the **Athena** service
+1. In the top left menu, choose *Query Editor*
+1. Use this code to create the Athena table. Once added, click **Run Query**
+
+```SQL
+CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
+  id bigint COMMENT 'Tweet ID', 
+  text string COMMENT 'Tweet text', 
+  created timestamp COMMENT 'Tweet create timestamp', 
+  screen_name string COMMENT 'Tweet screen_name',
+  screen_name_followers_count int COMMENT 'Tweet screen_name follower count',
+  place string COMMENT 'Location full name',
+  country string COMMENT 'Location country',
+  retweet_count int COMMENT 'Retweet count', 
+  favorite_count int COMMENT 'Favorite count')
+ROW FORMAT SERDE 
+  'org.openx.data.jsonserde.JsonSerDe' 
+WITH SERDEPROPERTIES ( 
+  'paths'='id,text,created,screen_name,screen_name_followers_count,place_fullname,country,retweet_count,favorite_count') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  's3://aws-vpa-tweets-euw1/tweets/'
+```
+
 </details>
 
 
-## Step  - Create a query to find the number of reinvent tweets 
-
-
-<details>
-<summary><strong>Full solution - Athena Query (expand for details)</strong></summary><p>
+## Step 1 - Create a query to find the number of reinvent tweets 
 
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select *History* on the top menu.
-1. You can see the latest queries under the column *Query* (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
-1. We'll be running these queries in the *Query Editor*. Navigate there in the top Athena menu.  
-1. Ensure that the **default** database is selected and you'll see our *tweets* table.  
+1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
+1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
+1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
 1. The Athena syntax is widely compatable with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
 1. Let's write a new query, there are several ways that you can do this:<br>
@@ -38,9 +67,9 @@ a. Use one of the queries that we had selected from the *Query Editor*<br>
 b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`<br>
 **TODO Show advanced query building techniques for our dataset**<br>
 c. Use or build off one of th examples below:
-</details>
+
 <details>
-<summary><strong>A few examples of other queries are listed below.</strong></summary><p>
+<summary><strong>OPTIONAL - Try out a few other queries.</strong></summary><p>
 
 ```SQL
 --Total number of tweets
