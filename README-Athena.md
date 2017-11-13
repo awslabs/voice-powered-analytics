@@ -24,7 +24,7 @@ Also, you should have created a Athena table in the QuickSight Lab. If you did n
 **Create Athena table**
 
 1. In your AWS account navigate to the **Athena** service
-1. In the top left menu, choose *Query Editor*
+1. In the top left menu, choose **Query Editor**
 1. Use this code to create the Athena table. Once added, click **Run Query**
 
 ```SQL
@@ -56,7 +56,7 @@ LOCATION
 ## Step 1 - Create a query to find the number of reinvent tweets 
 
 1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
-1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select *History* on the top menu.
+1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
 1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
 1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
