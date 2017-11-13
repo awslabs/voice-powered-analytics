@@ -5,6 +5,9 @@
 In this lab, we will work with Athena and Lambda. 
 The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
+<details>
+<summary><strong>If you skipped the QuickSight Lab, please do the following steps to catch up (open for details)</strong></summary><p>
+
 You should have launched the VPA-Setup CloudFormation template when this workshop started. 
 If you haven't yet done that, please do so now. 
 
@@ -29,6 +32,7 @@ Also, you should have created a Athena table in the QuickSight Lab. If you did n
 **Create Athena table**
 
 1. In your AWS account navigate to the **Athena** service
+1. Make sure you are using the **EU-WEST-1 or Ireland** region
 1. In the top left menu, choose **Query Editor**
 1. Use this code to create the Athena table. Once added, click **Run Query**
 
