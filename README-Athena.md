@@ -276,5 +276,37 @@ We will use a CloudWatch Event Rule created from the CloudFormation template to 
 
 ![Watch how to update the trigger](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_CWE_1.gif)
 
+</details>
+
+## Step 4 - Create a test event and test the Lambda
+
+At this point we are ready to test the Lambda. Before doing that we have to create a test event. 
+Lambda provides many test events, and provides for the ability to create our own event. 
+In this case, we will use the standard CloudWatch Event.
+
+To create the test event follow these steps:
+
+1. In the upper right, next to test, select **Configure test events**
+1. Select **Create new test event**
+1. Select **Scheduled event** for the event template
+1. Use **VPASampleEvent** for the event name
+1. Click **Create** in the bottom right of the window
+
+<details>
+<summary><strong>Watch how to configure a test event</strong></summary><p>
+
+![Watch how to configure a test event](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-cwe.gif)
+
+</details>
+
+Now we should test the Lambda. 
+
+1. Click **test** in the upper right
+
+
+<details>
+<summary><strong>Watch how to test the lambda</strong></summary><p>
+
+![Watch how to test the lambda](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-run.gif)
 
 </details>
