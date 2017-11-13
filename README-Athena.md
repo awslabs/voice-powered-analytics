@@ -11,7 +11,7 @@ If you haven't yet done that, please do so now.
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
 <details>
-<summary><strong>If you skiped QuickSight create an Athena Table (expand for details)</strong></summary><p>
+<summary><strong>If you skiped the QuickSight lab, create an Athena Table now (expand for details)</strong></summary><p>
 
 If you haven't launched the CloudFormation template yet from the main README do this now.
 
@@ -60,12 +60,11 @@ LOCATION
 1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
 1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
-1. The Athena syntax is widely compatable with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
+1. The Athena syntax is widely compatible with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
-1. Let's write a new query, there are several ways that you can do this:<br>
-a. Use one of the queries that we had selected from the *Query Editor*<br>
-b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`<br>
-**TODO Show advanced query building techniques for our dataset**<br>
+1. Let's write a new query, there are several ways that you can do this:
+a. Use one of the queries that we had selected from the **Query Editor**
+b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
 c. Use or build off one of th examples below:
 
 <details>
