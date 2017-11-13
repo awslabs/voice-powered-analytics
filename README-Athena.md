@@ -217,7 +217,7 @@ def upsert_into_DDB(nm, value, context):
 ```
 
 **Watch how to update the function code, execution role, and basic settings**
-![Watch how to update the function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
+![Watch how to update the function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-code-role.gif)
 
 
 ### Execution role
