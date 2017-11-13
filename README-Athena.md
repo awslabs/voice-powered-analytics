@@ -10,10 +10,14 @@ If you haven't yet done that, please do so now.
 
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
-<details>
-<summary><strong>If you skiped the QuickSight lab, create an Athena Table now (expand for details)</strong></summary><p>
+When you launch the template you will be asked for a few inputs. Use the following table for reference. 
 
-If you haven't launched the CloudFormation template yet from the main README do this now.
+Input Name | Value
+:---: | :---:
+Stack Name | VPA-Setup
+AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-<your initials>-<some random number>. For me this would look like **vpa-reinvent2017-can-3428**
+DDBReadCapacityUnits | 5
+DDBWriteCapacityUnits | 5
 
 Region | Launch Template
 :---: | :---:

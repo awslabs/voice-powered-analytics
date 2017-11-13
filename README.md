@@ -36,7 +36,14 @@ We have provided a CloudFormation template to create baseline resources needed b
 
 **For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
 
+When you launch the template you will be asked for a few inputs. Use the following table for reference. 
 
+Input Name | Value
+:---: | :---:
+Stack Name | VPA-Setup
+AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-<your initials>-<some random number>. For me this would look like **vpa-reinvent2017-can-3428**
+DDBReadCapacityUnits | 5
+DDBWriteCapacityUnits | 5
 
 Region | Launch Template
 :---: | :---:
