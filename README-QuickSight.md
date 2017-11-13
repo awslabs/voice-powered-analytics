@@ -9,7 +9,7 @@ In this lab we will use QuickSight to explore our dataset and visualize a few in
 ## Step 1 - Understand The Raw Data (OPTIONAL)
 
 This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. 
-If you don't want to inspect the JSON files you can safely skip this step and continue with [Step 2](#step-2). 
+If you don't want to inspect the JSON files you can safely skip this step and continue with [Step 2](#step-2---create-an-athena-table). 
 Each file in s3 has a collection of JSON objects stored within the file.
 In addition, the files have been gziped by [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/) which saves cost and improves performance.
 
