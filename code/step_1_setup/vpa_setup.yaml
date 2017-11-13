@@ -93,7 +93,8 @@ Resources:
   ScheduledRule:
     Type: "AWS::Events::Rule"
     Properties:
-      Description: "Every5MMinutes"
+      Name: VPAEvery5Min
+      Description: "Every5Minutes"
       ScheduleExpression: "rate(5 minutes)"
       State: "ENABLED"
 Outputs:
@@ -109,3 +110,6 @@ Outputs:
   AlexaSkillRole:
     Value: !Ref 'VPALambdaAlexaSkillRole'
     Description: Name of the IAM Role for the Lambda used by Alexa
+  CWEEvery5Min:
+    Value: !Ref 'ScheduledRule'
+    Description: Name of the CloudWatch Event Rule
