@@ -228,6 +228,7 @@ def upsert_into_DDB(nm, value, context):
 
 </details>
 
+
 ### Execution role
 
 1. Use **Choose an existing role**
@@ -261,6 +262,7 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 
 </details>
 
+
 ### Triggers tab
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
@@ -277,6 +279,7 @@ We will use a CloudWatch Event Rule created from the CloudFormation template to 
 ![Watch how to update the trigger](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_CWE_1.gif)
 
 </details>
+
 
 ## Step 4 - Create a test event and test the Lambda
 
@@ -298,6 +301,7 @@ To create the test event follow these steps:
 ![Watch how to configure a test event](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-cwe.gif)
 
 </details>
+
 
 Now we should test the Lambda. 
 
