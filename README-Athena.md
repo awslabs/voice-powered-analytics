@@ -253,6 +253,14 @@ region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 
+<details>
+<summary><strong>Screenshot of the Lambda env's - note use your bucket name</strong></summary><p>
+
+![Lambda env](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-env.png)
+
+
+</details>
+
 ### Triggers tab
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
