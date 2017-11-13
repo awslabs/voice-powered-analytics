@@ -5,8 +5,13 @@
 In this lab, we will work with Athena and Lambda. 
 The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
+## Step 1 - Catch up if you skipped the QuickSight Lab
+
+If you did not complete the QuickSight lab, you need to catch up by creating an Anthea table. 
+While you are double checking, please make you ran the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources. 
+
 <details>
-<summary><strong>If you skipped the QuickSight Lab, please do the following steps to catch up (open for details)</strong></summary><p>
+<summary><strong>Complete setup from previous steps (open for details)</strong></summary><p>
 
 You should have launched the VPA-Setup CloudFormation template when this workshop started. 
 If you haven't yet done that, please do so now. 
@@ -62,7 +67,7 @@ LOCATION
 </details>
 
 
-## Step 1 - Create a query to find the number of reinvent tweets 
+## Step 2 - Create a query to find the number of reinvent tweets 
 
 We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 
