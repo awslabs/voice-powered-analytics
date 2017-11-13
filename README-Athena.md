@@ -287,7 +287,7 @@ At this point we are ready to test the Lambda. Before doing that we have to crea
 Lambda provides many test events, and provides for the ability to create our own event. 
 In this case, we will use the standard CloudWatch Event.
 
-To create the test event follow these steps:
+### To create the test event
 
 1. In the upper right, next to test, select **Configure test events**
 1. Select **Create new test event**
@@ -303,10 +303,9 @@ To create the test event follow these steps:
 </details>
 
 
-Now we should test the Lambda. 
+### Now we should test the Lambda. 
 
 1. Click **test** in the upper right
-
 
 <details>
 <summary><strong>Watch how to test the lambda</strong></summary><p>
