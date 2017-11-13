@@ -101,24 +101,23 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 ```
 </details>
 
-### Step 5 - Create a lambda to query Athena
+## Step 3 - Create a lambda to query Athena
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
-Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.
-We can retrieve this by going to the **CloudFormation** stack we created and look at the outputs tab. 
-From the dialog, let's copy the value in the **Query result location** (beginning with 's3://') to a local text editor to save for later.
-<details>
-<summary><strong>Full Solution - Create the lambda to query Athena</strong></summary><p>
-
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
-2. Click **Create Function** 
-3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
-4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
-5. Give your Lambda function a unique name. For example you can use **vpa_lambda_athena** for the query name. For runtime select **Python 3.6**
-6. Add a role.  Under role, *Choose an existing role*, and in the box below, choose the role named *VPALambdaAthenaPoller*
-7. Click *Create function*
-8. Select inline code and then use the:
+1. Click **Create Function** 
+1. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
+1. Under name add **vpa_lambda_athena_poller**
+1. Under Role leave the default value of **Choose an existing role**
+1. Under existing role, select **VPALambdaAthenaPollerRole**
+1. Click **Create Function** 
+
+### Function Code
+
+1. For Runtime, select **Python 3.6**
+1. For Handeler, select **lambda_function.lambda_handler**
+1. Select inline code and then use the code below
 
 ```Python
 import boto3
@@ -213,7 +212,11 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
-1. Add the role to the Lambda function: VPALambdaAthenaPoller
+### Environment variables
+
+You will need the S3 bucket name you selected from the CloudFormation template. 
+If you forgot the name of your bucket you can locate the name on the output tab of the CloudFormation stack.
+
 1. Set the following Environment variables:
 
 ```
@@ -224,13 +227,17 @@ vpa_athena_query = SELECT count(*) FROM default."tweets"
 region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
-Note: for vpa_s3_output_location, use the Athena s3 location from the output of the setup CloudFormation template.  
-1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `VPALambdaAthenaPoller`
-1. Select Advanced Settings in order to configure the Timeout value to **2 minutes**
-1. Click **Next**
-1. From the review page, select **Create Function**
 
-</details>
+### Execution role
+
+1. Use **Choose an existing role**
+1. Add the role to the Lambda function: VPALambdaAthenaPollerRole
+
+### Basic Settings
+
+1. Set the timeout to 2 min
+
+
 
 
 <details>
@@ -245,20 +252,6 @@ Note: for vpa_s3_output_location, use the Athena s3 location from the output of 
 7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
 </details>
 
-#### Optional CloudFormation
-<summary>If you couldn't complete the steps above, optionally, you can deploy the following CloudFormation into your account:</summary><p>
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AthenaPoller&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/athena_poller_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Athena Poller into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-</p></details>
 
 1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
 2. Set the Role name to **poller_full_access** and click **create role**
