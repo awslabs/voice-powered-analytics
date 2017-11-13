@@ -113,7 +113,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 1. Under existing role, select **VPALambdaAthenaPollerRole**
 1. Click **Create Function** 
 
-<a href="http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html" target="_blank">Watch create a function</a>
+![Watch how to create a function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
 
 
 ### Function Code
