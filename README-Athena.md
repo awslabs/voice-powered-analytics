@@ -113,6 +113,9 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 1. Under existing role, select **VPALambdaAthenaPollerRole**
 1. Click **Create Function** 
 
+<a href="http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html" target="_blank">Watch create a function</a>
+
+
 ### Function Code
 
 1. For Runtime, select **Python 3.6**
