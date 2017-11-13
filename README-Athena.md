@@ -306,6 +306,9 @@ In this case, we will use the standard CloudWatch Event.
 ### Now we should test the Lambda. 
 
 1. Click **test** in the upper right
+1. Once the run has completed, click on the **Details** link to see how many reinvent tweets are stored in s3.
+
+Note, there should be > 10,000 tweets. If you get a number lower than this please ask a lab assistant for help.
 
 <details>
 <summary><strong>Watch how to test the lambda</strong></summary><p>
