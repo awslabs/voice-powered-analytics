@@ -117,7 +117,6 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 ![Watch how to create a function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
 
 
-
 ### Function Code
 
 1. For Runtime, select **Python 3.6**
@@ -217,6 +216,19 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
+**Watch how to update the function code, execution role, and basic settings**
+![Watch how to update the function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
+
+
+### Execution role
+
+1. Use **Choose an existing role**
+1. Add the role to the Lambda function: VPALambdaAthenaPollerRole
+
+### Basic Settings
+
+1. Set the timeout to 2 min
+
 ### Environment variables
 
 You will need the S3 bucket name you selected from the CloudFormation template. 
@@ -232,16 +244,6 @@ vpa_athena_query = SELECT count(*) FROM default."tweets"
 region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
-
-### Execution role
-
-1. Use **Choose an existing role**
-1. Add the role to the Lambda function: VPALambdaAthenaPollerRole
-
-### Basic Settings
-
-1. Set the timeout to 2 min
-
 
 
 
