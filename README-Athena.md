@@ -253,22 +253,20 @@ region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 
+### Triggers tab
 
+We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
+
+1. Click on the **Triggers** tab
+1. Click the **+ Add trigger**
+1. Click the empty box icon, followed by **CloudWatch Events**
+1. Under Rule, select **VPAEvery5Min**
+1. Leave the box checked for **Enable trigger**
 
 <details>
-<summary><strong>Full Solution - Create a CloudWatch Event Rule to trigger Lambda </strong></summary><p>
+<summary><strong>Watch how to update the trigger</strong></summary><p>
 
-1. Go to the [CloudWatch Events Rules console page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:). 
-2. Click **create rule**
-3. From the create rule page in the Event Source section. Select **Schedule** followed by **fixed rate** with a value of **5** minutes.
-4. From the Target section select **Add target**, then **lambda function**, followed by the new query we just created, **Athena_poller**.
-5. Next click on the **Configure Details**
-6. Give your rule a name, in this case **every-5-min**
-7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
+![Watch how to update the trigger](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_CWE_1.gif)
+
 
 </details>
-
-
-1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
-2. Set the Role name to **poller_full_access** and click **create role**
-3. Open the Lambda function and retrieve the S3 Athena output location to put in the environment variable
