@@ -49,5 +49,5 @@ You must however complete the Athena lab before starting on the Alexa lab.
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexa.md)
 
-After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller if you would like to leave the resources in place but not pay for ongoing Athena table scans. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
+After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller. This will stop the automated scans of s3 from Athena and also serve to stop any further Athena costs. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
 
