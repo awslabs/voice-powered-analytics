@@ -113,8 +113,13 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 1. Under existing role, select **VPALambdaAthenaPollerRole**
 1. Click **Create Function** 
 
+<details>
+<summary><strong>Watch how to create the function</strong></summary><p>
+
 **Watch how to create the function**
 ![Watch how to create a function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
+
+</details>
 
 
 ### Function Code
@@ -216,9 +221,12 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
-**Watch how to update the function code, execution role, and basic settings**
+<details>
+<summary><strong>Watch how to update the function code, execution role, and basic settings</strong></summary><p>
+
 ![Watch how to update the function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-code-role.gif)
 
+</details>
 
 ### Execution role
 
@@ -257,6 +265,7 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 5. Next click on the **Configure Details**
 6. Give your rule a name, in this case **every-5-min**
 7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
+
 </details>
 
 
