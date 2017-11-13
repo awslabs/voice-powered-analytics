@@ -149,7 +149,7 @@ def lambda_handler(event, context):
     vpa_athena_query = os.environ['vpa_athena_query']
     athena_result = run_athena_query(vpa_athena_query, os.environ['vpa_athena_database'],
                                      os.environ['vpa_s3_output_location'])
-    upsert_into_DDB(os.environ['vpa_metric_name'], athena_result, context)
+    upsert_into_DDB(str.upper(os.environ['vpa_metric_name']), athena_result, context)
     logger.info("{0} reinvent tweets so far!".format(athena_result))
     return {'message': "{0} reinvent tweets so far!".format(athena_result)}
 
@@ -175,11 +175,11 @@ def run_athena_query(query, database, s3_output_location):
     logger.info('Execution ID: ' + response['QueryExecutionId'])
 
     # wait for query to finish.
-    while (queryrunning == 0):
+    while queryrunning == 0:
         time.sleep(2)
         status = athena_client.get_query_execution(QueryExecutionId=response['QueryExecutionId'])
         results_file = status["QueryExecution"]["ResultConfiguration"]["OutputLocation"]
-        if (status["QueryExecution"]["Status"]["State"] != "RUNNING"):
+        if status["QueryExecution"]["Status"]["State"] != "RUNNING":
             queryrunning = 1
 
     # parse the s3 URL and find the bucket name and key name
