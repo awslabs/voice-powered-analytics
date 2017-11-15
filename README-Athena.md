@@ -1,161 +1,50 @@
 ##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
 
-# Workshop Overview
-In this workshop you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
+# Voice Powered Analytics - Athena Lab
 
-## The primary products used in this workshop are:
-All workshop attendees will need an AWS account with access to the following products. 
-<br>
-*Note For re:invent attendees:  AWS will not be providing temporary accounts for this workshop. Expected costs for this workshop is < $1 (Assuming free tier eligibility), AWS will be providing $10 AWS credits to cover the expense of the workshop.* 
+In this lab, we will work with Athena and Lambda. 
+The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
-### Pre-workshop Checklist
-Please make sure you have the following availabile prior to the workshop.
+## Step 1 - Catch up if you skipped the QuickSight Lab
 
-- [ ] Amazon Developer account
-- [ ] AWS Account with root access or full access
+If you did not complete the QuickSight lab, you need to catch up by creating an Anthea table. 
+While you are double checking, please make you ran the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.
+If you ran the QuickSight Lab and ran the CloudFormation template from the main readme you can move to [Step 2](#step-2---create-a-query-to-find-the-number-of-reinvent-tweets)
  
-Or
-
-- [ ] [Amazon Developer](https://developer.amazon.com/) account
-- [ ] Ability to create new IAM policies and roles
-- [ ] Full access to Athena – Clusterless Query Engine
-- [ ] Full access to Quicksight – Interactive BI Visualizations
-- [ ] Full access to S3 – Limitless and durable object store
-- [ ] Full access to Lambda – Event-triggered functions
-- [ ] Full access to DynamoDB – Managed NoSQL database
-- [ ] Full access to Alexa – Voice-powered skills
-- [ ] Full access to CloudFormation
-- [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
-
-**Note** There are two steps that differ from the typical AWS workflow. 
-
-* Development of an Alexa skill requires creation of an account at [Amazon Developer](https://developer.amazon.com/alexa-skills-kit) If you have not created an account yet, please do so before the workshop.
-* Using QuickSight requires [signing up](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html) for the service on a per user basis. Please conplete this step before the workshop to save on time.  
-
-## Workshop Steps
-
-This workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
-
-* **Athena and Data Discovery Steps**
-* **Alexa Skill Building Steps**
-
-We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps.
-
-We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
-
-1. Full solution where the attendee does not have to write any code
-2. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
-3. Many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.   While there aren't hard-and-fast answers for the bonus sections, feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
-
-In addition to deciding between using the full or partial solutions. The attende can also choose to focus in on the Big Data portion or the Voice powered portion. Please spend time in the workshop you find most interesting and use our full solutions for anything you have already mastered or are not interested in. The partial solution is designed to give you a head start, but still require key additions from the attende. 
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> 
-<center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkillFull&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-
-**TODO This needs to create additional DDB tables as well**
-
-## BI and Data Discovery Steps
-
-
-
-### Step 0 - Understand Raw Data Set To Query
-We will be using a dataset created from Twitter data related to AWS re:Invent 2017. In short, tweets with the #reinvent hashtag or to/from @awsreinvent 
-Let's first take a look at the data set we're going to analyze and query.  
-### How we get the data into S3
-The data is acquired starting with a Cloudwatch Event triggering an AWS Lambda function every 1 minute.  Lambda is making calls to Twitter's APIs for data, and then ingesting the data into AWS Kinesis Firehose.   Firsthose then microbatches the results into S3 as shown in the following diagram:
-<br><IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png?raw=true" width="80%" height="80%"><br><br>
-### Step 1 - Explore the Twitter data
-This dataset is available as:
-```bash
-US-EAST-1 
-s3://aws-vpa-tweets/
-EU-WEST-1
-s3://aws-vpa-tweets-euw1/
-```
 
 <details>
-<summary><strong>Partial solution - Explore the Twitter Data</strong></summary><p>
-AWS Firehose delivers the data into S3 as a GZIP file format.  There are 3 ways to get to this public dataset:
+<summary><strong>Complete setup from previous steps (open for details)</strong></summary><p>
 
-1. Download a sample extract of the data at the following [File Location](https://s3.amazonaws.com/aws-vpa-tweets/tweets/2017/11/06/03/aws-vpa-tweets-1-2017-11-06-03-53-28-b055a510-f718-4207-8e48-05c3ad8c3a5d.gz)
-2. Using the [AWS CLI](https://aws.amazon.com/cli/)
-3. Using a 3rd party S3 File Explorer such as [Cloudberry Explorer](https://www.cloudberrylab.com/explorer/amazon-s3.aspx)  
-</details>
+You should have launched the VPA-Setup CloudFormation template when this workshop started. 
+If you haven't yet done that, please do so now. 
+
+**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
+
+When you launch the template you will be asked for a few inputs. Use the following table for reference. 
+
+Input Name | Value
+:---: | :---:
+Stack Name | VPA-Setup
+AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-your initials-some random number. For me this would look like **vpa-reinvent2017-can-3428** Keep in mind bucket names must not use spaces.
+DDBReadCapacityUnits | 5
+DDBWriteCapacityUnits | 5
 
 
-<details>
-<summary><strong>Full solution - Explore the Twitter Data Using AWS CLI</strong></summary><p>
-When using the AWS CLI, you can run the following commands to see the folder/prefix structure of the data.  Firehose delivers the data in micro-batches by time.  When navigating to the file itself, it is in the GZIP file format:
+Region | Launch Template
+:---: | :---:
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
 
-```bash
-$ aws s3 ls s3://aws-vpa-tweets-euw1/
-         PRE tweets/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/
-         PRE 2017/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/
-         PRE 10/
-         PRE 11/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-         PRE 05/
-         PRE 06/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/
-         PRE 00/
-         PRE 01/
-         PRE 02/
-         PRE 03/
-         PRE 04/
-$ aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/
-2017-11-05 20:09:30        270 aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
-```
-Let's download the file by copying it locally and then using our favorite editor to open it:
-``` bash
-$ aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz .
-download: s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz to ./aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz
-$ vi aws-vpa-tweets-1-2017-11-06-04-08-28-f5542a86-818d-4b7a-8d84-aaff9ea4bec9.gz 
-```
-The data format looks something like this:
-```json
-{  
-	"id": 914642318044655600,  
-	"text": "Two months until #reInvent! Check out the session calendar & prepare for reserved seating on Oct. 19! http://amzn.to/2fxlVg7  ",  
-	"created": "2017-10-02 00:04:56",  
-	"screen_name": " AWSReinvent ",  
-	"screen_name_followers_count": 49864,  
-	"place": "none",  
-	"country": "none",  
-	"retweet_count": 7,  
-	"favorite_count": 21
-}
-```
-In the next section, we're going to use these fields to create HIVE external tables in AWS Athena and query the data directly in S3.
-</details>
+Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so now.
 
-### Step 2 - Create an Athena table for Initial Data Discovery
-
-Now we're comfortable with the dataset, let's create a table in Athena on top of this data.  There is no need to copy the dataset to a new bucket for the workshop. The data is publicly available. You will however need to create an Athena database and table to query the data. The twitter data is compressed in s3, but in a JSON syntax which Athena has native support for. 
-
-<details>
-<summary><strong>Full solution - Create Athena table (expand for details)</strong></summary><p>
+**Create Athena table**
 
 1. In your AWS account navigate to the **Athena** service
-2. In the top left menu, choose *Query Editor*.
-3. To create a new table, use this code to create the [HIVE external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable) Data Definition Language (DDL):
+1. Make sure you are using the **EU-WEST-1 or Ireland** region
+1. In the top left menu, choose **Query Editor**
+1. Use this code to create the Athena table. Once added, click **Run Query**
 
 ```SQL
-CREATE EXTERNAL TABLE tweets(
+CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
   id bigint COMMENT 'Tweet ID', 
   text string COMMENT 'Tweet text', 
   created timestamp COMMENT 'Tweet create timestamp', 
@@ -176,77 +65,25 @@ OUTPUTFORMAT
 LOCATION
   's3://aws-vpa-tweets-euw1/tweets/'
 ```
-4. Then hit the *Run Query* button
-5. In a few seconds, you'll see an Athena table called *tweets* in the *default* database (You may have to hit refresh).
-6. If you click on the *tweets* table, you can see the fields that are in our raw S3 data.    
-7. Let's test that the tweets table works.  In the same Query Editor run the following `SELECT` statement (clear the previous statement):
 
-```SQL
-SELECT COUNT(*) AS TOTAL_TWEETS FROM tweets;
-```
-The statement above shows the total amount of tweets in our data set (result value should be well over 8k).  
-</p></details>
-
-<details>
-<summary><strong>Partial solution - Create Athena table using Glue(expand for details)</strong></summary><p>
-
-TODO: Use AWS Glue to discover and build a DDL.
-
-</p></details>
-
-### Step 3 - Explore the data using Quicksight
-We've created an Athena table directly on top of our S3 Twitter data, let's explore some insights on the data.  While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  Let's explore:      
-<details>
-<summary><strong>Full solution - Explore Athena data in Quicksight</strong></summary><p>
-
-1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
-1. If haven't already configured, Quicksight may need special permissions to access Athena:   
-a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
-b. On the left menu, click *Account Settings*<br>
-c. Click the *Edit AWS permissions* button<br>
-d. Ensure the box *Amazon Athena* is checked, then click *Apply*
-1. In the main Quicksight portal page (ensure you're in the EU Ireland Region)
-1. In the upper right choose your  **Manage data**
-1. Now in the upper left choose **New data set**
-1. You will see tiles for each of the QuickSight supported data sources. From this page select the **Athena** tile. 
-1. When asked for the dataset name you can choose anything you like, for our example we use **tweets-dataset** You can choose to validate that SSL will be used for data between Athena and QuickSight. Finish be selecting **Create data source**
-1. Now we need to choose the Athena table we created in **Step 1**. For our example we used the **Default** database, with a table name of **tweets**. Finish by clicking on **Select**. 
-1. You will now be asked if you want to use spice or direct query access. If in the Ireland region, choose direct query access (SPICE is not yet available in this region).  Click **Visualize** when done. 
-1. QuickSight will now import the data. Wait until you see **Import Complete**. Then close the summary window. 
-1. Add the **created** field from the Athena table by dragging it from the Field list to the empty AutoGraph window.
-1. From the *Visual types* in the botom left corner, select **Vertical bar chart**
-1. Add another Visual by selecting in the top left corner, the **+ Add** button  and then **Add visual**
-1. On this new graph, lets add the **country** field. 
-1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
-1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "none"**
-
-</p></details>
-
-**Bonus: What other interesting insights can you find from this data in Quicksight**
-
-
-### Step 4 - Create a query to find the number of reinvent tweets 
-
-
-
-<details>
-<summary><strong>Full solution - Athena Query (expand for details)</strong></summary><p>
-
-1. We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
-1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select *History* on the top menu.
-1. You can see the latest queries under the column *Query* (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
-1. We'll be running these queries in the *Query Editor*. Navigate there in the top Athena menu.  
-1. Ensure that the **default** database is selected and you'll see our *tweets* table.  
-1. The Athena syntax is widely compatable with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
-1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
-1. Let's write a new query, there are several ways that you can do this:<br>
-a. Use one of the queries that we had selected from the *Query Editor*<br>
-b. Write a new query using the [Presto SELECT format](https://prestodb.io/docs/current/sql/select.html) Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`<br>
-**TODO Show advanced query building techniques for our dataset**<br>
-c. Use or build off one of th examples below:
 </details>
+
+
+## Step 2 - Create a query to find the number of reinvent tweets 
+
+We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
+
+1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
+1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
+1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
+1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
+1. The Athena syntax is widely compatible with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
+1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
+1. Let's write a new query. Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
+
+
 <details>
-<summary><strong>A few examples of other queries are listed below.</strong></summary><p>
+<summary><strong>OPTIONAL - Try out a few other queries.</strong></summary><p>
 
 ```SQL
 --Total number of tweets
@@ -264,27 +101,32 @@ SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 ```
 </details>
 
-### Step 5 - Create a lambda to query Athena
+## Step 3 - Create a lambda to query Athena
 
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
-#### Run the setup CloudFormation template
-
-We have created a CloudFormation template to create the IAM roles, IAM Policies, DynamoDB table, and s3 bucket needed for this workshop.
-The template can be found in `code/setup/vpa_setup.yaml` or [on Github](https://github.com/awslabs/voice-powered-analytics/blob/master/code/setup/vpa_setup.yaml)
-
-Before we create the Lambda function, we need to retrieve the bucket where Athena will be delivering the results in our local account.  We can retrieve this by going to the **Athena** service in the AWS console, then clicking *Settings* in the top right Athena menu.  From the dialog, let's copy the value in the *Query result location* (beginning with 's3://') to a local text editor to save for later.
-<details>
-<summary><strong>Full Solution - Create the lambda to query Athena</strong></summary><p>
-
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
-2. Click **Create Function** 
-3. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
-4. Leave the trigger blank for now. Click **Next** without adding a trigger from the Configure triggers page.
-5. Give your Lambda function a unique name. For example you can use **vpa_lambda_athena** for the query name. For runtime select **Python 3.6**
-6. Add a role.  Under role, *Choose an existing role*, and in the box below, choose the role named *VPALambdaAthenaPoller*
-7. Click *Create function*
-8. Select inline code and then use the:
+1. Click **Create Function** 
+1. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
+1. Under name add **vpa_lambda_athena_poller**
+1. Under Role leave the default value of **Choose an existing role**
+1. Under existing role, select **VPALambdaAthenaPollerRole**
+1. Click **Create Function** 
+
+<details>
+<summary><strong>Watch how to create the function</strong></summary><p>
+
+**Watch how to create the function**
+![Watch how to create a function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-create-function.gif)
+
+</details>
+
+
+### Function Code
+
+1. For Runtime, select **Python 3.6**
+1. For Handeler, select **lambda_function.lambda_handler**
+1. Select inline code and then use the code below
 
 ```Python
 import boto3
@@ -307,7 +149,7 @@ def lambda_handler(event, context):
     vpa_athena_query = os.environ['vpa_athena_query']
     athena_result = run_athena_query(vpa_athena_query, os.environ['vpa_athena_database'],
                                      os.environ['vpa_s3_output_location'])
-    upsert_into_DDB(os.environ['vpa_metric_name'], athena_result, context)
+    upsert_into_DDB(str.upper(os.environ['vpa_metric_name']), athena_result, context)
     logger.info("{0} reinvent tweets so far!".format(athena_result))
     return {'message': "{0} reinvent tweets so far!".format(athena_result)}
 
@@ -333,11 +175,11 @@ def run_athena_query(query, database, s3_output_location):
     logger.info('Execution ID: ' + response['QueryExecutionId'])
 
     # wait for query to finish.
-    while (queryrunning == 0):
+    while queryrunning == 0:
         time.sleep(2)
         status = athena_client.get_query_execution(QueryExecutionId=response['QueryExecutionId'])
         results_file = status["QueryExecution"]["ResultConfiguration"]["OutputLocation"]
-        if (status["QueryExecution"]["Status"]["State"] != "RUNNING"):
+        if status["QueryExecution"]["Status"]["State"] != "RUNNING":
             queryrunning = 1
 
     # parse the s3 URL and find the bucket name and key name
@@ -379,7 +221,28 @@ def upsert_into_DDB(nm, value, context):
 
 ```
 
-1. Add the role to the Lambda function: VPALambdaAthenaPoller
+<details>
+<summary><strong>Watch how to update the function code, execution role, and basic settings</strong></summary><p>
+
+![Watch how to update the function](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_lambda-code-role.gif)
+
+</details>
+
+
+### Execution role
+
+1. Use **Choose an existing role**
+1. Add the role to the Lambda function: VPALambdaAthenaPollerRole
+
+### Basic Settings
+
+1. Set the timeout to 2 min
+
+### Environment variables
+
+You will need the S3 bucket name you selected from the CloudFormation template. 
+If you forgot the name of your bucket you can locate the name on the output tab of the CloudFormation stack.
+
 1. Set the following Environment variables:
 
 ```
@@ -390,42 +253,70 @@ vpa_athena_query = SELECT count(*) FROM default."tweets"
 region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
-Note: for vpa_s3_output_location, use the Athena s3 location from the output of the setup CloudFormation template.  
-1. From the **Lambda function handler and role** ensure the Handler is set to `lambda_function.lambda_handler` and the Existing role to `VPALambdaAthenaPoller`
-1. Select Advanced Settings in order to configure the Timeout value to **2 minutes**
-1. Click **Next**
-1. From the review page, select **Create Function**
-
-</details>
-
 
 <details>
-<summary><strong>Full Solution - Create a CloudWatch Event Rule to trigger Lambda </strong></summary><p>
+<summary><strong>Screenshot of the Lambda env's - note use your bucket name</strong></summary><p>
 
-1. Go to the [CloudWatch Events Rules console page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:). 
-2. Click **create rule**
-3. From the create rule page in the Event Source section. Select **Schedule** followed by **fixed rate** with a value of **5** minutes.
-4. From the Target section select **Add target**, then **lambda function**, followed by the new query we just created, **Athena_poller**.
-5. Next click on the **Configure Details**
-6. Give your rule a name, in this case **every-5-min**
-7. Unselect the **Enabled** button to disable the trigger and then select **Create rule** 
+![Lambda env](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-env.png)
+
+
 </details>
 
-#### Optional CloudFormation
-<summary>If you couldn't complete the steps above, optionally, you can deploy the following CloudFormation into your account:</summary><p>
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=AthenaPoller&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/athena_poller_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Athena Poller into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-</p></details>
 
-1. You select the new policy you created for this roles permissions. You can use the filter to search for **poller**. Now select **Next: Review** to review our role. 
-2. Set the Role name to **poller_full_access** and click **create role**
-3. Open the Lambda function and retrieve the S3 Athena output location to put in the environment variable
+### Triggers tab
+
+We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
+
+1. Click on the **Triggers** tab
+1. Click the **+ Add trigger**
+1. Click the empty box icon, followed by **CloudWatch Events**
+1. Under Rule, select **VPAEvery5Min**
+1. Leave the box checked for **Enable trigger**
+
+<details>
+<summary><strong>Watch how to update the trigger</strong></summary><p>
+
+![Watch how to update the trigger](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_lab_CWE_1.gif)
+
+</details>
+
+
+## Step 4 - Create a test event and test the Lambda
+
+At this point we are ready to test the Lambda. Before doing that we have to create a test event. 
+Lambda provides many test events, and provides for the ability to create our own event. 
+In this case, we will use the standard CloudWatch Event.
+
+### To create the test event
+
+1. In the upper right, next to test, select **Configure test events**
+1. Select **Create new test event**
+1. Select **Scheduled event** for the event template
+1. Use **VPASampleEvent** for the event name
+1. Click **Create** in the bottom right of the window
+
+<details>
+<summary><strong>Watch how to configure a test event</strong></summary><p>
+
+![Watch how to configure a test event](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-cwe.gif)
+
+</details>
+
+
+### Now we should test the Lambda. 
+
+1. Click **test** in the upper right
+1. Once the run has completed, click on the **Details** link to see how many reinvent tweets are stored in s3.
+
+Note, there should be > 10,000 tweets. If you get a number lower than this please ask a lab assistant for help.
+
+<details>
+<summary><strong>Watch how to test the lambda</strong></summary><p>
+
+![Watch how to test the lambda](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-test-run.gif)
+
+</details>
+
+## Start working on the Alexa skill
+
+You are now ready to build the Alexa skill, you can get started here [Amazon Alexa Section](README-Alexa.md)

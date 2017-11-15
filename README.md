@@ -2,51 +2,62 @@
 
 # Voice Powered Analytics
 
-his workshop is designed for first time users of Athena and Alexa. We have broken the workshop into three Steps or focus topics. These are:
+### Introduction
+In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  The goal after leaving this workshop, is for you to understand how to uncover Key Performance Indicators (KPIs) from a data set, build and automate queries for measuring those KPIs, and access them via Alexa voice-enabled devices.  Startups can make  available voice powered analytics to query at any time, and Enterprises can deliver these types of solutions to stakeholders so they can have easy access to the Business KPIs that are top of mind.         
+This workshop requires fundamental knowledge of AWS services, but is designed for first time users of QuickSight, Athena, and Alexa. We have broken the workshop into three sections or focus topics. 
+These are:
 
-* **Athena and Data Discovery Steps**
-* **Alexa Skill Building Steps**
+* Data Discovery using QuickSight
+* Building Data Lake analytics in Athena (based on objects in S3) to generate answers for Alexa
+* Building a custom Alexa skill to access the analytics queries from Athena
 
-We expect most attendees to be able to complete both the Alexa Skill Building and Athena and Data Discovery Steps.
+We expect most attendees to be able to complete the full workshop in **2 hours**. 
 
-We have provided cloud formation templates and solutions for all steps where the attende is expected to write code. Generally these come in two flavors:
+To help keep moving through the sections in case you get stuck anywhere, we have provided CloudFormation templates and sample code.
 
-1. Full solution where the attendee does not have to write any code
-2. Partial solution where the attendee can author key selections of the code and double check thier work. This path is the recomended path as it provides for the most learning. If time becomes an issue, attendes will always have access to the full solitions so be bold!
-3. Many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.   While there aren't hard-and-fast answers for the bonus sections, feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
+For those feeling creative, many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.  
+Feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
 
+You can also contact @chadneal or @ahwestrich on twitter if you have additional questions or feedback.
 
 ## Prerequisites
 
-Please make sure you have the following availabile prior to the workshop.
+Please make sure you have the following available prior to the workshop.
 
-- [ ] Amazon Developer account
-- [ ] AWS Account with root access or full access
- 
-Or
+* <a href="https://developer.amazon.com/alexa" target="_blank">Amazon Developer</a> account (Free) **Note** This is different from a typical AWS workflow. 
+* AWS Account with admin or full access to all services
+* Using QuickSight requires <a href="http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html" target="_blank">Signing up for QuickSight</a>
 
-- [ ] [Amazon Developer](https://developer.amazon.com/) account
-- [ ] Ability to create new IAM policies and roles
-- [ ] Full access to Athena – Clusterless Query Engine
-- [ ] Full access to Quicksight – Interactive BI Visualizations
-- [ ] Full access to S3 – Limitless and durable object store
-- [ ] Full access to Lambda – Event-triggered functions
-- [ ] Full access to DynamoDB – Managed NoSQL database
-- [ ] Full access to Alexa – Voice-powered skills
-- [ ] Full access to CloudFormation
-- [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
+## Lab Setup
 
-**Note** There are two steps that differ from the typical AWS workflow. 
+We have provided a CloudFormation template to create baseline resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
 
-* Development of an Alexa skill requires creation of an account at [Amazon Developer](https://developer.amazon.com/alexa-skills-kit) If you have not created an account yet, please do so before the workshop.
-* Using QuickSight requires [signing up](http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html) for the service on a per user basis. Please conplete this step before the workshop to save on time.  
+**Please launch the template below so that the resources created will be ready by the time you get to those sections in the lab guides.** 
 
+**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
+
+When you launch the template you will be asked for a few inputs. Use the following table for reference. 
+
+Input Name | Value
+:---: | :---:
+Stack Name | VPA-Setup
+AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-your initials-some random number. For me this would look like **vpa-reinvent2017-can-3428** Keep in mind bucket names must not use spaces.
+DDBReadCapacityUnits | 5
+DDBWriteCapacityUnits | 5
+
+
+Region | Launch Template
+:---: | :---:
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
 
 ## Modules
 
-This workshop is broken up into multiple modules. You must complete each Section before proceeding to the next, however, there are AWS CloudFormation templates available that you can use to launch the necessary resources without manually creating them yourself if you'd like to skip ahead.
+This workshop is broken up into multiple modules. The QuickSight section is optional as the Athena and Alexa sections do not build on any of the artifcats created in the QuickSight section. 
+You must however complete the Athena lab before starting on the Alexa lab. 
 
-1. [Athena and Data Discovery Section](README-Athena.md)
-2. [Alexa Skill Building Section](README-Alexa.md)
+1. **OPTIONAL** [Amazon QuickSight Section](README-QuickSight.md) - Explore dataset to develop unique insights for Athena to query 
+1. [Amazon Athena Section](README-Athena.md)
+1. [Amazon Alexa Section](README-Alexa.md)
 
-After you have completed the workshop you can delete all of the resources that were created by following the [cleanup guide](README-Cleanup.md).
+After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller. This will stop the automated scans of s3 from Athena and also serve to stop any further Athena costs. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
+

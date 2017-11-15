@@ -1,0 +1,135 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Metadata:
+  License: Apache-2.0
+Description: 'AWS CloudFormation Template to create the IAM roles and DynamoDB table needed for the workshop.'
+Parameters:
+  DDBReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '1'
+    MaxValue: '10'
+    ConstraintDescription: Must be between 1 and 10
+  DDBWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '1'
+    MaxValue: '10'
+    ConstraintDescription: Must be between 1 and 10
+  AthenaOutputS3BucketName:
+    Description: The S3 Bucket that will hold Athena query results
+    Type: String
+Resources:
+  VPAMetricsTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: metric
+          AttributeType: S
+      KeySchema:
+        - AttributeName: metric
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref 'DDBReadCapacityUnits'
+        WriteCapacityUnits: !Ref 'DDBWriteCapacityUnits'
+      TableName: VPA_Metrics_Table
+  VPALambdaAthenaPollerRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: VPALambdaAthenaPollerRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+             - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+  VPALambdaAlexaSkillRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: VPALambdaAlexaSkillRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+             - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+  AlexaMetricSkill:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: vpa_alexa_skill.lambda_handler
+      Runtime: python3.6
+      Timeout: 60
+      CodeUri: s3://cf-templates-kljh22251-eu-west-1/vpa_alexa_skill_p.zip
+      Role: !GetAtt VPALambdaAlexaSkill.Arn
+      Environment:
+          Variables:
+            slot_name: Metric
+            intent_name: WhatsMyMetric
+            greeting_msg: Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics
+            metrics_table: VPA_Metrics_Table
+            exit_msg: Thank you for trying the Voice Powered Analytics.  Have a nice day!
+  AthenaPollerPolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: AthenaPollerPolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: ['logs:*', 's3:*', 'dynamodb:*', 'athena:*', 'xray:*', 'glue:*']
+          Resource: '*'
+      Roles:
+        -
+          Ref: "VPALambdaAthenaPollerRole"
+  AlexaSkillPolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: AlexaSkillPolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: ['logs:*', 'dynamodb:scan', 'xray:*']
+          Resource: '*'
+      Roles:
+        -
+          Ref: "VPALambdaAlexaSkillRole"
+  AthenaOutputS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AthenaOutputS3BucketName
+  ScheduledRule:
+    Type: "AWS::Events::Rule"
+    Properties:
+      Name: VPAEvery5Min
+      Description: "Every5Minutes"
+      ScheduleExpression: "rate(5 minutes)"
+      State: "ENABLED"
+Outputs:
+  TableName:
+    Value: !Ref 'VPAMetricsTable'
+    Description: VPA Metrics Table Name
+  BucketName:
+    Value: !Ref 'AthenaOutputS3Bucket'
+<<<<<<< HEAD:code/setup/vpa_setup.yaml
+    Description: Name of S3 bucket to hold website content
+=======
+    Description: Name of S3 bucket to hold Athena query results
+  AthenaPollerRole:
+    Value: !Ref 'VPALambdaAthenaPollerRole'
+    Description: Name of the IAM Role for the Lambda polling Athena
+  AlexaSkillRole:
+    Value: !Ref 'VPALambdaAlexaSkillRole'
+    Description: Name of the IAM Role for the Lambda used by Alexa
+  CWEEvery5Min:
+    Value: !Ref 'ScheduledRule'
+    Description: Name of the CloudWatch Event Rule
+>>>>>>> 28e1d02a9dfffc8f092ffb8cda31683e810f0ccd:code/step_1_setup/vpa_setup.yaml
