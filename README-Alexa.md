@@ -115,23 +115,11 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 
 ### Step 2: Configure Alexa Backend
 Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
-<br><b>Please deploy</b> the following template into your AWS environment which contains the Lambda code for the Alexa skill. 
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkill&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template_partial.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%"></a></center></td></tr></tbody></table>
-<details>
+Note: When you ran the initial setup CloudFormation in Module 1, a Lambda function with the name starting with <b>::Stack Name::-AlexaMetricSkill</b> was deployed.    
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_9.png?raw=true" width="80%" height="80%"><br>
-  2. Open the Lambda function, starting with <b>“VoiceAlexaSkillFull-AlexaMetricSkill-1”</b> deployed with the Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. If you don't see Alexa Skills Kit in the list, jump back to step #3 on this page.<br>
+  2. Open the Lambda function, starting with <b>::Stack Name::-AlexaMetricSkill</b> that was deployed with the Setup Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. 
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true" width="80%" height="80%">
     3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
     4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
