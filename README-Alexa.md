@@ -142,22 +142,6 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11b.png?raw=true" width="80%" height="80%">
   </p></details><br>
     7. Bonus (If time): can you add a skill to the Lambda function which enables users to "List My Metrics"
-<details>
-<summary>If you couldn't complete the steps for this Section above, optionally, you can deploy the following CloudFormation for the AWS configuration:</summary><p>
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Launch Template</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Ireland</strong> (eu-west-1)</td>
-<td> <center><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VoiceAlexaSkill&templateURL=https://s3.amazonaws.com/cf-templates-kljh22251-eu-west-1/skill_template.yaml"><img src="/media/images/CFN_Image_01.png" alt="Launch Alexa Skill into Ireland with CloudFormation" width="65%" height="65%" target="_blank"></a></center></td></tr></tbody></table>
-</p>
-<b>TODO: Click on the "<b>Code Editor"</b> item under Dashboard on the top left side of the skill builder.</b>
-</details>
 
 
 </details>
