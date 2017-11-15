@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
 Metadata:
   License: Apache-2.0
 Description: 'AWS CloudFormation Template to create the IAM roles and DynamoDB table needed for the workshop.'
@@ -62,6 +63,21 @@ Resources:
           Action:
             - sts:AssumeRole
       Path: "/"
+  AlexaMetricSkill:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: vpa_alexa_skill.lambda_handler
+      Runtime: python3.6
+      Timeout: 60
+      CodeUri: s3://cf-templates-kljh22251-eu-west-1/vpa_alexa_skill_p.zip
+      Role: !GetAtt VPALambdaAlexaSkill.Arn
+      Environment:
+          Variables:
+            slot_name: Metric
+            intent_name: WhatsMyMetric
+            greeting_msg: Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics
+            metrics_table: VPA_Metrics_Table
+            exit_msg: Thank you for trying the Voice Powered Analytics.  Have a nice day!
   AthenaPollerPolicies:
     Type: AWS::IAM::Policy
     Properties:
