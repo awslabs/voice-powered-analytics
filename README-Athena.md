@@ -7,7 +7,7 @@ The goal of the lab is to use Lambda and Athena to create a solution to query da
 
 ## Step 1 - Catch up if you skipped the QuickSight Lab
 
-If you did not complete the QuickSight lab, you need to catch up by creating an Anthea table. 
+If you did not complete the QuickSight lab, you need to catch up by creating an Athena table. 
 While you are double checking, please make you ran the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.
 If you ran the QuickSight Lab and ran the CloudFormation template from the main readme you can move to [Step 2](#step-2---create-a-query-to-find-the-number-of-reinvent-tweets)
  
@@ -125,7 +125,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 ### Function Code
 
 1. For Runtime, select **Python 3.6**
-1. For Handeler, select **lambda_function.lambda_handler**
+1. For Handler, select **lambda_function.lambda_handler**
 1. Select inline code and then use the code below
 
 ```Python
@@ -229,15 +229,6 @@ def upsert_into_DDB(nm, value, context):
 </details>
 
 
-### Execution role
-
-1. Use **Choose an existing role**
-1. Add the role to the Lambda function: VPALambdaAthenaPollerRole
-
-### Basic Settings
-
-1. Set the timeout to 2 min
-
 ### Environment variables
 
 You will need the S3 bucket name you selected from the CloudFormation template. 
@@ -262,10 +253,15 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 
 </details>
 
+### Basic Settings
+
+1. Set the timeout to 2 min
+
 
 ### Triggers tab
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
+Scroll up to the top of the screen, you will see tabs. One of them is labeled triggers, select that. 
 
 1. Click on the **Triggers** tab
 1. Click the **+ Add trigger**
