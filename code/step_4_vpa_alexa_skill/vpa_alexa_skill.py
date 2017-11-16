@@ -86,9 +86,9 @@ def query_dynamodb_metric(table,metric):
 def get_metric_from_session(table, intent, session):
     session_attributes = {}
     reprompt_text = None
-    metric_value = query_dynamodb_metric(table, intent['slots'][os.environ("slot_name")]['value'].upper())
+    metric_value = query_dynamodb_metric(table, intent['slots'][os.environ["slot_name"]]['value'].upper())
     if metric_value:
-        speech_output = "The value for " + intent['slots'][os.environ("slot_name")]['value'] + " is " + str(metric_value)
+        speech_output = "The value for " + intent['slots'][os.environ["slot_name"]]['value'] + " is " + str(metric_value)
         should_end_session = True
     else:
         speech_output = "I'm not sure what that metric is. " \
@@ -131,7 +131,7 @@ def on_intent(table, intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name.upper() == os.environ("intent_name").upper():
+    if intent_name.upper() == os.environ["intent_name"].upper():
         return get_metric_from_session(table, intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
