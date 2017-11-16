@@ -97,7 +97,7 @@ Resources:
       PolicyDocument:
         Statement:
         - Effect: Allow
-          Action: ['logs:*', 'dynamodb:scan', 'xray:*']
+          Action: ['logs:*', 'dynamodb:scan', 'dynamodb:GetItem', 'xray:*']
           Resource: '*'
       Roles:
         -
