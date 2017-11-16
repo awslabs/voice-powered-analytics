@@ -69,8 +69,8 @@ Resources:
       Handler: vpa_alexa_skill.lambda_handler
       Runtime: python3.6
       Timeout: 60
-      CodeUri: s3://cf-templates-kljh22251-eu-west-1/vpa_alexa_skill_p.zip
-      Role: !GetAtt VPALambdaAlexaSkill.Arn
+      CodeUri: s3://aws-vpa-tweets/setup/vpa_alexa_skill_p.zip
+      Role: !GetAtt VPALambdaAlexaSkillRole.Arn
       Environment:
           Variables:
             slot_name: Metric
@@ -119,9 +119,7 @@ Outputs:
     Description: VPA Metrics Table Name
   BucketName:
     Value: !Ref 'AthenaOutputS3Bucket'
-<<<<<<< HEAD:code/setup/vpa_setup.yaml
     Description: Name of S3 bucket to hold website content
-=======
     Description: Name of S3 bucket to hold Athena query results
   AthenaPollerRole:
     Value: !Ref 'VPALambdaAthenaPollerRole'
@@ -132,4 +130,4 @@ Outputs:
   CWEEvery5Min:
     Value: !Ref 'ScheduledRule'
     Description: Name of the CloudWatch Event Rule
->>>>>>> 28e1d02a9dfffc8f092ffb8cda31683e810f0ccd:code/step_1_setup/vpa_setup.yaml
+
