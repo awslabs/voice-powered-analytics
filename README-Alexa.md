@@ -106,7 +106,7 @@ iv. <b>Invocation Name</b> This is the name that your users will need to say to
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_6_6.png?raw=true" width="80%" height="80%"><br>
 15. Now you're ready to Click <b>"Build Model"</b> and <b>"Save"</b><br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_7.png?raw=true" width="80%" height="80%"><br>
-16. If your interaction model builds successfully, click on <b>Configuration button</b> to move on to Configuration. In our next step of this guide, we will be creating our Lambda function in the AWS developer console, but keep this browser tab open, because we will be returning here on <a href="https://github.com/voicehacks/setup-local-recommendations/blob/master/step-by-step/3-connect-vui-to-code.md">Page #3: Connect VUI to Code</a>. <br>
+16. If your interaction model builds successfully, click on <b>Configuration button</b> to move on to Configuration. In our next step of this guide (Configure Alexa Backend), we will be linking a Lambda function in the AWS developer console. <br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_8.png?raw=true" width="80%" height="80%"><br>
 <br>If you get an error from your interaction model, check through this list:
    - Did you copy & paste the provided code into the appropriate boxes?
@@ -119,13 +119,13 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary><p>
   1. Check your <b>AWS region</b>. For the reinvent workshop, we'll be using the <b>EU (Ireland)</b> region.<br>
 <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_9.png?raw=true" width="80%" height="80%"><br>
-  2. Open the Lambda function, starting with <b>::Stack Name::-AlexaMetricSkill</b> that was deployed with the Setup Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list. 
-  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true" width="80%" height="80%">
-    3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code.
+  2. Open the Lambda function, starting with <b>::Stack Name::-AlexaMetricSkill</b> that was deployed with the Setup Cloudformation.   <b>Configure your trigger</b>. Click the <b>Triggers</b> tab. Within the <b>Triggers</b> pane, click the link to <b>Add a Trigger</b>. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list, then click <b>Submit</b>. 
+  <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_10.png?raw=true" width="80%" height="80%"> 
+    3. Once you have selected Alexa Skills Kit, click the <b>Configuration</b> Tab to go back to your code. 
     4. The <b>ARN value</b> should be in the top right corner. Copy this value for use in the next section of the guide.
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_11.png?raw=true" width="80%" height="80%"><br>
-</p>
-    5.  Within the Lambda configuration, navigate to <b>Environment Variables</b>.<br>  
+</p> 
+    5.  Click on the <b>Configuration</b> tab, navigate to <b>Environment Variables</b>.<br> 
     6. <b>validate/(or change) the environment variables</b>: <br>
     - <b>intent_name</b> matches what's configured for your <i>intent</i> in the Alexa Skill's Interaction Configuration<br>
     - <b>slot_name</b> matches what's configured for your <i>slot name</i> in the Alexa Skill's Interaction Configuration<br>
@@ -154,7 +154,7 @@ In Step 1 "Setting up Your Voice User Interface", we created a voice user interf
 1.  Go back to the <b><a href="https://developer.amazon.com/edw/home.html#/skills/list">Amazon Developer Portal</a></b> and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the "Configuration" tab on the left side.<br>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_12.png?raw=true" width="40%" height="40%"><br>
-3. Select the <b>"AWS Lambda ARN"</b> option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service">(Read more about Hosting Your Own Custom Skill Web Service.)</a> With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>. In addition, Amazon now offers <a href="https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits">AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills</a> IMPORTANT: Make sure you select the same region that you created your Lambda in.<br>
+3. Select the <b>"AWS Lambda ARN"</b> option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service">(Read more about Hosting Your Own Custom Skill Web Service.)</a> With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at <a href="https://aws.amazon.com/free/">https://aws.amazon.com/free/</a>. In addition, Amazon now offers <a href="https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits">AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills</a>
   <IMG SRC="https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_13.png?raw=true" width="80%" height="80%"><br>
 4.  Paste your <b>Lambda's ARN</b> (Amazon Resource Name) into the textbox provided. It should look similar to the screenshot above.
 5.  Leave <b>"Account Linking" set to "No"</b>. For this skill, we won't be using Account Linking, but you can learn more about <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system" target="_blank">Linking an Alexa User with a User in Your System.</a>
