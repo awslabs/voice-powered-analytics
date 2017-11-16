@@ -69,7 +69,7 @@ Resources:
       Handler: vpa_alexa_skill.lambda_handler
       Runtime: python3.6
       Timeout: 60
-      CodeUri: s3://aws-vpa-tweets/setup/vpa_alexa_skill_p.zip
+      CodeUri: s3://aws-vpa-tweets-euw1/setup/vpa_alexa_skill_p.zip
       Role: !GetAtt VPALambdaAlexaSkillRole.Arn
       Environment:
           Variables:
