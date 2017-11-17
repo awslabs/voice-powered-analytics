@@ -44,18 +44,19 @@ Stack Name | VPA-Setup
 DDBReadCapacityUnits | 5
 DDBWriteCapacityUnits | 5
 
-
-Region | Launch Template
-:---: | :---:
-EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
-
 <details>
-<summary><strong>Watch a video of launching CloudFormation if you havent seen it before</strong></summary><p>
+<summary><strong>Watch a video of launching CloudFormation (Click to expand)</strong></summary><p>
 
 ![launcg CloudFormation](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-cloudformation-launch.gif)
 
 
 </details>
+
+Region | Launch Template
+:---: | :---:
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
+
+
 
 ## Modules
 
