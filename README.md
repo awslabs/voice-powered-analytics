@@ -49,8 +49,8 @@ DDBWriteCapacityUnits | 5
 
 ![launcg CloudFormation](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-cloudformation-launch.gif)
 
-
 </details>
+
 
 
 Region | Launch Template
