@@ -52,7 +52,7 @@ EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=e
 <details>
 <summary><strong>Watch a video of launching CloudFormation if you havent seen it before</strong></summary><p>
 
-![Lambda env](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-env.png)
+![launcg CloudFormation](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-cloudformation-launch.gif)
 
 
 </details>

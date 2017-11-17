@@ -234,6 +234,8 @@ def upsert_into_DDB(nm, value, context):
 You will need the S3 bucket name you selected from the CloudFormation template. 
 If you forgot the name of your bucket you can locate the name on the output tab of the CloudFormation stack.
 
+![S3 Bucket Name on CloudFormation Outputs Tab](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-s3-buckename.png)
+
 1. Set the following Environment variables:
 
 ```
