@@ -28,4 +28,4 @@ You can also delete the components manually.  While during the workshop, partici
 ## Modules
 
 You can redo this workshop by going back to any of the main modules:
-1. [Voice Powered Analytics](README)
+1. [Voice Powered Analytics](https://github.com/awslabs/voice-powered-analytics/)
