@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase..
+      - apt-get install -y git
+      - git clone https://github.com/awslabs/voice-powered-analytics.git
+  pre_build:
+    commands:
+      - command
+      - command
+  build:
+    commands:
+      - command
+      - command
+  post_build:
+    commands:
+      - command
+      - command
+artifacts:
+  files:
+    - location
+    - location
+  discard-paths: yes
+  base-directory: location

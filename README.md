@@ -41,7 +41,6 @@ When you launch the template you will be asked for a few inputs. Use the followi
 Input Name | Value
 :---: | :---:
 Stack Name | VPA-Setup
-AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-your initials-some random number. For me this would look like **vpa-reinvent2017-can-3428** Keep in mind bucket names must not use spaces.
 DDBReadCapacityUnits | 5
 DDBWriteCapacityUnits | 5
 
@@ -49,6 +48,14 @@ DDBWriteCapacityUnits | 5
 Region | Launch Template
 :---: | :---:
 EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
+
+<details>
+<summary><strong>Watch a video of launching CloudFormation if you havent seen it before</strong></summary><p>
+
+![Lambda env](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-lambda-env.png)
+
+
+</details>
 
 ## Modules
 
