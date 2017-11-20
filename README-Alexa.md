@@ -22,10 +22,10 @@ or
 - [ ] Full access to Alexa – Voice-powered skills
 - [ ] Full access to CloudFormation
 - [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
-
-
+ 
+ 
 ### Step 1: Setting up Your Voice User Interface
-
+ 
 There are two parts to an Alexa skill. The first part is the Voice User Interface (VUI). This is where we define how we will handle a user's voice input, and which code should be executed when specific commands are uttered. The second part is the actual programming logic for our skill.   Both will be configured in this step-by-step guide. 
 ![](./media/images/Alexa_Arch.png)  
   
@@ -115,7 +115,7 @@ iv. **Invocation Name** This is the name that your users will need to say to st
 </details>
 
 ### Step 2: Configure Alexa Backend
-Now that we've configured the voice interaction, let's set up our Lambda function to leverage your DynamoDB metrics and be triggered by the Alexa Skills Kit. 
+Now that we've configured the voice interaction, let's set up your Lambda function to be triggered by your Alexa Skills Kit and leverage your DynamoDB metrics. 
 Note: When you ran the initial setup CloudFormation in Module 1, a Lambda function with the name starting with **::Stack Name::-AlexaMetricSkill** was deployed. 
 <details> 
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary>
@@ -135,19 +135,22 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
     - (Optional) You can modify the greeting and exit message for your Alexa skill by changing the value of two environment variables: **greeting_msg** and **exit_msg** 
   <details>
 <summary>Example</summary> 
+  
   greeting_msg *Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics*  
   and
   exit_msg *Thank you for trying the Voice Powered Analytics.  Have a nice day!*
 </details>
-    -  There's also an environment variable called: **metrics_table** with the value *VPA_Metrics_Table*.  This references the DynamoDB table that the Alexa skill will be querying for your metric
-<details>
-<summary>Hint</summary> 
+-  There's also an environment variable called: **metrics_table** with the value *VPA_Metrics_Table*.  This references the DynamoDB table that the Alexa skill will be querying for your metric
+<details><summary>Hint</summary> 
+  
   ![](./media/images/Alexa_Lab_11b.png) 
 </details> 
   
+  
   7. **Bonus (Time permitting)**: can you add a skill to the Lambda function which enables users to "List My Metrics"
 </details>
-
+ 
+ 
 ### Step 3: Connecting Your Voice User Interface to Your Lambda Function
 In Step 1 "Setting up Your Voice User Interface", we created a voice user interface for the intents and utterances we expect from our users. On "Step 2 Configure Alexa Backend", we created a Lambda function that contains all of our logic for the skill. On this page, we need to connect those two pieces together. 
 <details>
@@ -161,7 +164,7 @@ In Step 1 "Setting up Your Voice User Interface", we created a voice user interf
 3. Select the **"AWS Lambda ARN"** option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. 
 - Notes: [Read more about Hosting Your Own Custom Skill Web Service](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service). With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at [https://aws.amazon.com/free/](https://aws.amazon.com/free/). In addition, Amazon now offers [AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills](https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits)
   ![](./media/images/Alexa_Lab_13.png) 
-4.  Paste your **Lambda's ARN** (Amazon Resource Name) into the textbox provided. It should look similar to the screenshot above.
+4.  Paste your **Lambda's ARN** (Amazon Resource Name) into the textbox provided labeled "Default". It should look similar to the screenshot above.
 5.  Leave **"Account Linking" set to "No"**. For this skill, we won't be using Account Linking, but you can learn more about [Linking an Alexa User with a User in Your System](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system) 
 6.  Click the **"Next"** button to continue to Step #4 of this guide.
 </details>
@@ -172,12 +175,13 @@ You've now created a Voice User Interface and a Lambda function, and connecte
 <details>
 <summary><strong>Full Solution - Testing Your Alexa Skill</strong></summary> 
  
-1.  Go back to the **[Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list)** and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial. 
+1.  In the **[Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list)**, select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial. 
 2. Open the **"Test"** tab on the left side. 
 
 ![](./media/images/Alexa_Lab_15.png) 
+ 
 3. Test your skill with the **Service Simulator**. To validate that your skill is working as expected, use the Service Simulator. In the **Enter Utterance** text box, type "What’s my reinvent twitter sentiment" 
-  ![](./media/images/Alexa_Lab_16.png) 
+  ![](./media/images/Alexa_Lab_16.gif) 
 4. Under the Service Response, you should see your metric's response under: *Response > Output Speech > Text*.  If you see errors, check out the **Troubleshooting** tips below.     
 5.  Other testing methods to consider: 
 - [Echosim.io](https://echosim.io/) - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go. 
@@ -197,6 +201,7 @@ You've now created a Voice User Interface and a Lambda function, and connecte
  - "what is my reinvent twitter sentiment" 
  (Continue this process for all of the utterances. To start over, click the "Reset" button.) 
 </details>  
+ 
  
  
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
