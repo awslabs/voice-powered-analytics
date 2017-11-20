@@ -96,7 +96,7 @@ iv. **Invocation Name** This is the name that your users will need to say to st
   12.  Next we're going **Add utterances** to our intent.  This triggers an invoke of your intent through your user's voice.  You'll want to add a few different variations based upon how users will interact with the different types of metrics available to query.     
   - Some sample utterances for your newly generated intents. These are the things a user would say to make a specific intent happen. Here are a few examples:
     - *What's my {metric}* or *What is the value for {metric}* (More on what the *{metric}* means on the next step) 
-    ![](./media/images/Alexa_Lab_6.png) 
+    ![](./media/images/Alexa_Lab_6.gif) 
   13. Now we'll **configure our Slots**.  Slots allow you to parameterize different variable attributes when invoking your intent.  For this workshop, the slot will be our metric(s) that we've created with the Athena query.  This is why we've put the {metric} slot name in our utterances.
     - Type in the name of the slot under **Create a new intent slot** and then **Click the + button** to add it.  Then click the **plus(+)** button on the utterances dialog to add the utterance.  Give your slot the name {**metric**}.  Note: If you want to give it a different name, then log the name in a separate text editor so we can adjust our backend Lambda function later.  If you do this, also remember to change the name of the slot referenced in your utterance so they match.        
     - Note: Alternatively, you can create a new slot on the right side of the screen in the section titled *Intent Slots*
@@ -124,7 +124,7 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 ![](./media/images/Alexa_Lab_9.png) 
   2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation. 
   Then we'll **Configure your trigger**: Click the **Triggers** tab. Within the **Triggers** pane, click the link to **Add a Trigger**. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list, then click **Submit**. 
-  ![](./media/images/Alexa_Lab_10.png) 
+  ![](./media/images/Alexa_Lab_10.png)  
   3. Once you have selected Alexa Skills Kit, click the **Configuration** Tab to go back to your code. 
   4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
   ![](./media/images/Alexa_Lab_11.png) 
@@ -157,6 +157,7 @@ In Step 1 "Setting up Your Voice User Interface", we created a voice user interf
 2. Open the "Configuration" tab on the left side. 
 
 ![](./media/images/Alexa_Lab_12.png) 
+ 
 3. Select the **"AWS Lambda ARN"** option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. 
 - Notes: [Read more about Hosting Your Own Custom Skill Web Service](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service). With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at [https://aws.amazon.com/free/](https://aws.amazon.com/free/). In addition, Amazon now offers [AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills](https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits)
   ![](./media/images/Alexa_Lab_13.png) 
