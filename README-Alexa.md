@@ -102,12 +102,12 @@ iv. **Invocation Name** This is the name that your users will need to say to st
     - Note: Alternatively, you can create a new slot on the right side of the screen in the section titled *Intent Slots*
   14. Our slot is now created and will be added to the *Intent Slots* area on the right side of the screen.  In this section, under the slot, click the area *choose a slot type*. We’ll create a new slot type for our list of metrics.  Let's call this **available_metrics** and click the **+** button to add it. 
 ![](./media/images/Alexa_Lab_6_5.png) 
-  15.  On the bottom left side of the screen, click on the **available_metrics** slot type that was just created.   For the **slot value, enter the *value*** of the metric used from the *Athena_Poller* Lambda function's environment variable: *Metric* (e.g. *reinvent twitter sentiment*. Then click the **+** button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
+  15.  On the bottom left side of the screen, click on the **available_metrics** slot type that was just created.   For the **slot value, enter the *value*** of the metric used from the *Athena_Poller* Lambda function's environment variable: *metric* (e.g. *reinvent twitter sentiment*. Then click the **+** button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
     - Note: Don't worry about adding **ID (Optional)** or **Synonyms**.  They can be added later after you test. 
 ![](./media/images/Alexa_Lab_6_6.png) 
   16. Now you're ready to Click **"Build Model"** and **"Save"** 
 ![](./media/images/Alexa_Lab_7.png) 
-  17. If your interaction model builds successfully, click on **Configuration button** to move on to Configuration. In our next step of this guide (Configure Alexa Backend), we will be linking a Lambda function in the AWS developer console.  
+  17. If your interaction model builds successfully (You'll see a successful build message added to the dialog), click on **Configuration button** to move on to Configuration. In our next step of this guide (Configure Alexa Backend), we will be linking a Lambda function in the AWS developer console.  
 ![](./media/images/Alexa_Lab_8.png) 
  **Troubleshooting** If you get an error from your interaction model, check through this list:
    - Did you copy & paste the provided code into the appropriate boxes?
@@ -122,13 +122,14 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
   
   1. Check your **AWS region**. For the reinvent workshop, we'll be using the **EU (Ireland)** region. 
 ![](./media/images/Alexa_Lab_9.png) 
-  2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation.   **Configure your trigger**. Click the **Triggers** tab. Within the **Triggers** pane, click the link to **Add a Trigger**. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list, then click **Submit**. 
+  2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation. 
+  Then we'll **Configure your trigger**: Click the **Triggers** tab. Within the **Triggers** pane, click the link to **Add a Trigger**. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list, then click **Submit**. 
   ![](./media/images/Alexa_Lab_10.png) 
   3. Once you have selected Alexa Skills Kit, click the **Configuration** Tab to go back to your code. 
-  4. The **ARN value** should be in the top right corner. Copy this value for use in the next section of the guide.
+  4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
   ![](./media/images/Alexa_Lab_11.png) 
   5.  Click on the **Configuration** tab, navigate to **Environment Variables**. 
-  6. **validate/(or change) the environment variables**:  
+  6. **validate/or change the environment variables**:  
     - **intent_name** matches what's configured for your *intent* in the Alexa Skill's Interaction Configuration 
     - **slot_name** matches what's configured for your *slot name* in the Alexa Skill's Interaction Configuration 
     - (Optional) You can modify the greeting and exit message for your Alexa skill by changing the value of two environment variables: **greeting_msg** and **exit_msg** 
@@ -142,9 +143,9 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 <details>
 <summary>Hint</summary> 
   ![](./media/images/Alexa_Lab_11b.png) 
-  </details> 
+</details> 
+  
   7. **Bonus (Time permitting)**: can you add a skill to the Lambda function which enables users to "List My Metrics"
-</details>
 </details>
 
 ### Step 3: Connecting Your Voice User Interface to Your Lambda Function
@@ -154,16 +155,17 @@ In Step 1 "Setting up Your Voice User Interface", we created a voice user interf
   
 1.  Go back to the **[Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list)** and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial.
 2. Open the "Configuration" tab on the left side. 
+
 ![](./media/images/Alexa_Lab_12.png) 
 3. Select the **"AWS Lambda ARN"** option for your endpoint. You have the ability to host your code anywhere that you would like, but for the purposes of simplicity and frugality, we are using AWS Lambda. 
-  Notes: [Read more about Hosting Your Own Custom Skill Web Service](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service). With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at [https://aws.amazon.com/free/](https://aws.amazon.com/free/). In addition, Amazon now offers [AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills](https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits)
+- Notes: [Read more about Hosting Your Own Custom Skill Web Service](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service). With the AWS Free Tier, you get 1,000,000 free requests per month, up to 3.2 million seconds of compute time per month. Learn more at [https://aws.amazon.com/free/](https://aws.amazon.com/free/). In addition, Amazon now offers [AWS Promotional Credits for developers who have live Alexa skills that incur costs on AWS related to those skills](https://developer.amazon.com/alexa-skills-kit/alexa-aws-credits)
   ![](./media/images/Alexa_Lab_13.png) 
 4.  Paste your **Lambda's ARN** (Amazon Resource Name) into the textbox provided. It should look similar to the screenshot above.
 5.  Leave **"Account Linking" set to "No"**. For this skill, we won't be using Account Linking, but you can learn more about [Linking an Alexa User with a User in Your System](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system) 
-6.  Click the **"Next"** button to continue to page #4 of this guide.
+6.  Click the **"Next"** button to continue to Step #4 of this guide.
 </details>
-
-
+ 
+ 
 ### Step 4: Testing Your Alexa Skill
 You've now created a Voice User Interface and a Lambda function, and connected the two together. Your skill is now ready to test.*
 <details>
@@ -171,26 +173,29 @@ You've now created a Voice User Interface and a Lambda function, and connecte
  
 1.  Go back to the **[Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list)** and select your skill from the list. You may still have a browser tab open if you started at the beginning of this tutorial. 
 2. Open the **"Test"** tab on the left side. 
+
 ![](./media/images/Alexa_Lab_15.png) 
 3. Test your skill with the **Service Simulator**. To validate that your skill is working as expected, use the Service Simulator. In the **Enter Utterance** text box, type "What’s my reinvent twitter sentiment" 
   ![](./media/images/Alexa_Lab_16.png) 
-4.  Other testing methods to consider: 
+4. Under the Service Response, you should see your metric's response under: *Response > Output Speech > Text*.  If you see errors, check out the **Troubleshooting** tips below.     
+5.  Other testing methods to consider: 
 - [Echosim.io](https://echosim.io/) - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go. 
 - [Unit Testing with Alexa](https://github.com/alexa/skill-sample-nodejs-city-guide/blob/master/unit-testing.md) - a modern approach to unit testing your Alexa skills with [Postman](http://getpostman.com/) and [Amazon API Gateway](http://aws.amazon.com/apigateway). 
-5. If your sample skill is working properly, you can now customize your skill. 
+6. If your sample skill is working properly, you can now customize your skill. 
  
  #### Troubleshooting 
- - If you receive a response that reads: *"The remote endpoint could not be called, or the response it returned was invalid,"* this is an indication that something is broken. Copy the JSON from the Alexa skill and insert it as a test event to our Lambda function **VoiceAlexaSkillFull-AlexaMetricSkill-1**.  You can then see the specific output from the Lambda function as to why it is not executing successfully. 
-- Also make sure that the DynamoDB has an entry with a value for your metric.
-</details></details> 
- 
+ - If you receive a response that reads: *"The remote endpoint could not be called, or the response it returned was invalid,"* this is an indication that something is broken. Copy the JSON from the Alexa skill and insert it as a test event to our Lambda function **VoiceAlexaSkillFull-AlexaMetricSkill-1**.  You can then see the specific output from the Lambda function as to why it is not executing successfully.
+ - It is most likely due to either the Alexa Skills Kit: **slot name** or **intent name** does not match the Lambda environment variables. 
+- Also make sure that the DynamoDB has an entry with a value for your metric. 
+  
  <summary><strong>Service Simulator Tips</strong></summary> 
+ 
  - After you click the **"Ask [Your Skill Name]"** button, you should see the **Lambda Request and Lambda Response boxes** get populated with JSON data like in the screenshot above. 
  - Click the **Listen** button in the bottom right corner to hear Alexa read the response. 
  - You can have an entire conversation with your skill with the Service Simulator. Try the following commands: 
  - "what is my reinvent twitter sentiment" 
  (Continue this process for all of the utterances. To start over, click the "Reset" button.) 
-  
+</details>  
  
  
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
