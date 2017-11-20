@@ -70,6 +70,7 @@ The data is publicly available in the bucket we provide.
 
 **Create Athena table**
 
+1. **For Re:invent 2017** Please make sure you are in **EU-WEST-1 (Ireland)** 
 1. In your AWS account navigate to the **Athena** service
 1. In the top left menu, choose *Query Editor*
 1. Use this code to create the Athena table. Once added, click **Run Query**
@@ -117,11 +118,11 @@ Let's explore:
 
 1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
-a. (These settings can only be changed in the N.Virginia region) In the upper right corner, ensure US East N. Virginia is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
+a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
 b. On the left menu, click *Account Settings*<
 c. Click the *Edit AWS permissions* button
 d. Ensure the box *Amazon Athena* is checked, then click *Apply*
-1. In the main Quicksight portal page (ensure you're in the EU Ireland Region)
+1. In the main Quicksight portal page, switch back to the **EU Ireland Region**)
 1. In the upper right choose your  **Manage data**
 1. Now in the upper left choose **New data set**
 1. You will see tiles for each of the QuickSight supported data sources. From this page select the **Athena** tile. 
@@ -136,9 +137,11 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. As you can see, lots of tweets do not include which country the tweet was created in. Lets filter these results out. Click on the large bar labeled **none**, then select **exclude "none"** from the pop up window. As you can see the tweets without a location were excluded.
 1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "country"**
 
-
 **Bonus: What other interesting insights can you find from this data in Quicksight?**
-
+* **Tweet @chadneal and @ahwestrich** with link to a screenshot of an interesting insight you captured from this data.  It may be added below to our ***Voice Powered Analytics** Quicksight Attendee Submissions* 
+ 
+**TBD - Voice Powered Analytics Quicksight Attendee Submissions** 
+ 
 ## Step 4 - Start on the Athena lab
-
+ 
 To continue the workshop, start on the [Athena Lab](README-Athena.md)
