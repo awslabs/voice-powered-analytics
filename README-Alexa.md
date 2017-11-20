@@ -8,20 +8,7 @@ In this workshop you will build a voice powered analytic engine that you can tak
 Note, that the following dependencies are needed in order to successfully complete this section of the workshop.
 
 - [ ] Successful completion of Athena Query Building Section
-- [ ] Amazon Developer account
-
-- [ ] AWS Account with root access or full access
-or
-- [ ] [Amazon Developer](https://developer.amazon.com/) account
-- [ ] Ability to create new IAM policies and roles
-- [ ] Full access to Athena – Clusterless Query Engine
-- [ ] Full access to Quicksight – Interactive BI Visualizations
-- [ ] Full access to S3 – Limitless and durable object store
-- [ ] Full access to Lambda – Event-triggered functions
-- [ ] Full access to DynamoDB – Managed NoSQL database
-- [ ] Full access to Alexa – Voice-powered skills
-- [ ] Full access to CloudFormation
-- [ ] Full access to CloudWatch, CloudWatch Events, and CloudWatch Logs
+- [ ] Amazon Developer account (free)
  
  
 ### Step 1: Setting up Your Voice User Interface
