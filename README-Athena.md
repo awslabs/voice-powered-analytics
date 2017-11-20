@@ -7,36 +7,13 @@ The goal of the lab is to use Lambda and Athena to create a solution to query da
 
 ## Step 1 - Catch up if you skipped the QuickSight Lab
 
-If you did not complete the QuickSight lab, you need to catch up by creating an Athena table. 
-While you are double checking, please make you ran the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.
-If you ran the QuickSight Lab and ran the CloudFormation template from the main readme you can move to [Step 2](#step-2---create-a-query-to-find-the-number-of-reinvent-tweets)
+If you did not complete the QuickSight lab, you'll need to catch up by creating an Athena table. 
+If you completed the QuickSight Lab from the Main workshop page you can move to [Step 2](#step-2---create-a-query-to-find-the-number-of-reinvent-tweets)
+
+1. If you have not run the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.  Please do so now on the [Main workshop page](README.md) 
+2. Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so by completing the **Create Athena Table** steps below. 
  
-
-<details>
-<summary><strong>Complete setup from previous steps (open for details)</strong></summary><p>
-
-You should have launched the VPA-Setup CloudFormation template when this workshop started. 
-If you haven't yet done that, please do so now. 
-
-**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
-
-When you launch the template you will be asked for a few inputs. Use the following table for reference. 
-
-Input Name | Value
-:---: | :---:
-Stack Name | VPA-Setup
-AthenaOutputS3BucketName | A bucket name to hold Athena query results. The bucket name must be globally unique. For that reason, we recommend the following vpa-reinvent2017-your initials-some random number. For me this would look like **vpa-reinvent2017-can-3428** Keep in mind bucket names must not use spaces.
-DDBReadCapacityUnits | 5
-DDBWriteCapacityUnits | 5
-
-
-Region | Launch Template
-:---: | :---:
-EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
-
-Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so now.
-
-**Create Athena table**
+**Create Athena Table**
 
 1. In your AWS account navigate to the **Athena** service
 1. Make sure you are using the **EU-WEST-1 or Ireland** region
@@ -73,17 +50,20 @@ LOCATION
 
 We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 
-1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
+1. (If you completed the Quicksight Lab) To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
 1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
 1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
 1. The Athena syntax is widely compatible with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
 1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
 1. Let's write a new query. Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
-
+ 
+**Bonus: What other interesting SQL insights can you create in Athena?**
+ 
+**Tweet @chadneal and @ahwestrich** with link to additional query insights that you captured from this data. It may be added below to our ***Voice Powered Analytics** Additional Queries Attendee Submissions*
 
 <details>
-<summary><strong>OPTIONAL - Try out a few other queries.</strong></summary><p>
+<summary><strong>OPTIONAL - Try out a few additional queries (and Attendee Submissions).</strong></summary><p>
 
 ```SQL
 --Total number of tweets
