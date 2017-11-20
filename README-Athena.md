@@ -13,7 +13,7 @@ If you completed the QuickSight Lab from the Main workshop page you can move to 
 1. If you have not run the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.  Please do so now on the [Main workshop page](README.md) 
 2. Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so by completing the **Create Athena Table** steps below. 
  
-**Create Athena Table**
+**Create Athena Table (Skip to Step #2 if completed in previous module)**
 
 1. In your AWS account navigate to the **Athena** service
 1. Make sure you are using the **EU-WEST-1 or Ireland** region
