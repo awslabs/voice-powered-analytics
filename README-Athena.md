@@ -55,7 +55,7 @@ We need to produce an integer for our Alexa skill. To do that we need to create 
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
 1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
 1. The Athena syntax is widely compatible with Presto. You can learn more about it from our [Amazon Athena Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) and the [Presto Docs](https://prestodb.io/docs/current/) web sites
-1. Once you are happy with the value returned by your query you can move to **Step 4**, otherwise you can experiment with other query types. 
+1. Once you are happy with the value returned by your query you can move to **Step 3**, otherwise you can experiment with other query types. 
 1. Let's write a new query. Hint: The Query text to find the number of #reinvent tweets is:  `SELECT COUNT(*) FROM tweets`
  
 **Bonus: What other interesting SQL insights can you create in Athena?**
