@@ -70,7 +70,7 @@ Resources:
       Role: !GetAtt VPALambdaAlexaSkillRole.Arn
       Environment:
           Variables:
-            slot_name: Metric
+            slot_name: metric
             intent_name: WhatsMyMetric
             greeting_msg: Welcome to the Voice Powered Analytics.  Please tell me what metrics you'd like to hear. To hear available metrics, ask Alexa tell me my metrics
             metrics_table: VPA_Metrics_Table
@@ -124,4 +124,3 @@ Outputs:
   CWEEvery5Min:
     Value: !Ref 'ScheduledRule'
     Description: Name of the CloudWatch Event Rule
-
