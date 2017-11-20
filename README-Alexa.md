@@ -104,7 +104,7 @@ iv. **Invocation Name** This is the name that your users will need to say to st
 ![](./media/images/Alexa_Lab_6_5.png) 
   15.  On the bottom left side of the screen, click on the **available_metrics** slot type that was just created.   For the **slot value, enter the *value*** of the metric used from the *Athena_Poller* Lambda function's environment variable: *metric* (e.g. *reinvent twitter sentiment*. Then click the **+** button.  Note: The DynamoDB item that is used as our key in the backend lambda function uses this value to query our metric's value.
     - Note: Don't worry about adding **ID (Optional)** or **Synonyms**.  They can be added later after you test. 
-![](./media/images/Alexa_Lab_6_6.png) 
+![](./media/images/Alexa_Lab_6_6.gif) 
   16. Now you're ready to Click **"Build Model"** and **"Save"** 
 ![](./media/images/Alexa_Lab_7.png) 
   17. If your interaction model builds successfully (You'll see a successful build message added to the dialog), click on **Configuration button** to move on to Configuration. In our next step of this guide (Configure Alexa Backend), we will be linking a Lambda function in the AWS developer console.  
