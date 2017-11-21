@@ -30,7 +30,7 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
   ![](./media/images/Alexa_Lab_2.png) 
   5.  Select **"Start A Skill."** This will get you to the first page of your new Alexa skill.
   6.  Fill out the **Skill Information screen**.  You can accept any defaults. Make sure to review the tips we provide below the screenshot. 
-  ![](./media/images/Alexa_Lab_4.png) 
+  ![](./media/images/Alexa_Lab_4.gif) 
   <details>
  <summary><strong>Skill Information Tips (expand for details)</strong></summary>
 
