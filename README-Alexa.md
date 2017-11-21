@@ -192,7 +192,7 @@ You've now created a Voice User Interface and a Lambda function, and connecte
  
  
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
-**Tweet @chadneal and @ahwestrich** with a description of the custom skill that you've created from this workshop. It may be added below to our **Voice Powered Analytics Attendee Submissions** 
+**Tweet @chadneal and @WestrichAdam** with a description of the custom skill that you've created from this workshop. It may be added below to our **Voice Powered Analytics Attendee Submissions** 
 <details>
 <summary><strong>Hints and Attendee Submissions</strong></summary> 
    Intent: ListMetrics
