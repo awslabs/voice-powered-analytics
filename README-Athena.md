@@ -60,7 +60,7 @@ We need to produce an integer for our Alexa skill. To do that we need to create 
  
 **Bonus: What other interesting SQL insights can you create in Athena?**
  
-**Tweet @chadneal and @ahwestrich** with link to additional query insights that you captured from this data. It may be added below to our ***Voice Powered Analytics** Additional Queries Attendee Submissions*
+**Tweet @chadneal and @WestrichAdam** with link to additional query insights that you captured from this data. It may be added below to our ***Voice Powered Analytics** Additional Queries Attendee Submissions*
 
 <details>
 <summary><strong>OPTIONAL - Try out a few additional queries (and Attendee Submissions).</strong></summary><p>
