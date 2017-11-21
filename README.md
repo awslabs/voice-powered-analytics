@@ -61,7 +61,7 @@ EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=e
 This workshop is broken up into multiple modules. The QuickSight section is optional as the Athena and Alexa sections do not build on any of the artifcats created in the QuickSight section. 
 You must however complete the Athena lab before starting on the Alexa lab. 
 
-1. **OPTIONAL** [Amazon QuickSight Section](README-QuickSight.md) - Explore dataset to develop unique insights for Athena to query 
+1. [Amazon QuickSight Section](README-QuickSight.md) 
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexa.md)
 
