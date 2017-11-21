@@ -138,7 +138,7 @@ d. Ensure the box *Amazon Athena* is checked, then click *Apply*
 1. Lets change the visual from a bar chart to a pie chart. Select the entire visual, then from the bottom right select the **pie chart** visual.  Add **Group By: "country"**
 
 **Bonus: What other interesting insights can you find from this data in Quicksight?**
-* **Tweet @chadneal and @ahwestrich** with link to a screenshot of an interesting insight you captured from this data.  It may be added below to our ***Voice Powered Analytics** Quicksight Attendee Submissions* 
+* **Tweet @chadneal and @WestrichAdam** with link to a screenshot of an interesting insight you captured from this data.  It may be added below to our ***Voice Powered Analytics** Quicksight Attendee Submissions* 
  
 **TBD - Voice Powered Analytics Quicksight Attendee Submissions** 
  
