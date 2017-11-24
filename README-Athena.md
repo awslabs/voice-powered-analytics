@@ -5,52 +5,16 @@
 In this lab, we will work with Athena and Lambda. 
 The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
-## Step 1 - Catch up if you skipped the QuickSight Lab
+## Step 1 - Double check you are using Ireland
 
-If you did not complete the QuickSight lab, you'll need to catch up by creating an Athena table. 
-If you completed the QuickSight Lab from the Main workshop page you can move to [Step 2](#step-2---create-a-query-to-find-the-number-of-reinvent-tweets)
-
-1. If you have not run the CloudFormation template to create the IAM, DynamoDB, S3, and CloudWatch Events resources.  Please do so now on the [Main workshop page](README.md) 
-2. Also, you should have created a Athena table in the QuickSight Lab. If you did not complete that section, please do so by completing the **Create Athena Table** steps below. 
- 
-**Create Athena Table (Skip to Step #2 if completed in previous module)**
-
-1. In your AWS account navigate to the **Athena** service
-1. Make sure you are using the **EU-WEST-1 or Ireland** region
-1. In the top left menu, choose **Query Editor**
-1. Use this code to create the Athena table. Once added, click **Run Query**
-
-```SQL
-CREATE EXTERNAL TABLE IF NOT EXISTS default.tweets(
-  id bigint COMMENT 'Tweet ID', 
-  text string COMMENT 'Tweet text', 
-  created timestamp COMMENT 'Tweet create timestamp', 
-  screen_name string COMMENT 'Tweet screen_name',
-  screen_name_followers_count int COMMENT 'Tweet screen_name follower count',
-  place string COMMENT 'Location full name',
-  country string COMMENT 'Location country',
-  retweet_count int COMMENT 'Retweet count', 
-  favorite_count int COMMENT 'Favorite count')
-ROW FORMAT SERDE 
-  'org.openx.data.jsonserde.JsonSerDe' 
-WITH SERDEPROPERTIES ( 
-  'paths'='id,text,created,screen_name,screen_name_followers_count,place_fullname,country,retweet_count,favorite_count') 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.mapred.TextInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
-LOCATION
-  's3://aws-vpa-tweets-euw1/tweets/'
-```
-
-</details>
+In this section we will use Athena and Lambda. Please make sure as you switch between tabs, that you are still using Ireland (EU-WEST-1) For the region.
 
 
 ## Step 2 - Create a query to find the number of reinvent tweets 
 
 We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count.
 
-1. (If you completed the Quicksight Lab) To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
+1. To find the last set of queries from Quicksight, go to the Athena AWS Console page, then select **History** on the top menu.
 1. You can see the latest queries under the column **Query** (starting with the word 'SELECT').  You can copy these queries to a text editor to save later.  
 1. We'll be running these queries in the **Query Editor**. Navigate there in the top Athena menu.  
 1. Ensure that the **default** database is selected and you'll see your **tweets** table.  
