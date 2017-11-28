@@ -28,7 +28,7 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
   (If you don't already have an account, you will be able to create a new one for free.) 
   4. Once you have signed in, on the Alexa page, click the **"Alexa Skills Kit"** button, which is what we'll use to create our custom skill. 
   ![](./media/images/Alexa_Lab_2.png) 
-  5.  Select **"Start A Skill."** This will get you to the first page of your new Alexa skill.
+  5.  Select **"Add a new skill."** This will get you to the first page of your new Alexa skill.
   6.  Fill out the **Skill Information screen**.  You can accept any defaults. Make sure to review the tips we provide below the screenshot. 
   ![](./media/images/Alexa_Lab_4.gif) 
   <details>
@@ -73,7 +73,7 @@ iv. **Invocation Name** This is the name that your users will need to say to st
 </tr></tbody></table>
  </details> 
  
-  7.  Click the Next button to move to the **Interaction Model**. 
+  7.  Click the **Save button** to move to the **Interaction Model**. 
   8. Click on the **Launch Skill Builder (Beta)** button . This will launch the new Skill Builder Dashboard. ![](./media/images/Alexa_Lab_5.png)   
   9.  Click on the **"Dashboard"** button.  
   10.  Click **"Add Intent"** on the Dashboard screen.  An intent allows you to define 'what to do' when your custom skill is invoked.  
