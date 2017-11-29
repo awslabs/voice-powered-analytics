@@ -4,7 +4,7 @@
 
 In this lab we will use QuickSight to explore our dataset and visualize a few interesting metrics of the twitter dataset. 
 
-**NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Setion](README-Athena.md)
+**NOTE** The QuickSight Lab is optional. Exploring the dataset is an extremely helpful process however the rest of the workshop does not depend on the QuickSight Lab. If you are already familiar with QuickSight please feel free to skip to the [Athena Section](README-Athena.md)
 
 ## Step 1 - Understand The Raw Data (OPTIONAL)
 
