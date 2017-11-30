@@ -1,6 +1,4 @@
-##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
-
-# Voice Powered Analytics - QuickSight Lab (OPTIONAL)
+# Voice Powered Analytics - QuickSight Lab
 
 In this lab we will use QuickSight to explore our dataset and visualize a few interesting metrics of the twitter dataset. 
 
@@ -121,7 +119,7 @@ Let's explore:
 a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
 b. On the left menu, click *Account Settings*<
 c. Click the *Edit AWS permissions* button
-d. Ensure the box *Amazon Athena* is checked, then click *Apply*
+d. Ensure the box *Amazon Athena* is checked.  **Also ensure that all S3 buckets are selected**.  Then click *Apply*
 1. In the main Quicksight portal page, switch back to the **EU Ireland Region**)
 1. In the upper right choose your  **Manage data**
 1. Now in the upper left choose **New data set**
