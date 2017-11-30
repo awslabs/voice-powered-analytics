@@ -1,5 +1,3 @@
-##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
-
 # Workshop Overview
 In this workshop you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
 
