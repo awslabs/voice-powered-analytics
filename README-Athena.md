@@ -1,5 +1,3 @@
-##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
-
 # Voice Powered Analytics - Athena Lab
 
 In this lab, we will work with Athena and Lambda. 
