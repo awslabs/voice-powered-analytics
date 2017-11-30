@@ -1,5 +1,3 @@
-##**Note that this workshop is not yet live.  It will be live at reinvent 2017 Wednesday 11/29**
-
 Although the cost of this workshop is less than $1 a week, if you'd like to minimize or delete the resources created, this can be done in multiple ways
 
 # Workshop Cleanup options
