@@ -61,6 +61,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 1. Click **Create Function** 
 1. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
 1. Under name add **vpa_lambda_athena_poller**
+1. For Runtime, select **Python 3.6**
 1. Under Role leave the default value of **Choose an existing role**
 1. Under existing role, select **VPALambdaAthenaPollerRole**
 1. Click **Create Function** 
@@ -76,8 +77,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 
 ### Function Code
 
-1. For Runtime, select **Python 3.6**
-1. For Handler, select **lambda_function.lambda_handler**
+1. For Handler, ensure that it is set to: **lambda_function.lambda_handler**
 1. Select inline code and then use the code below
 
 ```Python
@@ -212,15 +212,13 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 1. Set the timeout to 2 min
 
 
-### Triggers tab
+### Triggers Pane
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
-Scroll up to the top of the screen, you will see tabs. One of them is labeled triggers, select that. 
+Scroll up to the top of the screen, select the pane **Triggers**. 
 
-1. Click on the **Triggers** tab
-1. Click the **+ Add trigger**
-1. Click the empty box icon, followed by **CloudWatch Events**
-1. Under Rule, select **VPAEvery5Min**
+1. Under the **Add trigger**, click the empty box icon, followed by **CloudWatch Events**
+1. Scroll down, and under *Rule*, select **VPAEvery5Min**
 1. Leave the box checked for **Enable trigger**
 
 <details>
