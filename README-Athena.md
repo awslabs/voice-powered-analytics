@@ -41,11 +41,14 @@ SELECT COUNT(*) FROM tweets WHERE screen_name LIKE '%chadneal%'
 SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
 ** Attendee Submissions **
--- Submitted by Patrick (@imapokesfan)
+-- Submitted by Patrick (@imapokesfan) 11/29/17:
 SELECT screen_name as tweeters,text as the_tweet
 from default.tweets
 where text like '#imwithslalom%'
 group by screen_name, text
+
+-- Submitted by Cameron Pope (@theaboutbox) 11/29/17:
+SELECT count(*) from tweets where text like '%excited%'
 
 ```
 </details>
