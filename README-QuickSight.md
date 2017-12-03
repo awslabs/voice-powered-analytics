@@ -137,8 +137,19 @@ d. Ensure the box *Amazon Athena* is checked.  **Also ensure that all S3 buckets
 
 **Bonus: What other interesting insights can you find from this data in Quicksight?**
 * **Tweet @chadneal and @WestrichAdam** with link to a screenshot of an interesting insight you captured from this data.  It may be added below to our ***Voice Powered Analytics** Quicksight Attendee Submissions* 
+<details>
+	<summary><strong>Voice Powered Analytics Quicksight Attendee Submissions!</summary></strong>
+
+Kiran Chitturi (@nkchitturi) 11/29/17:
+![@nkchitturi Quicksight Submission](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Quicksight_Submission_1.jpg) 
  
-**TBD - Voice Powered Analytics Quicksight Attendee Submissions** 
+Thibaut LaBarre (@Thibqut) 11/29/17:
+![@Thibqut Quicksight Submission](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Quicksight_Submission_2.jpg) 
+ 
+Cameron Pope (@theaboutbox) 11/29/17:
+![@theaboutbox Quicksight Submission](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Quicksight_Submission_3.jpg)
+</details>
+
  
 ## Step 4 - Start on the Athena lab
  
