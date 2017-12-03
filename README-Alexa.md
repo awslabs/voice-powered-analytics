@@ -108,7 +108,7 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
   1. Check your **AWS region**. For the reinvent workshop, we'll be using the **EU (Ireland)** region. 
 ![](./media/images/Alexa_Lab_9.png) 
   2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation. 
-  Then we'll **Configure your trigger**: Click the **Triggers** tab. Within the **Triggers** pane, click the link to **Add a Trigger**. A pop-up should appear, click in the dashed box and select Alexa Skills Kit from the list, then click **Submit**. 
+  Then we'll **Configure your trigger**: Under Configuration, and in **Add Triggers** pane, select Alexa Skills Kit from the list, then scroll down to the bottom of the screen, click **Add**. 
   ![](./media/images/Alexa_Lab_10.png)  
   3. Once you have selected Alexa Skills Kit, click the **Configuration** Tab to go back to your code. 
   4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
