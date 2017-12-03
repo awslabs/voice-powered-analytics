@@ -40,6 +40,13 @@ SELECT COUNT(*) FROM tweets WHERE screen_name LIKE '%chadneal%'
 --Total number of tweets that mention AWSreInvent
 SELECT COUNT(*) FROM tweets WHERE text LIKE '%AWSreInvent%'
 
+** Attendee Submissions **
+-- Submitted by Patrick (@imapokesfan)
+SELECT screen_name as tweeters,text as the_tweet
+from default.tweets
+where text like '#imwithslalom%'
+group by screen_name, text
+
 ```
 </details>
 
