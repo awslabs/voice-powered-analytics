@@ -3,9 +3,9 @@
 In this lab, we will work with Athena and Lambda. 
 The goal of the lab is to use Lambda and Athena to create a solution to query data at rest in s3 and build answers for Alexa. 
 
-## Step 1 - Double check you are using Ireland
+## Step 1 - Double check you are running in the same region that the cloudformation was launched
 
-In this section we will use Athena and Lambda. Please make sure as you switch between tabs, that you are still using Ireland (EU-WEST-1) For the region.
+In this section we will use Athena and Lambda. Please make sure as you switch between tabs, that you are still using the same region launched with the cloudformation
 
 
 ## Step 2 - Create a query to find the number of reinvent tweets 
@@ -195,7 +195,7 @@ vpa_athena_database = tweets
 vpa_ddb_table = VPA_Metrics_Table
 vpa_metric_name = Reinvent Twitter Sentiment
 vpa_athena_query = SELECT count(*) FROM default."tweets"
-region = eu-west-1
+region = eu-west-1 (if running out of Ireland) or us-east-1 (if running out of Northern Virginia)
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 
