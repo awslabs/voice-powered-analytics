@@ -32,13 +32,13 @@ EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
 You can use a variety of methods to download one of the files in the dataset. If you use the AWS CLI today, this is likely the easiest method to take a look at the data.
 
-List one of the files with:
+List one of the files with (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 ls s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz
+aws s3 ls s3://aws-vpa-tweets/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz
 ```
-Download this file to your local directory:
+Download this file to your local directory (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 cp s3://aws-vpa-tweets-euw1/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz .
+aws s3 cp s3://aws-vpa-tweets/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz .
 ```
 
 Since the files are compressed, you will need to unzip it. In addition the data is stored in raw text form. Make sure you rename the file to either *.json or *.text.
@@ -68,7 +68,10 @@ The data is publicly available in the bucket we provide.
 
 **Create Athena table**
 
-1. **For Re:invent 2017** Please make sure you are in the **same region** that launched the Cloudformation stack
+1. Please make sure you are in the **same region** that launched the Cloudformation stack 
+1. For the **Ireland region**, modify the location field below with the following location:
+LOCATION
+  's3://aws-vpa-tweets-euw1/tweets/'
 1. In your AWS account navigate to the **Athena** service
 1. In the top left menu, choose *Query Editor*
 1. Use this code to create the Athena table. Once added, click **Run Query**
@@ -93,7 +96,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  's3://aws-vpa-tweets-euw1/tweets/'
+  's3://aws-vpa-tweets/tweets/'
 ```
 
 **Verify the table created correctly** 
@@ -114,7 +117,7 @@ We've created an Athena table directly on top of our S3 Twitter data, let's expl
 While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  
 Let's explore:      
 
-1. Launch the [QuickSight portal](https://eu-west-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
+1. Launch the [QuickSight portal](https://us-east-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
 a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
 b. On the left menu, click *Account Settings*<
