@@ -68,7 +68,7 @@ The data is publicly available in the bucket we provide.
 
 **Create Athena table**
 
-1. **For Re:invent 2017** Please make sure you are in **EU-WEST-1 (Ireland)** 
+1. **For Re:invent 2017** Please make sure you are in the **same region** that launched the Cloudformation stack
 1. In your AWS account navigate to the **Athena** service
 1. In the top left menu, choose *Query Editor*
 1. Use this code to create the Athena table. Once added, click **Run Query**
@@ -120,7 +120,7 @@ a. (These settings can only be changed in the **N.Virginia region**) In the uppe
 b. On the left menu, click *Account Settings*<
 c. Click the *Edit AWS permissions* button
 d. Ensure the box *Amazon Athena* is checked.  **Also ensure that all S3 buckets are selected**.  Then click *Apply*
-1. In the main Quicksight portal page, switch back to the **EU Ireland Region**)
+1. **(if running out of Ireland)** In the main Quicksight portal page, switch back to the **EU Ireland Region**)
 1. In the upper right choose your  **Manage data**
 1. Now in the upper left choose **New data set**
 1. You will see tiles for each of the QuickSight supported data sources. From this page select the **Athena** tile. 
