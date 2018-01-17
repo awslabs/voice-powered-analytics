@@ -32,7 +32,7 @@ We have provided a CloudFormation template to create baseline resources needed b
 
 **Please launch the template below so that the resources created will be ready by the time you get to those sections in the lab guides.** 
 
-**For reInvent 2017 - Please make sure you are launching in EU-WEST-1 (Ireland)**
+**Pick the desired region that's closest to your location for optimal performance **
 
 When you launch the template you will be asked for a few inputs. Use the following table for reference. 
 
@@ -51,7 +51,9 @@ DDBWriteCapacityUnits | 5
 
 Region | Launch Template
 :---: | :---:
-EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
+EU-WEST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets-euw1/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
+|
+US-EAST-1 | <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a>
 
 
 ## Modules
