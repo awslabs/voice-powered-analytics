@@ -19,10 +19,8 @@ Note, that the following dependencies are needed in order to successfully comple
 ![Watch how init the ask CLI](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_1.gif)
 </details>
 
-1. Download and modify your current skill config json to mark it for non publishing
-
-Find the skill id of the skill you want to enroll.  Note, you can find the ASK profile name in the [Amazon Developer Portal](https://developer.amazon.com/alexa-skills-kit)
-
+1. Execute the command below using the ASK Profile created in the **ask init** step 
+ 
 ```BASH
 ask api list-skills --profile <name of ASK profile>
 ```
