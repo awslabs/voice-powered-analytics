@@ -21,7 +21,8 @@ Note, that the following dependencies are needed in order to successfully comple
 
 1. Download and modify your current skill config json to mark it for non publishing
 
-Find the skill id of the skill you want to enroll.  Note, you can find the ASK profile name in the [Amazon Developer Portal] (https://developer.amazon.com/alexa-skills-kit)
+Find the skill id of the skill you want to enroll.  Note, you can find the ASK profile name in the [Amazon Developer Portal](https://developer.amazon.com/alexa-skills-kit)
+
 ```BASH
 ask api list-skills --profile <name of ASK profile>
 ```
@@ -30,10 +31,13 @@ ask api list-skills --profile <name of ASK profile>
 
 ![Watch how to list skills](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_2.gif)
 </details>
+
 2.  When you have the skill id, use in the following command to download your skill json into a file named **myskill.json**:
+
 ```BASH
 ask api get-skill -s <skill id> -p <name of ASK profile> > myskill.json
 ```
+
 **Note: this command could take 15-20 seconds to execute**
 <details>
 <summary><strong>Watch how to retrieve the skill configuration</strong></summary><p>
@@ -59,6 +63,7 @@ Note: This is what will mark the skill to be skipped for publishing to the Alexa
 
 ![Watch how to edit the skill configuration](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4.gif)
 </details>
+
 #### Update and Submit your skill with the modified configuration
 5.  Now we'll update your skill with the modified **myskill.json**:
 ```BASH
@@ -74,6 +79,7 @@ Skill submitted successfully.
 **Note that it may take a couple hours for the skill to be available in the "live" stage.**
 
 #### Distribute and Enable Your Skill
+
 7.  (This step requires a wait period of 2-3 hours for system propogation)
 Distribute the skill to your AWS account so that you can enroll it in Moneypenny
 ```BASH
@@ -83,7 +89,7 @@ Private distribution account added successfully.
 ```
 
 8.  Navigate into the Alexa For Business console and whitelist users the skill to enable it- for enrolled users they'll also check off the "available" checkbox
-![Alexa For Business Console](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4.gif)
+![Alexa For Business Console](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_5.gif)
 #### (Optional) Account and IAM Permissions
 
 9.  After setting up their a4b account and iam permissions (in admin guide) follow [this guide](https://docs.aws.amazon.com/a4b/latest/ag/manage-users.html) to invite users and enable in your Alexa companion app
