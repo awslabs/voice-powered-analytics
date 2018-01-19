@@ -69,7 +69,7 @@ Note: This is what will mark the skill to be skipped for publishing to the Alexa
 ```BASH
 ask api update-skill -s <skill id> -p <name of ASK profile> -f myskill.json
 ```
-**Note: this command could take 15-20 seconds to execute before receiving the message that the skill updated successfully**
+**Note: this command could take 15-20 seconds to execute before receiving the message that the skill updated successfully** 
 6.  Submit the skill via SMAPI
 ```BASH
 ask api submit -s <skill id> -p <name of ASK profile>
@@ -77,19 +77,49 @@ ask api submit -s <skill id> -p <name of ASK profile>
 Skill submitted successfully.
 ```
 **Note that it may take a couple hours for the skill to be available in the "live" stage.**
-
+ 
 #### Distribute and Enable Your Skill
-
+ 
 7.  (This step requires a wait period of 2-3 hours for system propogation)
-Distribute the skill to your AWS account so that you can enroll it in Moneypenny
+Distribute the skill to your AWS account so that you can enroll it in Alexa For Business
 ```BASH
 ask api add-private-distribution-account -s <skill id> -p <name of ASK profile> --stage live --account-id arn:aws:iam::<aws account id of moneypenny org>:root
 
 Private distribution account added successfully.
 ```
-
+ 
 8.  Navigate into the Alexa For Business console and whitelist users the skill to enable it- for enrolled users they'll also check off the "available" checkbox
 ![Alexa For Business Console](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_5.gif)
 #### (Optional) Account and IAM Permissions
+##### Configure Email to invite Users 
+After setting up their a4b account and iam permissions (in admin guide) as detailed in the [admin guide](https://docs.aws.amazon.com/a4b/latest/ag/manage-users.html) to invite users and enable in your Alexa companion app 
+ 
+9.  In the bottom left of the Alexa For Business console, under settings **Settings**, choose **User enrollment** then click **Edit**.
+ 
+10. For **Company Name** then *enter the name of your company*.
 
-9.  After setting up their a4b account and iam permissions (in admin guide) follow [this guide](https://docs.aws.amazon.com/a4b/latest/ag/manage-users.html) to invite users and enable in your Alexa companion app
+Note: For Company contact email address, enter the full email address that your invited users can contact if they have any questions while going through the enrollment process.
+ 
+11. Choose **Save**.
+ 
+<details>
+<summary><strong>Watch how to set up user enrollment</strong></summary><p>
+
+![Watch how to set up user enrollment](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_6.gif)
+</details>
+
+##### Invite users 
+12. In the left panel of the Alexa For Business Console, choose **Users** and select **Invite new user**.
+ 
+13.  Enter the First name, Last name, and Email address of the user to enroll, then click **send invite**
+ 
+(Optional) Choose Add another user and add the information from step 3. Repeat this step until you have entered all the information for the users to invite.
+<details>
+<summary><strong>Watch how to send invite</strong></summary><p>
+
+![Watch how to send invite](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_7.gif)
+</details>
+
+Note:  After the invited user clicks on the link and signs up, the **Status** field in the console will show *enrolled* 
+
+Finished! Now the user can enable the skill in their Alexa companion app.  User lifecycle and removal can also be managed within the console. 
