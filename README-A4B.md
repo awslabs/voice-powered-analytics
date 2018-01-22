@@ -6,7 +6,7 @@ In this workshop you will build a voice powered analytic engine that you can tak
 
 Note, that the following dependencies are needed in order to successfully complete this section of the workshop.
 
-- [ ] Successful completion of Alexa Skill Building Section
+- [ ] Successful completion of [Alexa Skill Building Section](https://github.com/awslabs/voice-powered-analytics/blob/master/README-Alexa.md)
 - [ ] Installation of the [Alexa Skills Kit (ASK) Command Line Interface (CLI)](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
 
 
@@ -30,7 +30,7 @@ ask api list-skills --profile <name of ASK profile>
 ![Watch how to list skills](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_2.gif)
 </details>
 
-2.  When you have the skill id, use in the following command to download your skill json into a file named **myskill.json**:
+2.  When you have the skill id, use the following command to download your skill's manifest json into a file named **myskill.json**:
 
 ```BASH
 ask api get-skill -s <skill id> -p <name of ASK profile> > myskill.json
@@ -38,31 +38,31 @@ ask api get-skill -s <skill id> -p <name of ASK profile> > myskill.json
 
 **Note: this command could take 15-20 seconds to execute**
 <details>
-<summary><strong>Watch how to retrieve the skill configuration</strong></summary><p>
+<summary><strong>Watch how to retrieve the skill manifest</strong></summary><p>
 
-![Watch how to retrieve the skill configuration](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_3.gif)
+![Watch how to retrieve the skill manifest](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_3.gif)
 </details>
 
-#### Modify Skill Configuration Distribution Mode
-3.   We're now going to modify that json file in your favorite Unix editor (e.g. vi)
+#### Modify Skill Manifest Distribution Mode
+3.   We're now going to modify that json file with your favorite Unix editor (e.g. vi)
 ```BASH
 vi myskill.json
 ```
 
-Note: If you haven't used vi (or in awhile), here's a [cheat sheet](https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/)
+Note: If you haven't used vi (or it has been awhile), here's a [cheat sheet](https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/)
 
 4.  Add a line in the json under the **publishingInformation** section:
 ```SQL
 "distributionMode": "PRIVATE"
 ```
-Note: This is what will mark the skill to be skipped for publishing to the Alexa Skills store.
+Note: This is what will mark the skill to be shipped for publishing to the Alexa Skills store.
 <details>
-<summary><strong>Watch how to edit the distribution mode within the skill configuration</strong></summary><p>
+<summary><strong>Watch how to edit the distribution mode within the skill manifest</strong></summary><p>
 
-![Watch how to edit the skill configuration](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4.gif)
+![Watch how to edit the skill manifest](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4.gif)
 </details>
 
-#### Update and Submit your skill with the modified configuration
+#### Update and Submit your skill with the modified manifest
 5.  Now we'll update your skill with the modified **myskill.json**:
 ```BASH
 ask api update-skill -s <skill id> -p <name of ASK profile> -f myskill.json
