@@ -1,9 +1,10 @@
 # Workshop Overview
-In this workshop you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
+In this [workshop](https://github.com/awslabs/voice-powered-analytics) you will build a voice powered analytic engine that you can take back to your stakeholders to deliver valuable company insights.   Common questions that may be asked, “Alexa, how many Unique Users did our site have last month?” and “Alexa, how many orders have breached their delivery SLA this week?”.
 
 
 ## Section 4: Alexa For Business Deployment
-
+In this section, we will deploy the newly created Alexa skill to a private repository within Alexa For Business.   This will make the skill only accessible to specific individuals within your organization so they can add it as a skill onto their device.  
+ 
 Note, that the following dependencies are needed in order to successfully complete this section of the workshop.
 
 - [ ] Successful completion of [Alexa Skill Building Section](https://github.com/awslabs/voice-powered-analytics/blob/master/README-Alexa.md)
@@ -19,7 +20,7 @@ Note, that the following dependencies are needed in order to successfully comple
 ![Watch how init the ask CLI](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_1.gif)
 </details>
 
-1. Execute the command below using the ASK Profile created in the **ask init** step 
+1. First, let's list our skills.  Execute the command below using the ASK Profile created in the **ask init** step 
  
 ```BASH
 ask api list-skills --profile <name of ASK profile>
