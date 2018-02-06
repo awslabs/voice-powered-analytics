@@ -12,7 +12,7 @@ access_secret = 'secret'
 
 ddbtable = "VPA_Twitter_State"
 fhstream = "aws-vpa-tweets"
-search_text = "#reinvent OR @AWSreInvent"
+search_text = "#reinvent OR @AWSreInvent OR @AWSCloud OR #awscloud"
 max_tweets = 100000
 Records = []
 
