@@ -187,6 +187,8 @@ You've now created a Voice User Interface and a Lambda function, and connecte
  (Continue this process for all of the utterances. To start over, click the "Reset" button.) 
 </details>  
  
+### (Optional) Step 5: Deploy to Alexa For Business
+To make the skill private for your organization.  You can optionally follow the following steps to deploy: [Alexa For Business](https://github.com/awslabs/voice-powered-analytics/blob/master/README-A4B.md)
  
  
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
