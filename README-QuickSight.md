@@ -128,10 +128,9 @@ e. Click *Choose S3 Buckets*, **Choose Select All**.
 f. Click the Tab *S3 Buckets you can access across AWS*, under *Use Different Bucket*, Type: *aws-vpa-tweets* (Note For Ireland: *aws-vpa-tweets-euw1*) Then click **Add S3 Bucket**, then click **Select Buckets**    
 <details>
 <summary><strong>Watch how to set Quicksight Permissions</strong></summary><p>
-</details>
 
 ![Watch how to set Quicksight Permissions](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Quicksight_Permissions.gif)
-</details>
+</p></details>
 1. **(if running out of Ireland)** In the main Quicksight portal page, switch back to the **EU Ireland Region**)
 1. In the upper right choose your  **Manage data**
 1. Now in the upper left choose **New data set**
