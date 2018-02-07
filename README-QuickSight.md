@@ -117,12 +117,12 @@ We've created an Athena table directly on top of our S3 Twitter data, let's expl
 While this can be achieved through Athena itself or compatible query engines, Amazon Quicksight enables you to connect directly to Athena and quickly visualize it into charts and graphs without writing any SQL code.  
 Let's explore:      
 
+**Import Permissions note** 
 1. Launch the [QuickSight portal](https://us-east-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
 a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.    
 b. On the left menu, click *Account Settings*  
 c. Click the *Edit AWS permissions* button  
-**Import Permissions note** 
 d. Ensure the box *Amazon Athena* is checked.  
 e. Click *Choose S3 Buckets*, **Choose Select All**.   
 f. Click the Tab *S3 Buckets you can access across AWS*, under *Use Different Bucket*, Type: ```aws-vpa-tweets``` (Note For Ireland: ```aws-vpa-tweets-euw1```) Then click **Add S3 Bucket**, then click **Select Buckets**, then click **Apply**    
