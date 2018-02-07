@@ -109,7 +109,8 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 ![](./media/images/Alexa_Lab_9.png) 
   2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation. 
   Then we'll **Configure your trigger**: Under Configuration, and in **Add Triggers** pane, select Alexa Skills Kit from the list, then scroll down to the bottom of the screen, click **Add**. 
-  ![](./media/images/Alexa_Lab_10.png)  
+  2a.  Scroll down to **Configure Triggers**, click **disable**.   Note: optionally you can use the Alexa SkillID to lock down the lambda function to your specific Alexa Skill.   
+  ![](./media/images/Alexa_Lab_10.gif)  
   3. Once you have selected Alexa Skills Kit, click the **Configuration** Tab to go back to your code. 
   4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
   ![](./media/images/Alexa_Lab_11.png) 
