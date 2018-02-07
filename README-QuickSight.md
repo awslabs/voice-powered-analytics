@@ -17,7 +17,7 @@ If you tweet about this workshop now and use the #reinvent hashtag you will be a
 Let's first take a look at the data set we're going to analyze and query.  
 
 ### How we get the data into S3
-The data is acquired starting with a CloudWatch Event triggering an AWS Lambda function every 5 minutes. Lambda is making calls to Twitter's APIs for data, and then ingesting the data into [Kinesis FIrehose](https://aws.amazon.com/kinesis/firehose/).   
+The data is acquired starting with a CloudWatch Event triggering an AWS Lambda function every 5 minutes. Lambda is making calls to Twitter's APIs for data, and then ingesting the data into [Kinesis Firehose](https://aws.amazon.com/kinesis/firehose/).   
 Firehose then micro-batches the results into S3 as shown in the following diagram:
 ![Workshop dataset](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Athena_Arch_1.png)
 
@@ -119,10 +119,18 @@ Let's explore:
 
 1. Launch the [QuickSight portal](https://us-east-1.quicksight.aws.amazon.com/).  This may ask you to register your email address for Quicksight access.  
 1. If haven't already configured, Quicksight may need special permissions to access Athena:   
-a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*.  
-b. On the left menu, click *Account Settings*<
-c. Click the *Edit AWS permissions* button
-d. Ensure the box *Amazon Athena* is checked.  **Also ensure that all S3 buckets are selected**.  Then click *Apply*
+a. (These settings can only be changed in the **N.Virginia region**) In the upper right corner, ensure **US East N. Virginia** is selected, then to the right of the *region* in the upper right corner, choose your profile name, and from the dropdown menu, choose *Manage Quicksight*. 
+b. On the left menu, click *Account Settings* 
+c. Click the *Edit AWS permissions* button 
+**Import Permissions note** 
+d. Ensure the box *Amazon Athena* is checked.  
+e. Click *Choose S3 Buckets*, **Choose Select All**. 
+f. Click the Tab *S3 Buckets you can access across AWS*, under *Use Different Bucket*, Type: *aws-vpa-tweets* (Note For Ireland: *aws-vpa-tweets-euw1*) Then click **Add S3 Bucket**, then click **Select Buckets**    
+<details>
+<summary><strong>Watch how to set Quicksight Permissions</strong></summary><p>
+
+![Watch how to set Quicksight Permissions](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Quicksight_Permissions.gif)
+</details>
 1. **(if running out of Ireland)** In the main Quicksight portal page, switch back to the **EU Ireland Region**)
 1. In the upper right choose your  **Manage data**
 1. Now in the upper left choose **New data set**
