@@ -125,7 +125,13 @@ c. Click the *Edit AWS permissions* button
 **Import Permissions note** 
 d. Ensure the box *Amazon Athena* is checked.  
 e. Click *Choose S3 Buckets*, **Choose Select All**.   
-f. Click the Tab *S3 Buckets you can access across AWS*, under *Use Different Bucket*, Type: *aws-vpa-tweets* (Note For Ireland: *aws-vpa-tweets-euw1*) Then click **Add S3 Bucket**, then click **Select Buckets**    
+f. Click the Tab *S3 Buckets you can access across AWS*, under *Use Different Bucket*, 
+g. Type the bucket name that matches your region. Here are the names to add:
+Region | Bucket
+:---: | :---|
+US-EAST-1 | ```s3://aws-vpa-tweets/```
+EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
+h. Then click **Add S3 Bucket**, then click **Select Buckets**    
 <details>
 <summary><strong>Watch how to set Quicksight Permissions</strong></summary><p>
 
