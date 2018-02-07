@@ -69,6 +69,7 @@ Note: This is what will mark the skill to be shipped for publishing to the Alexa
 ask api update-skill -s <skill id> -p <name of ASK profile> -f myskill.json
 ```
 **Note: this command could take 15-20 seconds to execute before receiving the message that the skill updated successfully** 
+ 
 6.  Submit the skill via SMAPI
 ```BASH
 ask api submit -s <skill id> -p <name of ASK profile>
