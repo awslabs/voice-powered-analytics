@@ -105,7 +105,7 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 <details> 
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary>
   
-  1. Check your **AWS region**. For the reinvent workshop, we'll be using the **EU (Ireland)** region. 
+  1. Check your **AWS region**. For the reinvent workshop, we'll be using the **US East (N. Virginia)** region. 
 ![](./media/images/Alexa_Lab_9.png) 
   2. Open the Lambda function, starting with **::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation. 
   Then we'll **Configure your trigger**: Under Configuration, and in **Add Triggers** pane, select **Alexa Skills Kit** from the list. It will then add this trigger to your Lambda function. 
