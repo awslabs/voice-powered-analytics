@@ -10,6 +10,32 @@ Note, that the following dependencies are needed in order to successfully comple
 - [ ] Successful completion of [Alexa Skill Building Section](https://github.com/awslabs/voice-powered-analytics/blob/master/README-Alexa.md)
 - [ ] Installation of the [Alexa Skills Kit (ASK) Command Line Interface (CLI)](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
 
+#### Update Alexa Skill with Required Metadata For Alexa For Business Publishing
+Alexa For Business requires certains fields in order for a skill to be accessible in the Alexa companion application privately.  
+
+1. Navigate to your skill in the [Alexa Developer Portal](https://developer.amazon.com/) 
+2. Click "Edit" to your skill's Interaction Model
+**Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience** 
+3. On the left side of the screen under "Publishing Information", please add values for the following fields:
+- Short Skill Description
+- Full Skill Desciprtion
+- Example Phrases
+4.  Upload thumbnail images for the "Small" and "Large" Icons. Note: Image sizes may need to be adjusted to the requirements listed
+5.  Click "Next"
+6. Answer the Global Fields about your app:
+- Category
+- Testing Instructions
+- Countries & Regions
+7.  Answer Yes/No for the following questions about your skill's Privacy:
+- Does this skill allow users to make purchases or spend real money?
+- Does this Alexa skill collect users' personal information?
+- Is this skill directed to or does it target children under the age of 13?
+8.  Answer Yes/No for the following questions about your skill's compliance:
+ - Export Compliance
+ - Does this skill contain advertising?
+9.  Then click "Save"
+
+Now your skill has the necessary data to be private published to Alexa For Business.
 
 #### Retrieve Alexa Skills Configuration
 
@@ -54,7 +80,7 @@ Note: If you haven't used vi (or it has been awhile), here's a [cheat sheet](htt
 
 4.  Add a line in the json under the **publishingInformation** section:
 ```SQL
-"distributionMode": "PRIVATE"
+"distributionMode": "PRIVATE",
 ```
 Note: This is what will mark the skill to be shipped for publishing to the Alexa Skills store.
 <details>
