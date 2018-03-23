@@ -16,7 +16,8 @@ Alexa For Business requires certains fields in order for a skill to be accessibl
 1. Navigate to your skill in the [Alexa Developer Portal](https://developer.amazon.com/) 
 2. Click "Edit" to your skill's Interaction Model  
 
-**Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience** 
+**Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience**   
+
 3. On the left side of the screen under "Publishing Information", please add values for the following fields:
 - Short Skill Description
 - Full Skill Desciprtion
