@@ -14,7 +14,7 @@ Note, that the following dependencies are needed in order to successfully comple
 Alexa For Business requires certains fields in order for a skill to be accessible in the Alexa companion application privately.  
 
 1. Navigate to your skill in the [Alexa Developer Portal](https://developer.amazon.com/) 
-2. Click "Edit" to your skill's Interaction Model
+2. Click "Edit" to your skill's Interaction Model 
 **Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience** 
 3. On the left side of the screen under "Publishing Information", please add values for the following fields:
 - Short Skill Description
