@@ -56,8 +56,7 @@ DDBWriteCapacityUnits | 5
 
 ## Modules
 
-This workshop is broken up into multiple modules. The QuickSight section is optional as the Athena and Alexa sections do not build on any of the artifcats created in the QuickSight section. 
-You must however complete the Athena lab before starting on the Alexa lab. 
+This workshop is broken up into multiple modules:
 
 1. [Amazon QuickSight Section](README-QuickSight.md) 
 1. [Amazon Athena Section](README-Athena.md)
