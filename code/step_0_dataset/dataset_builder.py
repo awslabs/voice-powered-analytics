@@ -3,17 +3,18 @@ from boto3 import resource
 import json
 import tweepy
 import logging
+import os
 from tweepy import OAuthHandler
 
-consumer_key = 'key'
-consumer_secret = 'secret'
-access_token = 'token'
-access_secret = 'secret'
+consumer_key = os.environ.get('CONSUMER_KEY')
+consumer_secret = os.environ.get('CONSUMER_SECRET')
+access_token = os.environ.get('ACCESS_TOKEN')
+access_secret = os.environ.get('ACCESS_SECRET')
 
-ddbtable = "VPA_Twitter_State"
-fhstream = "aws-vpa-tweets"
-search_text = "#reinvent OR @AWSreInvent OR @AWSCloud OR #awscloud"
-max_tweets = 100000
+ddbtable = os.environ.get("VPA_TWITTER_STATE_TABLE")
+fhstream = os.environ.get("TWEETS_FH_STREAM")
+search_text = os.environ.get("SEARCH_TEXT")
+max_tweets = int(os.environ.get("MAX_TWEETS"))
 Records = []
 
 auth = OAuthHandler(consumer_key, consumer_secret)
@@ -34,13 +35,17 @@ def send_to_fh():
 
 def lambda_handler(event, context):
     response = table.get_item(Key={'name': 'latest'})
-    sinceid = int(response['Item']['sinceid'])
-    logger.info("Sinceid from last run was {0}".format(sinceid))
+    try: 
+        sinceid = int(response['Item']['sinceid'])
+        logger.info("Sinceid from last run was {0}".format(sinceid))
+    except KeyError as error:
+        #if running on first iteration
+        logger.info("Setting sinceId to 0 on first iteration")
+        sinceid = 0
     tweet_count = 0
     spamCount = 0
 
-    for tweet in tweepy.Cursor(api.search, q=search_text, result_type="recent", include_entities=False, count=100,
-                               since_id=sinceid).items(max_tweets):
+    for tweet in tweepy.Cursor(api.search, q=search_text, result_type="recent", include_entities=False, count=100, since_id=sinceid).items(max_tweets):
         t = {}
         t['id'] = tweet.id
         t['text'] = tweet.text
@@ -93,4 +98,3 @@ def lambda_handler(event, context):
 
 # if you want to call outside of lambda
 # lambda_handler("event", "context")
-
