@@ -267,4 +267,4 @@ Note, there should be > 10,000 tweets. If you get a number lower than this pleas
 
 ## Start working on the Alexa skill
 
-You are now ready to build the Alexa skill, you can get started here [Amazon Alexa Section](README-Alexa_v2.md)
+You are now ready to build the Alexa skill, you can get started here [Amazon Alexa Section](README-Alexav2.md)
