@@ -34,11 +34,11 @@ You can use a variety of methods to download one of the files in the dataset. If
 
 List one of the files with (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 ls s3://aws-vpa-tweets/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz
+aws s3 ls s3://aws-vpa-tweets/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz
 ```
 Download this file to your local directory (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 cp s3://aws-vpa-tweets/tweets/2017/11/06/04/aws-vpa-tweets-1-2017-11-06-04-23-28-2020b61e-ac18-4c9e-b446-6a49f8cced21.gz .
+aws s3 cp s3://aws-vpa-tweets/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz .
 ```
 
 Since the files are compressed, you will need to unzip it. In addition the data is stored in raw text form. Make sure you rename the file to either *.json or *.text.
