@@ -220,6 +220,7 @@ Scroll up to the top of the screen, select the pane **Triggers**.
 1. Under the **Add trigger**, click the empty box icon, followed by **CloudWatch Events**
 1. Scroll down, and under *Rule*, select **VPAEvery5Min**
 1. Leave the box checked for **Enable trigger**
+1. Click the **Add** button, then scroll up and click **Save** (the Lambda function)
 
 <details>
 <summary><strong>Watch how to update the trigger</strong></summary><p>
@@ -239,7 +240,7 @@ In this case, we will use the standard CloudWatch Event.
 
 1. In the upper right, next to test, select **Configure test events**
 1. Select **Create new test event**
-1. Select **Scheduled event** for the event template
+1. Select **Select Amazon CloudWatch** for the event template
 1. Use **VPASampleEvent** for the event name
 1. Click **Create** in the bottom right of the window
 
