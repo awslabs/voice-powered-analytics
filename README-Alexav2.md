@@ -36,40 +36,38 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
 
 ![](./media/images/Alexa_Lab_v2_4.png)
 
-7.	Type in the name *Voice Powered Analytics* and **Click Next**
+7.	Type in the **Skill name** *Voice Powered Analytics*, Select the **Custom** button and finally click the **Create Skill** button:
 
 ![](./media/images/Alexa_Lab_v2_5.png)
 
-8.	**Click on Select** under the Custom box. This will select the Custom option.
+
+8.	Select the option **Start From Scratch**,then select the **Choose** button in the top righthand corner:
 
 ![](./media/images/Alexa_Lab_v2_6.png)
 
-9.	Make sure that the custom option is selected. **Click Create Skill button** to continue.
 
-![](./media/images/Alexa_Lab_v2_7.png)
-
-10.	Next, **Click on 1. Invocation Name >**
+9.	Next, **Click on 1. Invocation Name >**
 
 ![](./media/images/Alexa_Lab_v2_8.png)
 
-11.	**Type *voice powered analytics*** (all lower case)
+10.	Ensure the skill innvocation name is entered (if not, type:) **voice powered analytics*** (all lower case)
 
 ![](./media/images/Alexa_Lab_v2_9.png)
 
-12.	**Click on + Add button** next to Intent.
+11.	**Click on + Add button** next to Intent.
 
 ![](./media/images/Alexa_Lab_v2_10.png)
 
-13.	**Type the Intent** and **click Create Custom Intent button**
+12.	**Type the custom tntent name** *WhatsMyMetric* and **click Create Custom Intent button**
 
 ![](./media/images/Alexa_Lab_v2_11.png)
 
-14.	Next we're going Add utterances to our intent. This triggers an invoke of your intent through your user's voice. You'll want to add a few different variations based upon how users will interact with the different types of metrics available to query.
+13.	Next we're going Add utterances to our intent. This triggers an invoke of your intent through your user's voice. You'll want to add a few different variations based upon how users will interact with the different types of metrics available to query.
 - **Type the *What’s my {metric}*** (ignore the popup box) and **Click + sign** to add the utterance.
 
 ![](./media/images/Alexa_Lab_v2_12.png)
 
-15.	Now we'll configure our Slots. Slots allow you to parameterize different variable attributes when invoking your intent. For this workshop, the slot will be our metric(s) that we've created with the Athena query. This is why we've put the {metric} slot name in our utterances.
+14.	Now we'll configure our Slots. Slots allow you to parameterize different variable attributes when invoking your intent. For this workshop, the slot will be our metric(s) that we've created with the Athena query. This is why we've put the {metric} slot name in our utterances.
 - **Click on + Add** on the left menu, next to Slot.
 
 ![](./media/images/Alexa_Lab_v2_13.png)
@@ -84,10 +82,10 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
 
 ![](./media/images/Alexa_Lab_v2_15.png)
 
-16.	**Click on *WhatsMyMetric*** on the left menu under Intents. Then **select *available_metrics*** in the dropdown menu next to metric.
+15.	**Click on *WhatsMyMetric*** on the left menu under Intents. Then **select *available_metrics*** in the dropdown menu next to metric.
 
 ![](./media/images/Alexa_Lab_v2_16.png)
-17.	Now **click on Build Model**. This will save your model and build it.
+16.	Now **click on Build Model**. This will save your model and build it.
 
 ![](./media/images/Alexa_Lab_v2_17.png)
 
@@ -114,11 +112,14 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 2. **Open the Lambda function, starting with ::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation.
   Then we'll **Configure your trigger**: Under Configuration, and in **Add Triggers** pane, **select Alexa Skills Kit** from the list. It will then add this trigger to your Lambda function.
 
-  2a.  **Scroll down to Configure Triggers**, **click disable**.   Note: optionally you can use the Alexa SkillID to lock down the lambda function to your specific Alexa Skill.   You can now scroll to the top of the Lambda function and click **Save**
+  2a.  **Scroll down to Configure Triggers**, **click  Skill ID verification disable**.   Note: optionally you can use the Alexa SkillID to lock down the lambda function to your specific Alexa Skill; this is a best practice.  Next, click the **Add** button, then scroll to the top of the Lambda function and click **Save**
 
   ![](./media/images/Alexa_Lab_10.gif)
 
-  3. Once you have selected Alexa Skills Kit, **click the Configuration** Tab to go back to your code.
+  3. Once you have selected Alexa Skills Kit, **click the Configuration Tab**, then click on the Lambda function icon and name button **.starting with ::Stack Name::-AlexaMetricSkill**  to go back to your code.
+  
+   ![](./media/images/Alexa_Lab_10a.png)
+   
   4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
 
   ![](./media/images/Alexa_Lab_11.png)
