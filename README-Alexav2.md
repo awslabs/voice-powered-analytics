@@ -116,15 +116,15 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 
   ![](./media/images/Alexa_Lab_10.gif)
 
-  3. Once you have selected Alexa Skills Kit, **click the Configuration Tab**, then click on the Lambda function icon and name button **.starting with ::Stack Name::-AlexaMetricSkill**  to go back to your code.
-  
-   ![](./media/images/Alexa_Lab_10a.png)
-   
-  4. The *ARN value* should be in the top right corner. **Copy your Lambda function's ARN value to a separate text editor** for use in the next section of the guide.
+3. **Copy your Lambda function's ARN value to a separate text editor** The *ARN value* is in the top right corner.  We'll use this in the next section of the guide.
 
   ![](./media/images/Alexa_Lab_11.png)
 
-  5.  Click on the **Configuration** tab, navigate to **Environment Variables**.
+  4. Next, **click the Configuration Tab**, then click on the Lambda function icon and name button **.starting with ::Stack Name::-AlexaMetricSkill**  to go back to your code.
+  
+   ![](./media/images/Alexa_Lab_10a.png)
+   
+  5.  Scroll down beneath the code and navigate to **Environment Variables**.
   6. **Validate/or change the environment variables**:
     - **intent_name** matches what's configured for your *intent* in the Alexa Skill's Interaction Configuration
     - **slot_name** matches what's configured for your *slot name* in the Alexa Skill's Interaction Configuration
