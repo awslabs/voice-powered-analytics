@@ -16,7 +16,7 @@ To help keep moving through the sections in case you get stuck anywhere, we have
 For those feeling creative, many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.  
 Feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
 
-You can also contact @chadneal or @WestrichAdam on twitter if you have additional questions or feedback.
+You can also contact @WestrichAdam or @chadneal on twitter if you have additional questions or feedback.
 
 ## Prerequisites
 
