@@ -7,7 +7,7 @@ The goal of the lab is to use Lambda and Athena to create a solution to query da
 
 In this section we will use Athena and Lambda. Please make sure as you switch between tabs, that you are still using the same region launched with the cloudformation
 
-## Step 2 - Understand The Raw Data (OPTIONAL)
+## (OPTIONAL) Step 2 -  Understand The Raw Data in S3
 
 This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. 
 If you don't want to inspect the JSON files you can safely skip this step and continue with [Step 2](#step-2---create-an-athena-table). 
