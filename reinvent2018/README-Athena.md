@@ -28,7 +28,6 @@ This dataset is available in the following regions
 
 Region | Bucket
 :---: | :---|
-US-EAST-1 | ```s3://aws-vpa-tweets/```
 EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 
 
@@ -37,11 +36,11 @@ You can use a variety of methods to download one of the files in the dataset. If
 
 List one of the files with (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 ls s3://aws-vpa-tweets/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz
+aws s3 ls s3://aws-vpa-tweets-euw1/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz
 ```
 Download this file to your local directory (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
-aws s3 cp s3://aws-vpa-tweets/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz .
+aws s3 cp s3://aws-vpa-tweets-euw1/tweets/sample/2017/11/06/04/aws-vpa-tweets-sample.gz .
 ```
 
 Since the files are compressed, you will need to unzip it. In addition the data is stored in raw text form. Make sure you rename the file to either *.json or *.text.
@@ -71,10 +70,7 @@ The data is publicly available in the bucket we provide.
 
 **Create Athena table**
 
-1. Please make sure you are in the **same region** that launched the Cloudformation stack 
-1. For the **Ireland region**, modify the location field below with the following location:
-LOCATION
-  's3://aws-vpa-tweets-euw1/tweets/'
+1. Please make sure you are **Ireland region**
 1. In your AWS account navigate to the **Athena** service
 1. In the top left menu, choose *Query Editor*
 1. Use this code to create the Athena table. Once added, click **Run Query**
@@ -99,7 +95,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  's3://aws-vpa-tweets/tweets/'
+  's3://aws-vpa-tweets-euw1/tweets/'
 ```
 
 **We need to produce an integer for our Alexa skill. To do that we need to create a query that will return our desired count** 
@@ -156,7 +152,7 @@ SELECT count(*) from tweets where text like '%excited%'
 In this step we will create a **Lambda function** that runs every 5 minutes. The lambda code is provided but please take the time to review the function.
 
 1. Go to the [AWS Lambda console page](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions)
-1. Make sure you are in the same region as the initial Cloudformation deployment
+1. Make sure you are in the same region as the initial CloudFormation deployment
 1. Click **Create Function** 
 1. We will skip using a blueprint to get started and author one from scratch. Click **Author one from scratch** 
 1. Under name add **vpa_lambda_athena_poller**
@@ -294,7 +290,7 @@ vpa_athena_database = tweets
 vpa_ddb_table = VPA_Metrics_Table
 vpa_metric_name = Reinvent Twitter Sentiment
 vpa_athena_query = SELECT count(*) FROM default."tweets"
-region = eu-west-1 (if running out of Ireland) or us-east-1 (if running out of Northern Virginia)
+region = eu-west-1
 vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ```
 

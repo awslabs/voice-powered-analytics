@@ -25,12 +25,10 @@ Please make sure you have the following available prior to the workshop.
 * AWS Account with admin or full access to all services
 
 ## Lab Setup
-
+**For Reinvent 2018, we'll be working in the Ireland region**
 We have provided a CloudFormation template to create baseline resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
 
 **Please launch the template below so that the resources created will be ready by the time you get to those sections in the lab guides.** 
-
-**Pick the desired region that's closest to your location for optimal performance **
 
 When you launch the template you will be asked for a few inputs. Use the following table for reference. 
 
@@ -49,7 +47,7 @@ DDBWriteCapacityUnits | 5
 
 <table><tr><td>Region</td> <td>Launch Template</td></tr>
 <tr>
-<td>EU-WEST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets-euw1/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr> <tr><td>US-EAST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr></table>
+<td>EU-WEST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets-euw1/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr></table>
 
 
 ## Modules
@@ -71,6 +69,7 @@ By default, you can access twitter data that exists in a public S3 bucket filter
 8. Click "Create your Twitter application"
 
 ### Step 2: Create Kinesis Firehose Instance to send data to S3
+**Note: For reinvent 2018, make sure you are in the Ireland (EU-West-1) region**
 9.  In the console, navigate to **Services > Kinesis**
 10.  On the left pane, click **Data Firehose**, then click **Create Delivery Stream**
 11.  Under *Delivery Stream Name*, type a name and log this name to a location that you'll use in Step 3.

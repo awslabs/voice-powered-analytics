@@ -105,11 +105,11 @@ Note: When you ran the initial setup CloudFormation in Module 1, a Lambda functi
 <details>
 <summary><strong>Full solution - Setting up Alexa Backend (expand for details)</strong></summary>
 
-1. Check your **AWS region** as the Lambda function needs to be in the same region that your previous resources created in Module 2 were created.
+1. Check your **AWS region** is Ireland (eu-west-1)), since the Lambda function needs to be in the same region that your previous resources created in Module 2 were created.
 
 ![](./../media/images/Alexa_Lab_9.png)
 
-2. **Open the Lambda function, starting with ::Stack Name::-AlexaMetricSkill** that was deployed with the Setup Cloudformation.
+2. **Open the Lambda function, starting with ::Stack Name::-AlexaMetricSkill** that was deployed with the Setup CloudFormation.
   Then we'll **Configure your trigger**: Under Configuration, and in **Add Triggers** pane, **select Alexa Skills Kit** from the list. It will then add this trigger to your Lambda function.
 
   2a.  **Scroll down to Configure Triggers**, **click  Skill ID verification disable**.   Note: optionally you can use the Alexa SkillID to lock down the lambda function to your specific Alexa Skill; this is a best practice.  Next, click the **Add** button, then scroll to the top of the Lambda function and click **Save**
