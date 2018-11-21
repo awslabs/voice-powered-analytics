@@ -225,7 +225,7 @@ Note: If your sample skill is working properly, you can now customize your skill
 **Thank you Bobby Malik** for his contributions to this section.
 
 ### (Optional) Step 5: Deploy to Alexa For Business
-To make the skill private for your organization.  You can optionally follow the following steps to deploy: [Alexa For Business](https://github.com/awslabs/voice-powered-analytics/blob/master/README-A4B.md)
+To make the skill private for your organization.  You can optionally follow the following steps to deploy: [Alexa For Business](https://docs.aws.amazon.com/a4b/latest/ag/private-skills.html)
 
 ### Bonus Step: What Utterances and Intents Are Needed For a "List My Metrics" skill
 **Tweet @WestrichAdam** with a description of the custom skill that you've created from this workshop. It may be added below to our **Voice Powered Analytics Attendee Submissions**
