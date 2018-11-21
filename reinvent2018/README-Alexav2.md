@@ -58,7 +58,7 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
 
 ![](./../media/images/Alexa_Lab_v2_10.png)
 
-12.	**Type the custom tntent name** *WhatsMyMetric* and **click Create Custom Intent button**
+12.	**Type the custom intent name** *WhatsMyMetric* and **click Create Custom Intent button**
 
 ![](./../media/images/Alexa_Lab_v2_11.png)
 
