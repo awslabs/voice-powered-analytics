@@ -344,8 +344,8 @@ In this case, we will use the standard CloudWatch Event.
 
 1. In the upper right, next to test, select **Configure test events**
 1. Select **Create new test event**
-1. Select **Select Amazon CloudWatch** for the event template
-1. Use **VPASampleEvent** for the event name
+1. Select **Scheduled Event** for the event template
+1. Type **VPASampleEvent** for the event name
 1. Click **Create** in the bottom right of the window
 
 <details>
