@@ -204,7 +204,7 @@ Note: You should see the results on the right window
  - You can have an entire conversation with your skill with the Service Simulator. Try the following commands:
  - "ask Voice Powered Analytics" then "what is my reinvent twitter sentiment"
 </details>
-![](./media/images/Alexa_Lab_v2_30.png)
+![](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/Alexa_Lab_v2_29.png)
 
 6.  (Optional) Other testing methods to consider:
 - [Echosim.io](https://echosim.io/) - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go.
@@ -212,6 +212,8 @@ Note: You should see the results on the right window
 
 Note: If your sample skill is working properly, you can now customize your skill.
 
+**If time, try going back to [Module 0](https://github.com/awslabs/voice-powered-analytics/tree/master/reinvent2018) and deploying a custom data lake with your own twitter filter**
+ 
  #### Troubleshooting
  - If you receive a response that reads: *"The remote endpoint could not be called, or the response it returned was invalid,"* this is an indication that something is broken. Copy the JSON from the Alexa skill and insert it as a test event to our Lambda function **VoiceAlexaSkillFull-AlexaMetricSkill-1**.  You can then see the specific output from the Lambda function as to why it is not executing successfully.
  - It is most likely due to either the Alexa Skills Kit: **slot name** or **intent name** does not match the Lambda environment variables.
