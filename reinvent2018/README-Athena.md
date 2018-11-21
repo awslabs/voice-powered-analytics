@@ -292,6 +292,8 @@ If you forgot the name of your bucket you can locate the name on the output tab 
 
 1. Set the following Environment variables:
 
+*Note: It's a lambda best practice to separate configuration from your code into the Environment variables section.  Below you'll see our AWS Region, Athena database, Athena query, S3 output bucket (results from the athena query), and the DynamoDB table where we'll be writing the results for low latency voice retrieval*  
+
 ```
 vpa_athena_database = tweets
 vpa_ddb_table = VPA_Metrics_Table
@@ -317,7 +319,7 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ### Triggers Pane
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
-Scroll up to the top of the screen, select the pane **Triggers**. 
+Scroll up to the top of the screen in the **Designers** section and select the pane **Triggers**. 
 
 1. Under the **Add trigger**, click the empty box icon, followed by **CloudWatch Events**
 1. Scroll down, and under *Rule*, select **VPAEvery5Min**
