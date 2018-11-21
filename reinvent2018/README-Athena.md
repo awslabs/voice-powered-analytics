@@ -10,7 +10,7 @@ In this section we will use Athena and Lambda. Please make sure as you switch be
 ## (OPTIONAL) Step 2 -  Understand The Raw Data in S3
 
 This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. 
-If you don't want to inspect the JSON files you can safely skip this step and continue with Step 3 below
+**NOTE: If you're familiar with S3 and JSON and don't want to inspect the JSON files you can safely skip this step and continue with Step 3 below**
 Each file in s3 has a collection of JSON objects stored within the file.
 In addition, the files have been gziped by [Kinesis Firehose](https://aws.amazon.com/kinesis/firehose/) which saves cost and improves performance.
 
