@@ -60,8 +60,8 @@ By default, you can access twitter data that exists in a public S3 bucket filter
 
 ### Step 1: Generate Twitter Keys
 1.  Go to http://twitter.com/oauth_clients/new
-2.  Apply for a Twitter Developer Account. Takes ~15 minutes. Requires detailed justification and email verification
-3. Under Name, enter something descriptive, e.g., aws-voice-twitter-data lake
+2.  Apply for a Twitter Developer Account. Takes ~15 minutes. Requires detailed justification, twitter approval, and email verification
+3. Under Name, enter something descriptive, e.g., awstwitterdatalake *can only have alpha-numerics*
 4. Enter a description
 5. Under Website, you can enter the website of your choosing
 6. Leave Callback URL blank
@@ -72,9 +72,9 @@ By default, you can access twitter data that exists in a public S3 bucket filter
 
 16.  Navigate to [Twitter-Poller to-Kinesis-Firehose](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:381943442500:applications~Twitter-Poller-to-Kinesis-Firehose) in the Serverless Application Repository.
 17.  Click the **Deploy** button (top righthand corner)
-18.  You may be prompted to login to your AWS account.  After doing so, scroll down to the *Configure Application Parameters* section where you will be able to enter:
+18.  You may be prompted to login to your AWS account.  After doing so, scroll down to the *Application Settings* section where you will be able to enter:
  a. The 4 Tokens received from Twitter
- b. The Kinesis Firehose name that the serverless solution will send the data to (as created in Step 2)
+ b. You can keep the Kinesis Firehose resource name the same or change it to a preferred name 
  c. Customize the search text that twitter will bring back
 19.  After deploying the Serverless Application, your application will begin polling automatically within the next 5 minutes.
 </details>
