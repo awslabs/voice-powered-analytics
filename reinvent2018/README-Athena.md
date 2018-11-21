@@ -179,6 +179,7 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 
 1. For Handler, ensure that it is set to: **lambda_function.lambda_handler**
 1. Select inline code and then use the code below
+
 *NOTE: the code below will be querying Athena with the SQL statement that you defined above every 5 minutes (from our Cloudwatch Event trigger). It then inserts into DynamoDB so it can be available for low latency voice retrieval in the next module*
 
 ```Python
