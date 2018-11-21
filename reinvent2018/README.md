@@ -55,8 +55,9 @@ DDBWriteCapacityUnits | 5
 
 
 By default, you can access twitter data that exists in a public S3 bucket filtered on #reinvent, #aws or @AWSCloud. If you'd like to use this pre-existing data, you can skip to Module 1.   But if you'd like to deploy this workshop through building your own Data Lake and using your own filters, follow the outlined steps below:
+**NOTE We suggest completing the workshop and then come back to Module 0 if you'd like to add your own data and time is alotted**
 <details>
-<summary>Optional Module 0 (Build Your Own Data Lake)</summary>
+<summary>Optional Module 0 (~25 minutes Build Your Own Data Lake)</summary>
 
 ### Step 1: Generate Twitter Keys
 1.  Go to http://twitter.com/oauth_clients/new
