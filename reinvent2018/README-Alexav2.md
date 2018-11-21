@@ -63,7 +63,7 @@ Alexa fits into your Voice Powered Analytics architecture as the interaction int
 ![](./../media/images/Alexa_Lab_v2_11.png)
 
 13.	Next we're going Add utterances to our intent. This triggers an invoke of your intent through your user's voice. You'll want to add a few different variations based upon how users will interact with the different types of metrics available to query.
-- **Type the *What’s my {metric}*** (ignore the popup box) and **Click + sign** to add the utterance.
+- **Type the *Whats my {metric}*** (ignore the popup box) and **Click + sign** to add the utterance.
 
 ![](./../media/images/Alexa_Lab_v2_12.png)
 
