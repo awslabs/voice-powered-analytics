@@ -36,7 +36,7 @@ EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
 You can use a variety of methods to download one of the files in the dataset. If you use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) today, this is likely the easiest method to take a look at the data.
 
-**NOTE: The commands below require the installation of the AWS Command Line Interface (CLI).   Click here to [install] (https://docs.aws.amazon.com/cli/latest/userguide/installing.html)**
+**NOTE: The commands below require the installation of the AWS Command Line Interface (CLI).   Click here to [install] (https://docs.aws.amazon.com/cli/latest/userguide/installing.html) **
  
 
 List one of the files with (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
