@@ -88,7 +88,8 @@ Lastly, note the name of the S3 bucket so you can use it to create the Athena sc
 1. [Amazon QuickSight Section](README-QuickSight.md) 
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexav2.md)
-1. (Optional) [Alexa For Business Section](README-A4B.md) - Deploy your skill privately through Alexa For Business
+
+If you'd like to make your skills private to your organization, you can deploy your skill privately through Alexa For Business
 
 After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller. This will stop the automated scans of s3 from Athena and also serve to stop any further Athena costs. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
 
