@@ -79,9 +79,10 @@ By default, you can access twitter data that exists in a public S3 bucket filter
  b. You can keep the Kinesis Firehose resource name the same or change it to a preferred name 
  c. Customize the search text that twitter will bring back
 19.  After deploying the Serverless Application, your application will begin polling automatically within the next 5 minutes.
-</details>
 
 Lastly, note the name of the S3 bucket so you can use it to create the Athena schema in Module 1. 
+</details>
+
 
 #### Main Modules:
 1. [Amazon Athena Section](README-Athena.md)
