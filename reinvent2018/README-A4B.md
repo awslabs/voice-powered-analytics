@@ -22,7 +22,7 @@ Alexa For Business requires certains fields in order for a skill to be accessibl
 - Short Skill Description
 - Full Skill Desciprtion
 - Example Phrases
-4.  Upload thumbnail images for the "Small" and "Large" Icons. Note: Image sizes may need to be adjusted to the requirements listed
+4.  Upload thumbnail images for the Small (108px) and Large(512px) Icons. Note: Image sizes may need to be adjusted to the requirements listed.  Here are links to some samples to save time: [Small](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Logo_108.jpeg), [Large](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Logo_512.jpeg).
 5.  Click "Next"
 6. Answer the Global Fields about your app:
 - Category
