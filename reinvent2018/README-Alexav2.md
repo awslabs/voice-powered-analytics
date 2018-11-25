@@ -187,7 +187,7 @@ You've now created a Voice User Interface and a Lambda function, and connected t
 
 ![](./../media/images/Alexa_Lab_v2_27.png)
 
-4.	Once enabled, type *“ask Voice Powered Analytics”* and **click the Mic button**
+4.	Once enabled, type *“ask Voice Powered Analytics”* and **HOLD the Mic button**
 
 ![](./../media/images/Alexa_Lab_v2_28.png)
 
@@ -196,7 +196,7 @@ Note: You should see the results on the right window
 ![](./../media/images/Alexa_Lab_v2_29.png)
 
 5.	You can have an entire conversation with your skill with the Service Simulator. Try the following commands:
-- *"what is my reinvent twitter sentiment"*
+- *"what is my reinvent twitter sentiment"* .  **NOTE: You must repeat Step 4 each time before Step 5 is invoked**
 <details>
 <summary><strong>Service Simulator Tips</strong></summary>
 
