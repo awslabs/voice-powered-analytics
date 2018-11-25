@@ -57,48 +57,39 @@ DDBWriteCapacityUnits | 5
 ## Modules
 
 
-
 By default, you can access twitter data that exists in a public S3 bucket filtered on #reinvent, #aws or @AWSCloud. If you'd like to use this pre-existing data, you can skip to Module 1.   But if you'd like to deploy this workshop through building your own Data Lake and using your own filters, follow the outlined steps below:
 <details>
 <summary>Optional Module 0 (Build Your Own Data Lake)</summary>
 
 ### Step 1: Generate Twitter Keys
 1.  Go to http://twitter.com/oauth_clients/new
-2. Click "Create New App"
-3. Under Name, enter something descriptive, e.g., aws-voice-twitter-data lake
+2.  Apply for a Twitter Developer Account. Takes ~15 minutes. Requires detailed justification, twitter approval, and email verification
+3. Under Name, enter something descriptive, e.g., awstwitterdatalake *can only have alpha-numerics*
 4. Enter a description
 5. Under Website, you can enter the website of your choosing
 6. Leave Callback URL blank
 7. Read and agree to the Twitter Developer Agreement
 8. Click "Create your Twitter application"
 
-### Step 2: Create Kinesis Firehose Instance to send data to S3
-9.  In the console, navigate to **Services > Kinesis**
-10.  On the left pane, click **Data Firehose**, then click **Create Delivery Stream**
-11.  Under *Delivery Stream Name*, type a name and log this name to a location that you'll use in Step 3.
-12. Leave default and click **Next**, click **Next** on the next screen.
-13.  For *Select Destination*, choose **Amazon S3**
-14.  You can either create a new bucket and prefix or reference an existing one
-15.  Leave defaults on *Configure Settings* except for *IAM Role*.  **Note: Ensure that the firehose IAM role has a policy to *write* to the bucket specified in the previous section
-
-Once your stream is created, navigate to the next series of steps to deploy the Application using the Twitter tokens and Firehose delivery stream
-
-### Step 3: Deploy App In Repo
+### Step 2: Deploy App In Repo
 
 16.  Navigate to [Twitter-Poller to-Kinesis-Firehose](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:381943442500:applications~Twitter-Poller-to-Kinesis-Firehose) in the Serverless Application Repository.
 17.  Click the **Deploy** button (top righthand corner)
-18.  You may be prompted to login to your AWS account.  After doing so, scroll down to the *Configure Application Parameters* section where you will be able to enter:
+18.  You may be prompted to login to your AWS account.  After doing so, scroll down to the *Application Settings* section where you will be able to enter:
  a. The 4 Tokens received from Twitter
- b. The Kinesis Firehose name that the serverless solution will send the data to (as created in Step 2)
+ b. You can keep the Kinesis Firehose resource name the same or change it to a preferred name 
  c. Customize the search text that twitter will bring back
 19.  After deploying the Serverless Application, your application will begin polling automatically within the next 5 minutes.
 </details>
+
+Lastly, note the name of the S3 bucket so you can use it to create the Athena schema.   
 
 #### Main Modules:
 1. [Amazon QuickSight Section](README-QuickSight.md) 
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexav2.md)
-1. (Optional) [Alexa For Business Section](README-A4B.md) - Deploy your skill privately through Alexa For Business
+
+If you'd like to make your skills private to your organization, you can deploy your skill privately through Alexa For Business
 
 After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller. This will stop the automated scans of s3 from Athena and also serve to stop any further Athena costs. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
 

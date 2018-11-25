@@ -10,7 +10,9 @@ In this section we will use Athena and Lambda. Please make sure as you switch be
 ## (OPTIONAL) Step 2 -  Understand The Raw Data in S3
 
 This is an optional step of the optional lab. It is intended to give you a better understanding of the data we are using for the lab. 
-If you don't want to inspect the JSON files you can safely skip this step and continue with [Step 2](#step-2---create-an-athena-table). 
+
+**NOTE: If you're familiar with S3 and JSON and don't want to inspect the JSON files you can safely skip this step and continue with Step 3 below.** 
+
 Each file in s3 has a collection of JSON objects stored within the file.
 In addition, the files have been gziped by [Kinesis Firehose](https://aws.amazon.com/kinesis/firehose/) which saves cost and improves performance.
 
@@ -32,7 +34,10 @@ EU-WEST-1 | ```s3://aws-vpa-tweets-euw1/```
 
 
 Amazon Kinesis Firehose delivers the data into S3 as a GZIP file format.
-You can use a variety of methods to download one of the files in the dataset. If you use the AWS CLI today, this is likely the easiest method to take a look at the data.
+You can use a variety of methods to download one of the files in the dataset. If you use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) today, this is likely the easiest method to take a look at the data.
+
+**NOTE: The commands below require the installation of the AWS Command Line Interface (CLI).   Click here to [install](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)**
+ 
 
 List one of the files with (Note use **s3://aws-vpa-tweets-euw1...** for Ireland):
 ```bash
@@ -175,6 +180,8 @@ In this step we will create a **Lambda function** that runs every 5 minutes. The
 1. For Handler, ensure that it is set to: **lambda_function.lambda_handler**
 1. Select inline code and then use the code below
 
+*NOTE: the code below will be querying Athena with the SQL statement that you defined above every 5 minutes (from our Cloudwatch Event trigger). It then inserts into DynamoDB so it can be available for low latency voice retrieval in the next module*
+
 ```Python
 import boto3
 import csv
@@ -285,6 +292,8 @@ If you forgot the name of your bucket you can locate the name on the output tab 
 
 1. Set the following Environment variables:
 
+*Note: It's a lambda best practice to separate configuration from your code into the Environment variables section.  Below you'll see our AWS Region, Athena database, Athena query, S3 output bucket (results from the athena query), and the DynamoDB table where we'll be writing the results for low latency voice retrieval*  
+
 ```
 vpa_athena_database = tweets
 vpa_ddb_table = VPA_Metrics_Table
@@ -310,7 +319,7 @@ vpa_s3_output_location = s3://<your_s3_bucket_name>/poller/
 ### Triggers Pane
 
 We will use a CloudWatch Event Rule created from the CloudFormation template to trigger this Lambda. 
-Scroll up to the top of the screen, select the pane **Triggers**. 
+Scroll up to the top of the screen in the **Designers** section and select the pane **Triggers**. 
 
 1. Under the **Add trigger**, click the empty box icon, followed by **CloudWatch Events**
 1. Scroll down, and under *Rule*, select **VPAEvery5Min**
@@ -335,8 +344,8 @@ In this case, we will use the standard CloudWatch Event.
 
 1. In the upper right, next to test, select **Configure test events**
 1. Select **Create new test event**
-1. Select **Select Amazon CloudWatch** for the event template
-1. Use **VPASampleEvent** for the event name
+1. Select **Amazon Cloudwatch** for the event template
+1. Type **VPASampleEvent** for the event name
 1. Click **Create** in the bottom right of the window
 
 <details>

@@ -14,28 +14,28 @@ Note, that the following dependencies are needed in order to successfully comple
 Alexa For Business requires certains fields in order for a skill to be accessible in the Alexa companion application privately.  
 
 1. Navigate to your skill in the [Alexa Developer Portal](https://developer.amazon.com/) 
-2. Click "Edit" to your skill's Interaction Model  
-
-**Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience**   
-
-3. On the left side of the screen under "Publishing Information", please add values for the following fields:
-- Short Skill Description
-- Full Skill Desciprtion
+3. On the top menu of the screen, **click on the "Distribution" button**, please add values for the following fields:
+- Public Name 
+- One Sentence Description
+- Detailed Description
 - Example Phrases
+ - Add: *Alexa, Open voice powered analytics*
 4.  Upload thumbnail images for the "Small" and "Large" Icons. Note: Image sizes may need to be adjusted to the requirements listed
-5.  Click "Next"
-6. Answer the Global Fields about your app:
-- Category
-- Testing Instructions
-- Countries & Regions
+5.  Select a "Category" from the dropdown
+6.  Click "Save and Continue"
 7.  Answer Yes/No for the following questions about your skill's Privacy:
 - Does this skill allow users to make purchases or spend real money?
 - Does this Alexa skill collect users' personal information?
 - Is this skill directed to or does it target children under the age of 13?
-8.  Answer Yes/No for the following questions about your skill's compliance:
- - Export Compliance
- - Does this skill contain advertising?
-9.  Then click "Save"
+- Does this Alexa skill contain advertising?
+8.  Check the box for export compliance
+9. Add some text about: 
+- Testing Instructions
+10.  **Click "Save and Continue"**
+11.  **Select "Alexa for Business Organizations"** under the question "Who Should Have Access to This Skill"
+12.  **Select "Selected Countries" and ensure "United States" is checked** for "Where would you like this skill to be available?"
+13.  On the left side, **click 'Functional Test'**, then on the right-side **click the "Run Button**.  Ensure that *Zero errors found.* returns.
+14. On the left side, **click the 'Submission'**, then on the right-side **click 'Submit for Review' Button **
 
 Now your skill has the necessary data to be private published to Alexa For Business.
 
