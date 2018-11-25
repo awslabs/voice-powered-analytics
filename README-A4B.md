@@ -14,115 +14,69 @@ Note, that the following dependencies are needed in order to successfully comple
 Alexa For Business requires certains fields in order for a skill to be accessible in the Alexa companion application privately.  
 
 1. Navigate to your skill in the [Alexa Developer Portal](https://developer.amazon.com/) 
-3. On the top menu of the screen, **click on the "Distribution" button**, please add values for the following fields:
-- Public Name 
-- One Sentence Description
-- Detailed Description
+2. Click "Edit" to your skill's Interaction Model  
+
+**Note: These lab instructions reflect the old Alexa Skills console.  If given the option, in the top right-hand corner of the screen, click "Your Alexa Console", then "Skills". This will bring you back to the traditional console experience**   
+
+3. On the left side of the screen under "Publishing Information", please add values for the following fields:
+- Short Skill Description
+- Full Skill Desciprtion
 - Example Phrases
- - Add: *Alexa, Open voice powered analytics*
-4.  Upload thumbnail images for the "Small" and "Large" Icons. Note: Image sizes may need to be adjusted to the requirements listed
-5.  Select a "Category" from the dropdown
-6.  Click "Save and Continue"
+4.  Upload thumbnail images for the Small (108px) and Large(512px) Icons. Note: Image sizes may need to be adjusted to the requirements listed.  Here are links to some samples to save time: [Small](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Logo_108.jpeg), [Large](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/VPA_Logo_512.jpeg).
+5.  Click "Next"
+6. Answer the Global Fields about your app:
+- Category
+- Testing Instructions
+- Countries & Regions
 7.  Answer Yes/No for the following questions about your skill's Privacy:
 - Does this skill allow users to make purchases or spend real money?
 - Does this Alexa skill collect users' personal information?
 - Is this skill directed to or does it target children under the age of 13?
-- Does this Alexa skill contain advertising?
-8.  Check the box for export compliance
-9. Add some text about: 
-- Testing Instructions
-10.  **Click "Save and Continue"**
-11.  **Select "Alexa for Business Organizations"** under the question "Who Should Have Access to This Skill"
-12.  **Select "Selected Countries" and ensure "United States" is checked** for "Where would you like this skill to be available?"
-13.  On the left side, **click 'Functional Test'**, then on the right-side **click the "Run Button**.  Ensure that *Zero errors found.* returns.
-14. On the left side, **click the 'Submission'**, then on the right-side **click 'Submit for Review' Button **
+8.  Answer Yes/No for the following questions about your skill's compliance:
+ - Export Compliance
+ - Does this skill contain advertising?
+9.  Then click "Save"
 
-Now your skill has the necessary data to be private published to Alexa For Business.
+In the next few minutes, you will receive an email with an update on your approval and instructions (as shown below) to configure your skill for private access in Alexa For Business.
 
-#### Retrieve Alexa Skills Configuration
+**NOTE: It may take 90 minutes for your skill to be available for distribution**
 
-**Ensure you followed the instructions using *[ask init](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)* to initialize the Alexa Skills Kit (ASK) profile**
-<details>
-<summary><strong>Watch how to initialize the ASK CLI profile</strong></summary><p>
 
-![Watch how init the ask CLI](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_1.gif)
-</details>
+#### Distribute To Alexa For Business Organizations
 
-1. First, let's list our skills.  Execute the command below using the ASK Profile created in the **ask init** step 
+Within 90 minutes, your skill will be available for Alexa for Business distribution.  The instructions below show how to enable skill availability to Alexa For Business
  
-```BASH
-ask api list-skills --profile <name of ASK profile>
-```
-<details>
-<summary><strong>Watch how to list skills</strong></summary><p>
-
-![Watch how to list skills](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_2.gif)
-</details>
-
-2.  When you have the skill id, use the following command to download your skill's manifest json into a file named **myskill.json**:
-
-```BASH
-ask api get-skill -s <skill id> -p <name of ASK profile> > myskill.json
-```
-
-**Note: this command could take 15-20 seconds to execute**
-<details>
-<summary><strong>Watch how to retrieve the skill manifest</strong></summary><p>
-
-![Watch how to retrieve the skill manifest](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_3.gif)
-</details>
-
-#### Modify Skill Manifest Distribution Mode
-3.   We're now going to modify that json file with your favorite Unix editor (e.g. vi)
-```BASH
-vi myskill.json
-```
-
-Note: If you haven't used vi (or it has been awhile), here's a [cheat sheet](https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/)
-
-4.  Add a line in the json under the **publishingInformation** section:
-```SQL
-"distributionMode": "PRIVATE",
-```
-Note: This is what will mark the skill to be shipped for publishing to the Alexa Skills store.
-<details>
-<summary><strong>Watch how to edit the distribution mode within the skill manifest</strong></summary><p>
-
-![Watch how to edit the skill manifest](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4.gif)
-</details>
-
-#### Update and Submit your skill with the modified manifest
-5.  Now we'll update your skill with the modified **myskill.json**:
-```BASH
-ask api update-skill -s <skill id> -p <name of ASK profile> -f myskill.json
-```
-**Note: this command could take 15-20 seconds to execute before receiving the message that the skill updated successfully** 
  
-6.  Submit the skill via SMAPI
-```BASH
-ask api submit -s <skill id> -p <name of ASK profile>
-
-Skill submitted successfully.
-```
-**Note that it may take a couple hours for the skill to be available in the "live" stage.**
+1. First, **click on your skill** within the Amazon Developer Console. 
+2. Next, **click on the *Distribution Link*** on the top menu bar.  Then **click on *Availability*** on the left side menu. 
+This brings you the screen to link your Alexa skill to your AWS Alexa For Business organization. 
  
-#### Distribute and Enable Your Skill
+![Availability Screen](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_1a.png)
  
-7.  (This step requires a wait period of 2-3 hours for system propogation)
-Distribute the skill to your AWS account so that you can enroll it in Alexa For Business
-```BASH
-ask api add-private-distribution-account -s <skill id> -p <name of ASK profile> --stage live --account-id arn:aws:iam::<aws account id of moneypenny org>:root
-
-Private distribution account added successfully.
-```
+Next, we'll need to retrieve the IAM (Identity and Access Management) ARN (Amazon Resource Number) ID of our for Alexa For Business private skills. 
  
-8.  Navigate into the Alexa For Business console and whitelist users the skill to enable it- for enrolled users they'll also check off the "available" checkbox
-![Alexa For Business Console](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_5.gif)
+3.  To do this, *navigate to the **AWS Console***, then **choose Alexa For Business**. 
+4.  On the left menu, **choose Skills**, then in the Skill screen, **choose the Private Skills tab** 
+5.  Under the Private Skills tab, **click the *Show IAM ARN* button**.  This process will link your AWS Account ID and IAM user from Amazon Developer (where your skill is owned) to AWS account for skill/private user management 
+6.  **Copy the ID** It will look similar to the following: *arn:aws:iam::123456789012:root** 
+![A4B Screen](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_2a.png) 
+ 
+7. *Navigate back to the Amazon Developer console screen* where you should be on the Availability Screen.  If you're not, then repeat Step 1 and 2 in this section. 
+8. Scroll down to the *Manage Access to this Skill* section, and **enter the copied IAM ARN ID** under the section *Enter an Alexa for Business Organization* 
+9. **Click the *Add* button** 
+10.  **Click the *Save* button** 
+ 
+![Adding ARN ID Screen](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_3a.png) 
+ 
+You've now linked the skill to your Alexa For Business account.   Within a few seconds, you can refresh the Private Skills screen and see your skill listed below: 
+ 
+![Adding ARN ID Screen](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/a4b_4a.png) 
+ 
 #### (Optional) Account and IAM Permissions
 ##### Configure Email to invite Users 
 After setting up their a4b account and iam permissions (in admin guide) as detailed in the [admin guide](https://docs.aws.amazon.com/a4b/latest/ag/manage-users.html) to invite users and enable in your Alexa companion app 
  
-9.  In the bottom left of the Alexa For Business console, under settings **Settings**, choose **User enrollment** then click **Edit**.
+9.  In the bottom left of the Alexa For Business console, under settings **Settings**, choose **User invitations** then click **Edit**.
  
 10. For **Company Name** then *enter the name of your company*.
 
@@ -137,11 +91,11 @@ Note: For Company contact email address, enter the full email address that your 
 </details>
 
 ##### Invite users 
-12. In the left panel of the Alexa For Business Console, choose **Users** and select **Invite new user**.
+12. In the left panel of the Alexa For Business Console, choose **Users** and select **Invite user**.
  
 13.  Enter the First name, Last name, and Email address of the user to enroll, then click **send invite**
  
-(Optional) Choose Add another user and add the information from step 3. Repeat this step until you have entered all the information for the users to invite.
+(Optional) Choose Add another user and add the information from the previous step. Repeat this step until you have entered all the information for the users to invite.
 <details>
 <summary><strong>Watch how to send invite</strong></summary><p>
 
