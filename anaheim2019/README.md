@@ -1,7 +1,7 @@
 # Voice Powered Analytics For Anaheim Summit 2019
 
 ### Introduction
-In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  The goal after leaving this workshop, build and automate queries for measuring Key Performance Indicators (KPIs) from a dataset and  access them via Alexa voice-enabled devices.  Startups can make  available voice powered analytics to query at any time, and Enterprises can deliver these types of solutions to stakeholders so they can have easy access to the Business KPIs that are top of mind.         
+In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  Imagine a startup making use of voice powered analytics to query the state of the business at any time. Enterprises can deliver these types of solutions to stakeholders, so they can have easy access to Project or Business KPIs that are top of mind.           The goal after leaving this workshop is to build and automate queries for measuring Key Performance Indicators (KPIs) from a dataset and access them via Alexa voice-enabled devices.  
 This workshop requires fundamental knowledge of AWS services, but is designed for first time users of Athena, Lambda and Alexa. We have broken the workshop into two sections or focus topics. 
 These are:
 
