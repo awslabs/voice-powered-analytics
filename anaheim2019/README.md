@@ -1,22 +1,21 @@
-# Voice Powered Analytics
-# [Anaheim 2019 Click Here](./anaheim2019/README.md)
+# Voice Powered Analytics For Anaheim Summit 2019
+
 ### Introduction
-In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  The goal after leaving this workshop, is for you to understand how to uncover Key Performance Indicators (KPIs) from a data set, build and automate queries for measuring those KPIs, and access them via Alexa voice-enabled devices.  Startups can make  available voice powered analytics to query at any time, and Enterprises can deliver these types of solutions to stakeholders so they can have easy access to the Business KPIs that are top of mind.         
-This workshop requires fundamental knowledge of AWS services, but is designed for first time users of QuickSight, Athena, and Alexa. We have broken the workshop into three sections or focus topics. 
+In this workshop, you will build an Alexa skill that queries metrics from a data lake, which you will define.  The goal after leaving this workshop, build and automate queries for measuring Key Performance Indicators (KPIs) from a dataset and  access them via Alexa voice-enabled devices.  Startups can make  available voice powered analytics to query at any time, and Enterprises can deliver these types of solutions to stakeholders so they can have easy access to the Business KPIs that are top of mind.         
+This workshop requires fundamental knowledge of AWS services, but is designed for first time users of Athena, Lambda and Alexa. We have broken the workshop into two sections or focus topics. 
 These are:
 
-* Data Discovery using QuickSight
-* Building Data Lake analytics in Athena (based on objects in S3) to generate answers for Alexa
+* Running analytic queries on a Data Lake using Athena (based on objects in S3) to generate answers for Alexa
 * Building a custom Alexa skill to access the analytics queries from Athena
 
-We expect most attendees to be able to complete the full workshop in **2 hours**. 
+We expect most attendees to be able to complete the full workshop in **1 hour and 30 minutes**. 
 
 To help keep moving through the sections in case you get stuck anywhere, we have provided CloudFormation templates and sample code.
 
 For those feeling creative, many sections also have **Bonus Sections** where you can build additional capability on top of the workshop.  
 Feel free to engage your workshop facilitator(s)/lab assistant(s) if you'd like additional assistance with these areas.  
 
-You can also contact @WestrichAdam or @chadneal on twitter if you have additional questions or feedback.
+You can also contact @WestrichAdam on twitter if you have additional questions or feedback.
 
 ## Prerequisites
 
@@ -24,15 +23,11 @@ Please make sure you have the following available prior to the workshop.
 
 * <a href="https://developer.amazon.com/alexa" target="_blank">Amazon Developer</a> account (Free) **Note** This is different from a typical AWS workflow. 
 * AWS Account with admin or full access to all services
-* Using QuickSight requires <a href="http://docs.aws.amazon.com/quicksight/latest/user/sign-up-existing.html" target="_blank">Signing up for QuickSight</a>
 
 ## Lab Setup
-
 We have provided a CloudFormation template to create baseline resources needed by this lab but are not the focus of the workshop. These include IAM Roles, IAM Policies, a DynamoDB table, and a CloudWatch Event rule. These are listed as outputs in the CloudFormation template in case you want to inspect them.
 
 **Please launch the template below so that the resources created will be ready by the time you get to those sections in the lab guides.** 
-
-**Pick the desired region that's closest to your location for optimal performance **
 
 When you launch the template you will be asked for a few inputs. Use the following table for reference. 
 
@@ -45,21 +40,23 @@ DDBWriteCapacityUnits | 5
 <details>
 <summary><strong>Watch a video of launching CloudFormation (Click to expand)</strong></summary><p>
 
-![launcg CloudFormation](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-cloudformation-launch.gif)
+![launch CloudFormation](https://github.com/awslabs/voice-powered-analytics/blob/master/media/images/vpa-cloudformation-launch.gif)
 
 </details>
 
 <table><tr><td>Region</td> <td>Launch Template</td></tr>
 <tr>
-<td>EU-WEST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets-euw1/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr> <tr><td>US-EAST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr></table>
-
+<td>US-EAST-1</td> <td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=VPA-Setup&templateURL=https://s3.amazonaws.com/aws-vpa-tweets/setup/vpa_setup.yaml" target="_blank"><IMG SRC="/media/images/CFN_Image_01.png"></a></td></tr></table>
 
 ## Modules
 
 
+
 By default, you can access twitter data that exists in a public S3 bucket filtered on #reinvent, #aws or @AWSCloud. If you'd like to use this pre-existing data, you can skip to Module 1.   But if you'd like to deploy this workshop through building your own Data Lake and using your own filters, follow the outlined steps below:
+
+**NOTE We suggest completing the workshop and then come back to Module 0 if you'd like to add your own data and time is alotted**
 <details>
-<summary>Optional Module 0 (Build Your Own Data Lake)</summary>
+<summary>Optional Module 0 (~25 minutes Build Your Own Data Lake)</summary>
 
 ### Step 1: Generate Twitter Keys
 1.  Go to http://twitter.com/oauth_clients/new
@@ -80,16 +77,16 @@ By default, you can access twitter data that exists in a public S3 bucket filter
  b. You can keep the Kinesis Firehose resource name the same or change it to a preferred name 
  c. Customize the search text that twitter will bring back
 19.  After deploying the Serverless Application, your application will begin polling automatically within the next 5 minutes.
+
+Lastly, note the name of the S3 bucket so you can use it to create the Athena schema in Module 1. 
 </details>
 
-Lastly, note the name of the S3 bucket so you can use it to create the Athena schema.   
 
 #### Main Modules:
-1. [Amazon QuickSight Section](README-QuickSight.md) 
 1. [Amazon Athena Section](README-Athena.md)
 1. [Amazon Alexa Section](README-Alexav2.md)
 
-If you'd like to make your skills private to your organization, you can deploy your skill privately through Alexa For Business
+To make your skill private, you can deploy privately through Alexa For Business
 
 After you have completed the workshop you can disable to the CloudWatch Event to disable the Athena poller. This will stop the automated scans of s3 from Athena and also serve to stop any further Athena costs. If you want to completely remove all resources please follow the [cleanup guide](README-Cleanup.md).
 
