@@ -38,7 +38,7 @@ def lambda_handler(event, context):
     try: 
         sinceid = int(response['Item']['sinceid'])
         logger.info("Sinceid from last run was {0}".format(sinceid))
-    except KeyError as error:
+    except KeyError:
         #if running on first iteration
         logger.info("Setting sinceId to 0 on first iteration")
         sinceid = 0
