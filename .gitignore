@@ -4,6 +4,8 @@
 .DS_Store
 ~$VPA_Reinvent_Tasks.xlsx
 
+#vscode
+.vscode/
 
 # Gradle:
 .idea/
